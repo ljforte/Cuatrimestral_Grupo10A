@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,25 @@ namespace TP_Grupo10A
     public partial class SiteMaster : MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnSubmitLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnCarrito_Click(object sender, EventArgs e)
         {
 
         }
