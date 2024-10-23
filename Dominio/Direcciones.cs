@@ -10,10 +10,10 @@ namespace Dominio
     {
         public int DireccionID {  get; set; }
         public int UsuarioID {  get; set; }
-        public string? Calle {  get; set; }
-        public string? Ciudad {  get; set; }
-        public string? CodigoPostal { get; set; }
-        public string? Pais {  get; set; }
-        public string? Telefono {  get; set; }
+        public string Calle {  get; set; }
+        public string Ciudad {  get; set; }
+        public string CodigoPostal { get; set; }
+        public string Pais {  get; set; }
+        public string Telefono {  get; set; }
     }
 }
