@@ -1,0 +1,148 @@
+CREATE DATABASE EcommerceWeb;
+GO
+
+USE EcommerceWeb;
+GO
+
+CREATE TABLE Usuarios (
+    UsuarioID INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    UsuarioPassword NVARCHAR(255) NOT NULL,
+    Rol NVARCHAR(20) NOT NULL,
+    FechaRegistro DATETIME NOT NULL DEFAULT GETDATE(),
+    Estado BIT NOT NULL DEFAULT 1
+);
+GO
+
+CREATE TABLE Categorias (
+    CategoriaID INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(50) NOT NULL,
+    Descripcion NVARCHAR(255)
+);
+GO
+
+CREATE TABLE Marcas(
+	MarcaID INT PRIMARY KEY IDENTITY(1,1),
+	Nombre VARCHAR(100) NOT NULL
+);
+GO
+
+
+CREATE TABLE Productos (
+    ProductoID INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(100) NOT NULL,
+    MarcaID INT NOT NULL,
+    Precio DECIMAL(10, 2) NOT NULL,
+    Stock INT NOT NULL,
+    Descripcion NVARCHAR(255),
+    CategoriaID INT FOREIGN KEY REFERENCES Categorias(CategoriaID),
+    Estado BIT NOT NULL DEFAULT 1
+);
+GO
+
+
+CREATE TABLE ImagenProducto (
+    ImagenID INT PRIMARY KEY IDENTITY(1,1),
+    ProductoID INT NOT NULL,
+    ImagenURL NVARCHAR(255),
+    FOREIGN KEY (ProductoID) REFERENCES Productos(ProductoID) ON DELETE CASCADE
+);
+GO
+
+CREATE TABLE Carrito (
+    CarritoID INT PRIMARY KEY IDENTITY(1,1),
+    UsuarioID INT FOREIGN KEY REFERENCES Usuarios(UsuarioID),
+    FechaCreacion DATETIME NOT NULL DEFAULT GETDATE()
+);
+GO
+
+CREATE TABLE CarritoDetalle (
+    CarritoDetalleID INT PRIMARY KEY IDENTITY(1,1),
+    CarritoID INT FOREIGN KEY REFERENCES Carrito(CarritoID) ON DELETE CASCADE,
+    ProductoID INT FOREIGN KEY REFERENCES Productos(ProductoID),
+    Cantidad INT NOT NULL,
+    PrecioUnitario DECIMAL(10, 2) NOT NULL
+);
+GO
+
+CREATE TABLE Pedidos (
+    PedidoID INT PRIMARY KEY IDENTITY(1,1),
+    UsuarioID INT FOREIGN KEY REFERENCES Usuarios(UsuarioID),
+    FechaPedido DATETIME NOT NULL DEFAULT GETDATE(),
+    EstadoPedido NVARCHAR(20) NOT NULL,
+    Total DECIMAL(10, 2) NOT NULL
+);
+GO
+
+CREATE TABLE PedidosDetalle (
+    PedidoDetalleID INT PRIMARY KEY IDENTITY(1,1),
+    PedidoID INT FOREIGN KEY REFERENCES Pedidos(PedidoID) ON DELETE CASCADE,
+    ProductoID INT FOREIGN KEY REFERENCES Productos(ProductoID),
+    Cantidad INT NOT NULL,
+    PrecioUnitario DECIMAL(10, 2) NOT NULL
+);
+GO
+
+CREATE TABLE Direcciones (
+    DireccionID INT PRIMARY KEY IDENTITY(1,1),
+    UsuarioID INT FOREIGN KEY REFERENCES Usuarios(UsuarioID),
+    Calle NVARCHAR(100) NOT NULL,
+    Ciudad NVARCHAR(50) NOT NULL,
+    CodigoPostal NVARCHAR(10) NOT NULL,
+    Pais NVARCHAR(50) NOT NULL,
+    Telefono NVARCHAR(20) NOT NULL
+);
+GO
+
+
+
+INSERT INTO Categorias (Nombre, Descripcion) VALUES
+('Gabinetes', 'Estructuras que alojan componentes de PC'),
+('Placas Base', 'Tarjetas principales que conectan todos los componentes de hardware'),
+('Tarjetas Gráficas', 'Unidades de procesamiento gráfico dedicadas'),
+('Memoria RAM', 'Módulos de memoria de acceso aleatorio para el almacenamiento temporal'),
+('Discos Duros', 'Dispositivos de almacenamiento de datos'),
+('Unidades SSD', 'Dispositivos de almacenamiento sólido para mayor velocidad'),
+('Fuentes de Alimentación', 'Componentes que suministran energía a la PC'),
+('Procesadores', 'Unidades centrales de procesamiento que ejecutan instrucciones'),
+('Refrigeración', 'Sistemas de enfriamiento para componentes internos'),
+('Periféricos', 'Dispositivos externos como teclados, ratones y monitores');
+GO
+
+INSERT INTO Marcas (Nombre) VALUES
+('Intel'),
+('AMD'),
+('NVIDIA'),
+('Asus'),
+('Gigabyte'),
+('Corsair'),
+('Kingston'),
+('Western Digital'),
+('Seagate'),
+('MSI');
+GO
+
+
+INSERT INTO Productos (Nombre, MarcaID, Precio, Stock, Descripcion, CategoriaID, Estado) VALUES
+('Intel Core i9 11900K', 1, 529.99, 50, 'Procesador de 8 núcleos y 16 hilos', 8, 1),
+('AMD Ryzen 9 5900X', 2, 549.99, 40, 'Procesador de 12 núcleos y 24 hilos', 8, 1),
+('NVIDIA GeForce RTX 3080', 3, 699.99, 30, 'Tarjeta gráfica de alto rendimiento', 3, 1),
+('Asus TUF Gaming X570', 4, 219.99, 25, 'Placa base para AMD Ryzen', 2, 1),
+('Gigabyte Aorus B550', 5, 179.99, 20, 'Placa base compatible con AMD Ryzen', 2, 1),
+('Corsair Vengeance LPX 16GB', 6, 89.99, 100, 'Memoria RAM DDR4 de alto rendimiento', 4, 1),
+('Kingston Fury 32GB', 7, 129.99, 70, 'Memoria RAM DDR4 de 32GB', 4, 1),
+('Western Digital Blue 1TB', 8, 49.99, 150, 'Disco duro de 1TB', 5, 1),
+('Seagate Barracuda 2TB', 9, 69.99, 120, 'Disco duro de 2TB', 5, 1),
+('MSI MPG Gungnir 110R', 10, 139.99, 60, 'Gabinete de torre media con vidrio templado', 1, 1),
+('Corsair iCUE 5000X', 6, 199.99, 45, 'Gabinete de torre completa con iluminación RGB', 1, 1),
+('Kingston A2000 1TB', 7, 89.99, 80, 'Unidad SSD NVMe de 1TB', 6, 1),
+('Western Digital SN850 2TB', 8, 299.99, 35, 'Unidad SSD NVMe de 2TB de alta velocidad', 6, 1),
+('Cooler Master Hyper 212', 6, 39.99, 90, 'Refrigerador de aire para CPU', 9, 1),
+('Noctua NH-D15', 6, 89.99, 55, 'Refrigerador de aire para CPU de doble torre', 9, 1),
+('EVGA 750W GQ', 6, 109.99, 75, 'Fuente de alimentación de 750W con certificación 80+ Gold', 7, 1),
+('Seasonic Prime 850W', 9, 179.99, 40, 'Fuente de alimentación de 850W con certificación 80+ Platinum', 7, 1),
+('AMD Radeon RX 6800 XT', 2, 649.99, 30, 'Tarjeta gráfica de alto rendimiento para juegos', 3, 1),
+('Asus ROG Strix 3090', 4, 1499.99, 10, 'Tarjeta gráfica premium para gaming y trabajo profesional', 3, 1),
+('Intel Xeon W-3275', 1, 3499.99, 5, 'Procesador de servidor de 28 núcleos', 8, 1);
+GO

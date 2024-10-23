@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "..\Dominio\Domin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "..\Negocio\Negocio.csproj", "{4A0CE29C-9BCD-4BEA-8684-6BEDCA6EEF7B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScriptSQL", "ScriptSQL", "{E4832EFE-3BBF-4C52-B222-37DF4EE6E59D}"
+	ProjectSection(SolutionItems) = preProject
+		ScriptSQLServer.txt = ScriptSQLServer.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
