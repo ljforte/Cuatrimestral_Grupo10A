@@ -16,7 +16,7 @@ namespace TP_Grupo10A
         }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Login.aspx", false);
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -24,6 +24,12 @@ namespace TP_Grupo10A
 
         }
 
+
+        protected void btnRegistro_Click(object sender, EventArgs e)
+        {
+
+        Response.Redirect("Registro.aspx", false);
+        }
         protected void btnSubmitLogin_Click(object sender, EventArgs e)
         {
 

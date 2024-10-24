@@ -77,6 +77,7 @@
                     <%--carrito--%>
                     <asp:Button ID="btnCarrito" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0" Text="Carrito" OnClick="btnCarrito_Click" />
                     <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0" Text="Login" OnClick="btnLogin_Click" />
+                     <asp:Button ID="btnRegistro" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0" Text="Registrarse" OnClick="btnRegistro_Click" />
                 </div>
             </div>
         </nav>
