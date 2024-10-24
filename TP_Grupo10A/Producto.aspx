@@ -8,14 +8,12 @@
                     <table class="tablaProductos">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Código</th>
+                                <th>ProductoID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>Marca</th>
                                 <th>Categoría</th>
                                 <th>Precio</th>
-                                <th>Imágenes</th>
                             </tr>
                         </thead>
                         <tbody>
