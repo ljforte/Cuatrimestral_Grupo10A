@@ -17,6 +17,7 @@ namespace Dominio
         public float Precio {  get; set; }
         public int stock {  get; set; }
         [DisplayName("Categorias")]
+        public List<ImagenProducto> ListImagenes {  get; set; }
         public Categorias CategoriaID {  get; set; }
         public bool Estado { get; set; }
     }

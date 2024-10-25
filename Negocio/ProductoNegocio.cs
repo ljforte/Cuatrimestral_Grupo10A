@@ -16,13 +16,14 @@ namespace Negocio
     {
         private AccesoDatos datos = new AccesoDatos();
         private List<Productos> list;
+        private ImagenProductoNegocio IMGnegocio = new ImagenProductoNegocio();
 
         public List<Productos> ListarArticulos()
         {
             list = new List<Productos>();
             try
             {
-                string consulta = @"SELECT P.Nombre, M.Nombre AS Marca, P.Precio, P.Descripcion, 
+                string consulta = @"SELECT P.ProductoID as ProductoID, P.Nombre, M.Nombre AS Marca, P.Precio, P.Descripcion, 
                                    C.Nombre AS Categoria, P.MarcaID, C.CategoriaID
                             FROM Productos AS P
                             LEFT JOIN Marcas AS M ON M.MarcaID = P.MarcaID
@@ -34,36 +35,44 @@ namespace Negocio
 
                 while (datos.Lector.Read())
                 {
-                    Productos art = new Productos();
+                    Productos Producto = new Productos();
+
+
+                    if (!(datos.Lector["ProductoID"] is DBNull))
+                        Producto.ProductoID = Convert.ToInt32(datos.Lector["ProductoID"]);
 
                     if (!(datos.Lector["Nombre"] is DBNull))
-                        art.Nombre = (string)datos.Lector["Nombre"];
+                        Producto.Nombre = (string)datos.Lector["Nombre"];
 
                     if (!(datos.Lector["Precio"] is DBNull))
-                        art.Precio = Convert.ToSingle(datos.Lector["Precio"]);
+                        Producto.Precio = Convert.ToSingle(datos.Lector["Precio"]);
 
                     if (!(datos.Lector["Descripcion"] is DBNull))
-                        art.Descripcion = (string)datos.Lector["Descripcion"];
+                        Producto.Descripcion = (string)datos.Lector["Descripcion"];
 
                     if (!(datos.Lector["Categoria"] is DBNull))
                     {
-                        art.CategoriaID = new Categorias();
-                        art.CategoriaID.Nombre = (string)datos.Lector["Categoria"];
+                        Producto.CategoriaID = new Categorias();
+                        Producto.CategoriaID.Nombre = (string)datos.Lector["Categoria"];
 
                         if (!(datos.Lector["CategoriaID"] is DBNull))
-                            art.CategoriaID.CategoriaID = Convert.ToInt32(datos.Lector["CategoriaID"]);
+                            Producto.CategoriaID.CategoriaID = Convert.ToInt32(datos.Lector["CategoriaID"]);
                     }
 
                     if (!(datos.Lector["Marca"] is DBNull))
                     {
-                        art.MarcaID = new Marcas();
-                        art.MarcaID.Nombre = (string)datos.Lector["Marca"];
+                        Producto.MarcaID = new Marcas();
+                        Producto.MarcaID.Nombre = (string)datos.Lector["Marca"];
 
                         if (!(datos.Lector["MarcaID"] is DBNull))
-                            art.MarcaID.MarcaID = Convert.ToInt32(datos.Lector["MarcaID"]);
+                            Producto.MarcaID.MarcaID = Convert.ToInt32(datos.Lector["MarcaID"]);
                     }
 
-                    list.Add(art);
+                    List<ImagenProducto> img = IMGnegocio.listarImagenes(Producto.ProductoID);
+                    if (img.Count > 0)
+                        Producto.ListImagenes = img;
+                    list.Add(Producto);
+
                 }
 
                 return list;
