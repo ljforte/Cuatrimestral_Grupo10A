@@ -45,8 +45,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh_vz9k9mLwX5Cj0Jl8aJSNf-oX8clwYlqJg&s" width="40" height="40" class="d-inline-block align-top" alt="Logo" />
-                    E-commerceUTN
+                    <img src="./Imagenes/LogoFBE.png" class="logoFBE" alt="Logo" />
                 </a>
 
                 <%--lista de MENU--%>
@@ -82,7 +81,6 @@
                 </div>
             </div>
         </nav>
-
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
         </asp:ContentPlaceHolder>
 
@@ -92,9 +90,9 @@
                 <div class="row text-center text-md-left">
                     <!-- Información de la Compania -->
                     <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
-                        <h5 class="text-uppercase mb-4 font-weight-bold">E-commerceUTN</h5>
+                        <h5 class="text-uppercase mb-4 font-weight-bold">FBE Hardware</h5>
                         <p>
-                            E-commerceUTN es su tienda de confianza para todos sus componentes de hardware y accesorios. Desde tarjetas gráficas hasta periféricos, ofrecemos productos de alta calidad a precios competitivos.
+                            FBE Hardware es su tienda de confianza para todos sus componentes de hardware y accesorios. Desde tarjetas gráficas hasta periféricos, ofrecemos productos de alta calidad a precios competitivos.
                         </p>
                     </div>
 

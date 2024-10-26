@@ -117,6 +117,8 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Imagenes\logoFBE.png" />
+    <Content Include="Imagenes\OfertaPortada.png" />
     <Content Include="Producto.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Registro.aspx" />
