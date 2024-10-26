@@ -4,6 +4,7 @@
 
 <html lang="en">
 <head runat="server">
+        <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - E-commerceUTN</title>

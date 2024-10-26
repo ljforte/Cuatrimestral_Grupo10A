@@ -72,6 +72,7 @@ CREATE TABLE Pedidos (
     FechaPedido DATETIME NOT NULL DEFAULT GETDATE(),
     EstadoPedido NVARCHAR(20) NOT NULL,
     Total DECIMAL(10, 2) NOT NULL
+    /  VER RELACION CARRITOID  y necesidad o no de PEDIDODETALLE/
 );
 GO
 
@@ -149,25 +150,31 @@ GO
 
 
 INSERT INTO ImagenProducto (ProductoID, ImagenURL) VALUES
-(1, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(2, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(3, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(4, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(5, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(6, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(7, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(8, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(9, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(10, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(11, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(12, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(13, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(14, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(15, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(16, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(17, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(18, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(19, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg'),
-(20, 'https://imagenes.compragamer.com/productos/compragamer_Imganen_general_41330_Placa_de_Video_Zotac_GeForce_RTX_4060_Ti_16GB_GDDR6_AMP_b55acf2f-grn.jpg');
+(1, 'https://http2.mlstatic.com/D_NQ_NP_677183-MLA54812400475_042023-O.webp'),
+(1, 'https://http2.mlstatic.com/D_NQ_NP_2X_743787-MLA47219952113_082021-F.webp'),
+(2, 'https://http2.mlstatic.com/D_NQ_NP_819467-MLA44771577629_022021-O.webp'),
+(3, 'https://http2.mlstatic.com/D_NQ_NP_780915-MLA49001561785_022022-O.webp'),
+(4, 'https://http2.mlstatic.com/D_NQ_NP_818437-MLA51636738692_092022-O.webp'),
+(5, 'https://http2.mlstatic.com/D_NQ_NP_668419-MLU69934902867_062023-O.webp'),
+(5, 'https://http2.mlstatic.com/D_NQ_NP_708617-MLU73693564903_122023-O.webp'),
+(5, 'https://http2.mlstatic.com/D_NQ_NP_621060-MLU69936474763_062023-O.webp'),
+(6, 'https://http2.mlstatic.com/D_NQ_NP_826363-MLA74781247079_022024-O.webp'),
+(7, 'https://http2.mlstatic.com/D_NQ_NP_853562-MLA74781346721_022024-O.webp'),
+(8, 'https://http2.mlstatic.com/D_NQ_NP_632778-MLA53352128101_012023-O.webp'),
+(8, 'https://http2.mlstatic.com/D_NQ_NP_768198-MLU70028224279_062023-O.webp'),
+(8, 'https://http2.mlstatic.com/D_NQ_NP_994277-MLU74088828554_012024-O.webp'),
+(9, 'https://http2.mlstatic.com/D_NQ_NP_763799-MLU79148198301_092024-O.webp'),
+(10, 'https://http2.mlstatic.com/D_NQ_NP_671913-MLU54972904368_042023-O.webp'),
+(11, 'https://http2.mlstatic.com/D_NQ_NP_944508-MLA79787872189_102024-O.webp'),
+(12, 'https://http2.mlstatic.com/D_NQ_NP_965676-MLA78864293749_092024-O.webp'),
+(13, 'https://http2.mlstatic.com/D_NQ_NP_640484-MLU75938038240_042024-O.webp'),
+(14, 'https://http2.mlstatic.com/D_NQ_NP_626435-MLU74480112355_022024-O.webp'),
+(15, 'https://http2.mlstatic.com/D_NQ_NP_958193-MLU79181079465_092024-O.webp'),
+(15, 'https://http2.mlstatic.com/D_NQ_NP_885573-MLU74366655692_022024-O.webp'),
+(16, 'https://http2.mlstatic.com/D_NQ_NP_979192-MLU72831156405_112023-O.webp'),
+(17, 'https://http2.mlstatic.com/D_NQ_NP_975984-MLU78370843059_082024-O.webp'),
+(18, 'https://http2.mlstatic.com/D_NQ_NP_706937-MLU72824211407_112023-O.webp'),
+(19, 'https://http2.mlstatic.com/D_NQ_NP_955131-MLA72483301492_102023-O.webp'),
+(20, 'https://http2.mlstatic.com/D_NQ_NP_966214-MLA49500030797_032022-O.webp');
 
 GO

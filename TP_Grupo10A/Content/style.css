@@ -1,0 +1,7 @@
+﻿.fixed-image-size {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-fit: contain;
+    background-color: #f0f0f0;
+}

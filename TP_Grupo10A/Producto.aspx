@@ -10,7 +10,7 @@
                             <asp:Repeater ID="RepeaterImagenes" runat="server" DataSource='<%# Eval("ListImagenes") %>'>
                                 <ItemTemplate>
                                     <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>" data-bs-interval="3000">
-                                        <img src='<%# Eval("ImagenURL") %>' class="d-block w-100" alt="Imagen del Artículo">
+                                        <img src='<%# Eval("ImagenURL") %>' class="d-block w-100 fixed-image-size" alt="Imagen del Artículo">
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
@@ -29,3 +29,4 @@
         </div>
     </div>
 </asp:Content>
+
