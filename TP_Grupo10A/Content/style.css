@@ -1,4 +1,41 @@
-﻿.fixed-image-size {
+﻿#carouselProveedores .carousel-inner .col img {
+    display: block;
+    width: 200px; 
+    height: 200px;
+    margin: auto; 
+}
+
+nav{
+    background-color: black;
+    color:white;
+}
+
+nav .nav-link {
+    color: #FFFFFF; /* blancoo */
+    font-size: 16px; 
+}
+
+nav .nav-link:hover /*Aca se puede configurar el color al pasar el mouse por arriba*/
+{
+ color: #FFD700; 
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+footer {
+    background-color: deeppink; 
+    color: white;
+    padding: 20px; 
+}
+
+footer:hover {
+        color: #FFD700;
+}
+
+fixed-image-size {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -6,13 +43,34 @@
     background-color: #f0f0f0;
 }
 
-
-.OfertaPortada {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    display: block;
+carousel-inner {
+    position: relative;
 }
+
+carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+carousel-item:nth-child(1),
+carousel-item:nth-child(2) {
+    background-color: black;
+}
+
+carousel-item:nth-child(3) {
+    background-color: white;
+}
+
+
+carousel-item img {
+    object-fit: cover;
+    width: 100%;
+    height: 50vh; 
+}
+
+
 
 .logoFBE{
     width: 70px;
