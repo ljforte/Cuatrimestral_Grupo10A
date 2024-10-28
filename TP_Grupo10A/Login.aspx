@@ -28,6 +28,11 @@
                     <asp:TextBox ID="txtContraseña"  runat="server" CssClass="form-control" type ="password"></asp:TextBox>
                     <label for="txtContraseña">Contraseña</label>
                 </div>
+                <div>
+                    <asp:Label ID="mensajeError" runat="server" Text="Datos incorrectos" ForeColor="Red"></asp:Label>
+
+
+                </div>
                 <div class="mt-3">
                     <asp:Button ID="btnIngresar" CssClass="btn btn primary" OnClick="btnIngresar_Click" runat="server" Text="Ingresar" />
                 </div>

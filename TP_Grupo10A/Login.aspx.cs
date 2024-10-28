@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
+using Negocio;
 
 namespace TP_Grupo10A
 {
@@ -11,11 +13,32 @@ namespace TP_Grupo10A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            mensajeError.Visible = false;
         }
         protected void btnIngresar_Click(object sender, EventArgs e)
-        {
-
+        { 
+            Usuarios user;
+            UsuarioNegocio negocio = new UsuarioNegocio();
+            
+            try
+            {
+                user = new Usuarios(txtEmail.Text, txtContraseña.Text, false);
+               if(negocio.Loguear(user))
+                {
+                    Session.Add("Usuario", user);
+                    Response.Redirect("TeLogueaste.aspx", false);
+                }
+                else
+                {
+                    mensajeError.Visible = true;
+                    Session.Add("error", "Usuario o contraseña incorrecta");
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                throw;
+            }
         }
     }
 }

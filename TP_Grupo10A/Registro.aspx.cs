@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +14,20 @@ namespace TP_Grupo10A
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnRegistrarse_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Usuarios user = new Usuarios();
+               // UsuarioNeogocio neogocio = new UsuarioNeogocio();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }
