@@ -20,7 +20,7 @@ nav .nav-link:hover /*Aca se puede configurar el color al pasar el mouse por arr
  color: #FFD700; 
 }
 
-body {
+ body {
     background-color: black;
     color: white;
 }
@@ -77,16 +77,3 @@ carousel-item img {
     height:70px;
 }
 
-/*Carousel imagenes producto url*/
-
-.fixed-image-size {
-    width: 200px; 
-    height: 200px; 
-    object-fit: cover; 
-}
-
-.carousel-ImagenUrl {
-    display: inline-block; 
-    margin: 5px;
-    text-align: center; 
-}

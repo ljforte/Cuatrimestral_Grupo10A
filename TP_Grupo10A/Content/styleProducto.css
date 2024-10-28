@@ -1,0 +1,72 @@
+﻿/*Carousel imagenes producto url*/
+
+.fixed-image-size {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.producto .main {
+    background: white;
+}
+
+/* producto paginacion*/
+.btn-paginacion {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-paginacion:hover {
+        background-color: #0056b3;
+    }
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
+    gap: 20px; /* Espacio entre elementos */
+}
+
+.producto-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+    .producto-item h3 {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .producto-item p {
+        font-size: 16px;
+        color: #555;
+    }
+
+.carousel-ImagenUrl {
+    display: inline-block;
+    margin: 5px;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    overflow: hidden; /* Oculta el exceso de imagen si es más grande */
+}
+
+    .carousel-ImagenUrl img {
+        width: 100%; /* Ajusta la imagen al ancho del contenedor */
+        height: 100%; /* Ajusta la imagen a la altura del contenedor */
+        object-fit: cover; /* Recorta la imagen para llenar el contenedor sin deformarla */
+        border-radius: 5px; /* Opcional: añade bordes redondeados */
+    }
+
+
+    body{
+        background:white;
+    }
