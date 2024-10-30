@@ -11,7 +11,11 @@ namespace TP_Grupo10A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!(Session["usuario"] != null && ((Dominio.Usuarios)Session["usuario"]).Tipo == Dominio.TipoUsuario.Admin))
+            {
+                //Session.Add("error", "no tenes permisos para ingresar a esta pagina");
+                Response.Redirect("Default.aspx", false);
+            }
         }
     }
 }
