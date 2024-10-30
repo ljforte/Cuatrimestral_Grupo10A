@@ -15,6 +15,24 @@ namespace TP_Grupo10A
     {
 
         /// <summary>
+        /// Control RepeaterCategorias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterCategorias;
+
+        /// <summary>
+        /// Control RepeaterMarcas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterMarcas;
+
+        /// <summary>
         /// Control RepeaterProductos.
         /// </summary>
         /// <remarks>
