@@ -26,7 +26,16 @@ namespace TP_Grupo10A
                if(negocio.Loguear(user))
                 {
                     Session.Add("Usuario", user);
+                    if (user.Tipo == TipoUsuario.Admin)
+                    {
+                        Response.Redirect("Gestion.aspx", false);
+                        return;
+                    }
+                }
+                    else if(user.Tipo == TipoUsuario.Cliente)
+                    {
                     Response.Redirect("TeLogueaste.aspx", false);
+                    return;
                 }
                 else
                 {
