@@ -75,9 +75,21 @@
                     <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control mr-2" placeholder="Buscar productos" aria-label="Buscar"></asp:TextBox>
                     <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-success my-2 my-sm-0" Text="Buscar" OnClick="btnBuscar_Click" />
                     <%--carrito--%>
-                    <asp:Button ID="btnCarrito" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0" Text="Carrito" OnClick="btnCarrito_Click" />
+
+                    <%if (((Dominio.Usuarios)Session["usuario"]) == null)
+                        {%>
                     <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0" Text="Login" OnClick="btnLogin_Click" />
                     <asp:Button ID="btnRegistro" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0" Text="Registrarse" OnClick="btnRegistro_Click" />
+
+                    <%            }%>
+
+                    <%if (Session["usuario"] != null && ((Dominio.Usuarios)Session["usuario"]).Tipo == Dominio.TipoUsuario.Cliente)
+                        {%>
+                    <asp:Button ID="btnPerfil" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0" Text="Perfil" OnClick="btnPerfil_click" />
+
+                    <%            }%>
+
+                    <asp:Button ID="btnCarrito" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0" Text="Carrito" OnClick="btnCarrito_Click" />
                 </div>
             </div>
         </nav>

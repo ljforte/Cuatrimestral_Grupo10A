@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace TP_Grupo10A
 {
-    public partial class _Default : Page
+    public partial class Perfil : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+
         }
     }
 }

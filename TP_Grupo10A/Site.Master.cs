@@ -19,25 +19,36 @@ namespace TP_Grupo10A
             Response.Redirect("Login.aspx", false);
         }
 
-        protected void btnBuscar_Click(object sender, EventArgs e)
+        protected void btnPerfil_click(object sender, EventArgs e)
         {
-
+            Response.Redirect("Login.aspx", false);
         }
 
+        
 
-        protected void btnRegistro_Click(object sender, EventArgs e)
-        {
+    public void CambiarTextoBotonLogin(string nuevoTexto)
+    {
+        btnLogin.Text = nuevoTexto;
+    }
+    protected void btnBuscar_Click(object sender, EventArgs e)
+    {
+
+    }
+
+
+    protected void btnRegistro_Click(object sender, EventArgs e)
+    {
 
         Response.Redirect("Registro.aspx", false);
-        }
-        protected void btnSubmitLogin_Click(object sender, EventArgs e)
-        {
+    }
+    protected void btnSubmitLogin_Click(object sender, EventArgs e)
+    {
 
-        }
+    }
 
-        protected void btnCarrito_Click(object sender, EventArgs e)
-        {
+    protected void btnCarrito_Click(object sender, EventArgs e)
+    {
 
-        }
+    }
     }
 }
