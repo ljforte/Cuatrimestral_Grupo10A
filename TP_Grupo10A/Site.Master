@@ -51,7 +51,7 @@
         </asp:ScriptManager>
         <!-- Navbar -->
        
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark p-4">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark p-2">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/#">
                     <img src="./Imagenes/LogoFBE.png" class="logoFBE" alt="Logo" />
@@ -102,11 +102,12 @@
                 </div>
             </div>
         </nav>
-        
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-</asp:ContentPlaceHolder>
-        
-        
+        <div class="container flex-gorw-1">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+
 
         <!-- Footer -->
         <footer class="footer text-dark pt-5 pb-4">

@@ -18,5 +18,6 @@ namespace TP_Grupo10A
         {
             Response.Write("<script>alert('Gracias por contactarnos. Te responderemos pronto.');</script>");
         }
+
     }
 }
