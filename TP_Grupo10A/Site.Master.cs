@@ -28,7 +28,7 @@ namespace TP_Grupo10A
 
     public void CambiarTextoBotonLogin(string nuevoTexto)
     {
-        btnLogin.Text = nuevoTexto;
+        //btnLogin.Text = nuevoTexto;
     }
     protected void btnBuscar_Click(object sender, EventArgs e)
     {

@@ -15,13 +15,35 @@ namespace TP_Grupo10A
         private int paginaActual = 1;
 
         public List<Dominio.Productos> listaProductos;
+        public List<Dominio.Categorias> listaCategorias;
+        public List<Dominio.Marcas> listaMarcas;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CargarProductos();
+                
+                CargarCategorias();
+                CargarMarcas();
+
             }
+        }
+
+        private void CargarCategorias()
+        {
+            CategoriaNegocio negocio = new CategoriaNegocio();
+            listaCategorias = negocio.ListarCategorias();
+            RepeaterCategorias.DataSource = listaCategorias;
+            RepeaterCategorias.DataBind();
+        }
+
+        private void CargarMarcas()
+        {
+            MarcasNegocio negocio = new MarcasNegocio();
+            listaMarcas = negocio.ListarMarcas ();
+            RepeaterMarcas.DataSource = listaMarcas;
+            RepeaterMarcas.DataBind();
         }
 
         // Cambie el metodo cargarProductos para que el repeater cargue solo los productos que le indiquemos

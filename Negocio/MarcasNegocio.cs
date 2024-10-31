@@ -3,43 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using Dominio;
-using static System.Net.Mime.MediaTypeNames;
-using System.Collections;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
 
+using Dominio;
 namespace Negocio
 {
-    public class CategoriaNegocio
+    public class MarcasNegocio
     {
         private AccesoDatos datos = new AccesoDatos();
-        private List<Categorias> list;
+        private List<Marcas> list;
 
-        public List<Categorias> ListarCategorias()
+        public List<Marcas> ListarMarcas()
         {
-            list = new List<Categorias>();
+            list = new List<Marcas>();
 
             try
             {
                 string consulta = @"
-                                select Nombre from Categorias;
+                                select Nombre from Marcas;
                                 ";
 
                 datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
-                    Categorias categoria = new Categorias();
+                    Marcas marca = new Marcas();
 
                     if (!(datos.Lector["Nombre"] is DBNull))
-                        categoria.Nombre = (string)datos.Lector["Nombre"];
-                    list.Add(categoria);
+                        marca.Nombre = (string)datos.Lector["Nombre"];
+                    list.Add(marca);
                 }
                 return list;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -47,10 +42,6 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
-
         }
-
-
-
     }
 }
