@@ -22,11 +22,19 @@ namespace TP_Grupo10A
         {
             if (!IsPostBack)
             {
-                CargarProductos();
-                
-                CargarCategorias();
-                CargarMarcas();
+                string Categoria = Request.QueryString["CATEGORIA"];
 
+                if (!string.IsNullOrEmpty(Categoria))
+                {
+                    CargarProductosPorCategoria(Categoria);
+                }
+                else
+                {
+                    CargarProductos();
+                    CargarCategorias();
+                    CargarMarcas();
+
+                }
             }
         }
 
@@ -53,6 +61,32 @@ namespace TP_Grupo10A
         {
             ProductoNegocio negocio = new ProductoNegocio();
             listaProductos = negocio.ListarArticulos();
+
+            /* Math ceiling redondea la division, si da 2.3, lo pasa a 3.. redonde hacia arriba
+             para siempre tener una pagina aunque de menos de 10*/
+            int totalPaginas = (int)Math.Ceiling((double)listaProductos.Count / productosPorPagina);
+
+
+            var productosPagina = listaProductos
+            .Skip((paginaActual - 1) * productosPorPagina)
+            .Take(productosPorPagina)
+            .ToList();
+
+
+            RepeaterProductos.DataSource = productosPagina;
+            RepeaterProductos.DataBind();
+
+            // Actualizar la interfaz para mostrar botones de paginación si es necesario
+            BtnSiguiente.Visible = paginaActual < totalPaginas;
+            BtnAnterior.Visible = paginaActual > 1;
+
+        }
+
+
+        private void CargarProductosPorCategoria(string Categoria)
+        {
+            ProductoNegocio negocio = new ProductoNegocio();
+            listaProductos = negocio.ListarArticulos(Categoria);
 
             /* Math ceiling redondea la division, si da 2.3, lo pasa a 3.. redonde hacia arriba
              para siempre tener una pagina aunque de menos de 10*/
