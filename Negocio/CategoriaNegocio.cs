@@ -9,6 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace Negocio
 {
@@ -23,9 +24,18 @@ namespace Negocio
 
             try
             {
-                string consulta = @"
-                                select Nombre from Categorias;
-                                ";
+                string consulta = @"SELECT 
+                    c.CategoriaID,
+                    c.Nombre AS Nombre,
+                    c.Descripcion AS Descripcion,
+                    (SELECT TOP 1 i.ImagenURL 
+                    FROM Productos p 
+
+                    JOIN ImagenProducto i ON p.ProductoID = i.ProductoID 
+
+                    WHERE p.CategoriaID = c.CategoriaID) AS ImagenURL
+
+                    FROM Categorias c";
 
                 datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
@@ -35,6 +45,15 @@ namespace Negocio
 
                     if (!(datos.Lector["Nombre"] is DBNull))
                         categoria.Nombre = (string)datos.Lector["Nombre"];
+
+                    if (!(datos.Lector["Descripcion"] is DBNull))
+                        categoria.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    
+                    
+                    if (!(datos.Lector["ImagenURL"] is DBNull))
+                        categoria.ImagenURL = (string)datos.Lector["ImagenURL"];
+
                     list.Add(categoria);
                 }
                 return list;
@@ -50,7 +69,20 @@ namespace Negocio
 
         }
 
+        public ImagenProducto ObtenerImagen() {
 
+            ImagenProducto imagen = new ImagenProducto();
+            try
+
+            {
+
+            }
+            finally
+            {
+
+            }
+            return new ImagenProducto();
+        }
 
     }
 }

@@ -5,7 +5,7 @@
         <div class="row">
 
             <form>
-                <div class="col-md-9">
+                <div class="col-md-6">
                     
                         <h4>Contacto</h4>
                         <p>Envíanos tu consulta o comentario y te responderemos a la brevedad.</p>
@@ -33,7 +33,7 @@
                 </div>
             </form>
 
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <ul class="list-group">
                     <li class="list-group-item">
                         <span><i class="fab fa-whatsapp"></i>WhatsApp</span>
