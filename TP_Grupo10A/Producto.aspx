@@ -4,36 +4,41 @@
     <link href="./Content/styleProducto.css" rel="stylesheet" type="text/css" />
 
     <div class="row mb-3 text-center">
-        <aside class="col-2 themed-grid-col">
+        <%--ASIDE--%>
+        <aside class="col-3 themed-grid-col">
+           
             <h5>Categorías</h5>
-            <ul class="list-group">
-                <asp:Repeater ID="RepeaterCategorias" runat="server">
-                    <ItemTemplate>
-                        <li class="nav-item">
+            <asp:Repeater ID="RepeaterCategorias" runat="server">
+                <ItemTemplate>
+                    <div class="list-group-item list-group-item-action d-flex gap-3 py-3">
+                         <div class="d-flex gap-2 w-100 justify-content-between"></div>
+                        <button ID="btnListarCategorias" type="button" class="list-group-item list-group-item-action btn btn-sm">
                             <a class="nav-link" href='<%# "Producto.aspx?categoria=" + Eval("Nombre") %>'>
                                 <%# Eval("Nombre") %>
                             </a>
-                        </li>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </ul>
-            
+                        </button>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+
+
             <h5>Marcas</h5>
-            <ul class="list-group">
                 <asp:Repeater ID="RepeaterMarcas" runat="server">
                     <ItemTemplate>
-                        <li class="nav-item">
-                            <a class="nav-link" href='<%# "Producto.aspx?marcas=" + Eval("Nombre") %>'>
+                    <div class="list-group list-group-flush">
+                        <button ID="btnListarMarcas" type="button" class="list-group-item list-group-item-action btn btn-sm">
+                            <a class="nav-link" href='<%# "Producto.aspx?marca=" + Eval("Nombre") %>'>
                                 <%# Eval("Nombre") %>
                             </a>
-                        </li>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </ul>
+                        </button>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
 
 
         </aside>
-        <main class="col-10 themed-grid-col">
+    <%--MAIN--%>
+        <main class="col-9 themed-grid-col">
             <div class="productos-grid">
                 <asp:Repeater ID="RepeaterProductos" runat="server">
                     <ItemTemplate>
@@ -60,6 +65,6 @@
             </div>
         </main>
     </div>
-
+    
 </asp:Content>
 
