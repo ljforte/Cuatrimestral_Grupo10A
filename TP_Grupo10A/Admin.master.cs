@@ -18,5 +18,25 @@ namespace TP_Grupo10A
         {
 
         }
+
+        protected void btnInicio_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnProductos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("GestionProductos.aspx");
+        }
+
+        protected void btnMarcas_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("GestionMarcas.aspx");
+        }
+
+        protected void btnCategorias_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("GestionCategoria.aspx");
+        }
     }
 }

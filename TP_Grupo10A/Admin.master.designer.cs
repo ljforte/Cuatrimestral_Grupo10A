@@ -42,31 +42,31 @@ namespace TP_Grupo10A
         protected global::System.Web.UI.WebControls.Button btnInicio;
 
         /// <summary>
-        /// Control btnAgregar.
+        /// Control btnProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregar;
+        protected global::System.Web.UI.WebControls.Button btnProductos;
 
         /// <summary>
-        /// Control btnModificar.
+        /// Control btnMarcas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificar;
+        protected global::System.Web.UI.WebControls.Button btnMarcas;
 
         /// <summary>
-        /// Control btnEliminar.
+        /// Control btnCategorias.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminar;
+        protected global::System.Web.UI.WebControls.Button btnCategorias;
 
         /// <summary>
         /// Control btnLogout.

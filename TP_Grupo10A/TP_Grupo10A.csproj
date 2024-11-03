@@ -119,6 +119,9 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Gestion.aspx" />
+    <Content Include="GestionCategoria.aspx" />
+    <Content Include="GestionMarcas.aspx" />
+    <Content Include="GestionProductos.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Imagenes\CorsairBanner.jpg" />
     <Content Include="Imagenes\fondoFBE.png" />
@@ -221,6 +224,27 @@
     </Compile>
     <Compile Include="Gestion.aspx.designer.cs">
       <DependentUpon>Gestion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionCategoria.aspx.cs">
+      <DependentUpon>GestionCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionCategoria.aspx.designer.cs">
+      <DependentUpon>GestionCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionMarcas.aspx.cs">
+      <DependentUpon>GestionMarcas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionMarcas.aspx.designer.cs">
+      <DependentUpon>GestionMarcas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionProductos.aspx.cs">
+      <DependentUpon>GestionProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionProductos.aspx.designer.cs">
+      <DependentUpon>GestionProductos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

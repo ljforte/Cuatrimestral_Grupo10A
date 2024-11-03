@@ -23,20 +23,20 @@
                 </button>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <asp:Button ID="btnInicio" runat="server" CssClass="btn btn-primary my-2 my-sm-0 nav-link" Text="Inicio" />
+                        <asp:Button ID="btnInicio" runat="server" CssClass="btn btn-primary my-2 my-sm-0 nav-link" OnClick="btnInicio_Click" Text="Inicio" />
                     </li>
 
                 </ul>
                 <ul class="navbar-nav mx-auto">
 
                     <li class="nav-item">
-                        <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-success my-2 my-sm-0 nav-link" Text="Agregar" />
+                        <asp:Button ID="btnProductos" runat="server" CssClass="btn btn-success my-2 my-sm-0 nav-link" OnClick="btnProductos_Click" Text="Productos" />
                     </li>
                     <li class="nav-item">
-                        <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-secondary my-2 my-sm-0 nav-link" Text="Modificar" />
+                        <asp:Button ID="btnMarcas" runat="server" CssClass="btn btn-secondary my-2 my-sm-0 nav-link" OnClick="btnMarcas_Click" Text="Marcas" />
                     </li>
                     <li class="nav-item">
-                        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger my-2 my-sm-0 nav-link" Text="Eliminar" />
+                        <asp:Button ID="btnCategorias" runat="server" CssClass="btn btn-danger my-2 my-sm-0 nav-link" OnClick="btnCategorias_Click" Text="Categorias" />
                     </li>
 
                 </ul>
