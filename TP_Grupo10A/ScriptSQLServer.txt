@@ -9,10 +9,22 @@ CREATE TABLE Usuarios (
     Nombre NVARCHAR(50) NOT NULL,
     Email NVARCHAR(100) NOT NULL UNIQUE,
     UsuarioPassword NVARCHAR(255) NOT NULL,
-    Rol NVARCHAR(20) NOT NULL,
+    Rol INT NOT NULL,
     FechaRegistro DATETIME NOT NULL DEFAULT GETDATE(),
     Estado BIT NOT NULL DEFAULT 1
 );
+GO
+
+INSERT INTO Usuarios (Nombre, Email, Usuariopassword, Rol) VALUES 
+('Admin','admin@admin.com','admin',2),
+('Cliente','cliente@cliente.com','cliente',1);
+GO
+
+CREATE TABLE Roles  (
+ID INT PRIMARY KEY IDENTITY(1,1),
+Rol NVARCHAR(30) NOT NULL
+);
+
 GO
 
 CREATE TABLE Marcas(
@@ -71,7 +83,6 @@ CREATE TABLE Pedidos (
     FechaPedido DATETIME NOT NULL DEFAULT GETDATE(),
     EstadoPedido NVARCHAR(20) NOT NULL,
     Total DECIMAL(10, 2) NOT NULL
-    /  VER RELACION CARRITOID  y necesidad o no de PEDIDODETALLE/
 );
 GO
 
@@ -123,6 +134,10 @@ INSERT INTO Marcas (Nombre) VALUES
 ('MSI');
 GO
 
+INSERT INTO Roles (Rol) VALUES
+('Cliente'),
+('Admin');
+GO
 
 INSERT INTO Productos (Nombre, MarcaID, Precio, Stock, Descripcion, CategoriaID, Estado) VALUES
 ('Intel Core i9 11900K', 1, 529.99, 50, 'Procesador de 8 núcleos y 16 hilos', 8, 1),

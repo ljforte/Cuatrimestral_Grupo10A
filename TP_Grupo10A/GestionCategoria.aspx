@@ -12,7 +12,10 @@
             <asp:TextBox ID="txtDescripcion" runat="server" Placeholder="Descripcion" TextMode="MultiLine" CssClass="form-control mb-2" style="width: 800px; height: 150px;"></asp:TextBox>
         </div>
         <div class="form-group">
-            <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" CssClass="btn btn-primary" />
+            <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" CssClass="btn btn-success" />
+        </div>
+        <div>
+            <asp:Label ID="lblDato" runat="server" Text="" ></asp:Label>
         </div>
     </div>
 </asp:Content>

@@ -22,7 +22,7 @@ namespace TP_Grupo10A
             
             try
             {
-                user = new Usuarios(txtEmail.Text, txtContraseña.Text, false);
+                user = new Usuarios(txtEmail.Text, txtContraseña.Text);
                if(negocio.Loguear(user))
                 {
                     Session.Add("Usuario", user);
@@ -31,11 +31,11 @@ namespace TP_Grupo10A
                         Response.Redirect("Gestion.aspx", false);
                         return;
                     }
-                }
                     else if(user.Tipo == TipoUsuario.Cliente)
                     {
                     Response.Redirect("TeLogueaste.aspx", false);
                     return;
+                }
                 }
                 else
                 {

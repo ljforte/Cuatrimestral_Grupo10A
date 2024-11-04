@@ -12,7 +12,7 @@ namespace TP_Grupo10A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lblDato.Visible = false;
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -21,7 +21,19 @@ namespace TP_Grupo10A
 
             try
             {
-                negocio.AgregarCategoria(txtNombre.Text, txtDescripcion.Text);
+                if (negocio.BuscarCat(txtNombre.Text))
+                {
+                    lblDato.Text = "Error, esa categoria ya existe";
+                    lblDato.Visible=true;
+                    return;
+                }
+                else
+                {
+                    negocio.AgregarCategoria(txtNombre.Text, txtDescripcion.Text);
+                    lblDato.Text = "¡Categoria cargada con exito!";
+                    lblDato.Visible = true;
+                    return;
+                }
             }
             catch (Exception ex)
             {

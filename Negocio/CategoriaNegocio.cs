@@ -49,8 +49,8 @@ namespace Negocio
                     if (!(datos.Lector["Descripcion"] is DBNull))
                         categoria.Descripcion = (string)datos.Lector["Descripcion"];
 
-                    
-                    
+
+
                     if (!(datos.Lector["ImagenURL"] is DBNull))
                         categoria.ImagenURL = (string)datos.Lector["ImagenURL"];
 
@@ -58,7 +58,7 @@ namespace Negocio
                 }
                 return list;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -69,7 +69,8 @@ namespace Negocio
 
         }
 
-        public ImagenProducto ObtenerImagen() {
+        public ImagenProducto ObtenerImagen()
+        {
 
             ImagenProducto imagen = new ImagenProducto();
             try
@@ -88,8 +89,12 @@ namespace Negocio
         {
             try
             {
-                datos.setearConsulta("insert into Categorias (Nombre, Descripcion) VALUES (' " + cat + "', '" +desc+ "')");
+
+
+
+                datos.setearConsulta("insert into Categorias (Nombre, Descripcion) VALUES (' " + cat + "', '" + desc + "')");
                 datos.ejecutarAccion();
+
 
             }
             catch (Exception ex)
@@ -101,6 +106,34 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+
+        public bool BuscarCat(string cat)
+        {
+            try
+            {
+            datos.setearConsulta("select * from Categorias where Nombre = '" + cat + "'");
+            datos.ejecutarLectura();
+            if (datos.Lector.Read())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
         }
 
     }

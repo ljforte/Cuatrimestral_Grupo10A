@@ -9,7 +9,8 @@ namespace Dominio
     public enum TipoUsuario
     {
         Cliente = 1,
-        Admin= 2
+        Admin= 2,
+
     }
     public class Usuarios
     {
@@ -24,11 +25,10 @@ namespace Dominio
         public DateTime FechaRegistro { get; set; }
         public bool Estado {  get; set; }
 
-        public Usuarios(string mail, string pass, bool admin)
+        public Usuarios(string mail, string pass)
         {
             Email = mail;
             UsuarioPassword = pass;
-            Tipo = admin ? TipoUsuario.Admin : TipoUsuario.Cliente;
         }
     }
 }
