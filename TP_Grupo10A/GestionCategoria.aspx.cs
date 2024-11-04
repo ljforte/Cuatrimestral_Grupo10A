@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,21 @@ namespace TP_Grupo10A
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            CategoriaNegocio negocio = new CategoriaNegocio();
+
+            try
+            {
+                negocio.AgregarCategoria(txtNombre.Text, txtDescripcion.Text);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -84,5 +84,24 @@ namespace Negocio
             return new ImagenProducto();
         }
 
+        public void AgregarCategoria(string cat, string desc)
+        {
+            try
+            {
+                datos.setearConsulta("insert into Categorias (Nombre, Descripcion) VALUES (' " + cat + "', '" +desc+ "')");
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

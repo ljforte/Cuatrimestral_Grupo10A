@@ -43,5 +43,25 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+       public void AgregarMarca(string marca)
+        {
+            try
+            {
+                 datos.setearConsulta("insert into Marcas (Nombre) VALUES (' "+ marca +"')");
+               // datos.setearConsulta("insert into Marcas (Nombre) VALUES ('Asrock')");
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
