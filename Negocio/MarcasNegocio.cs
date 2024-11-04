@@ -48,7 +48,7 @@ namespace Negocio
         {
             try
             {
-                 datos.setearConsulta("insert into Marcas (Nombre) VALUES (' "+ marca +"')");
+                 datos.setearConsulta("insert into Marcas (Nombre) VALUES ('"+ marca +"')");
                // datos.setearConsulta("insert into Marcas (Nombre) VALUES ('Asrock')");
                 datos.ejecutarAccion();
 
@@ -62,6 +62,33 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+
+        public bool BuscarMarca(string marca)
+        {
+            try
+            {
+                datos.setearConsulta("select * from Marcas where Nombre = '" + marca + "'");
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
         }
     }
 }

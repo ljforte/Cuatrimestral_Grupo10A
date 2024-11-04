@@ -21,6 +21,17 @@ namespace TP_Grupo10A
 
             try
             {
+                if (string.IsNullOrEmpty(txtNombre.Text))
+                {
+                    lblDato.Text = "Debe ingresar un nombre";
+                    lblDato.Visible = true;
+                    return;
+                }
+                else if (string.IsNullOrEmpty(txtDescripcion.Text)){
+                    lblDato.Text = "Debe ingresar una descripcion";
+                    lblDato.Visible = true;
+                    return;
+                }
                 if (negocio.BuscarCat(txtNombre.Text))
                 {
                     lblDato.Text = "Error, esa categoria ya existe";

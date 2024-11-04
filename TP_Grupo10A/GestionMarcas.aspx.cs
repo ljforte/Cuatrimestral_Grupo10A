@@ -12,16 +12,36 @@ namespace TP_Grupo10A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            lblDato.Visible = false;
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
             MarcasNegocio negocio = new MarcasNegocio();
 
+
             try
             {
-                negocio.AgregarMarca(txtNombre.Text);
+                if (string.IsNullOrEmpty(txtNombre.Text))
+                {
+                    lblDato.Text = "Debe ingresar un nombre";
+                    lblDato.Visible = true;
+                    return;
+                }
+                if (negocio.BuscarMarca(txtNombre.Text))
+                {
+
+                    lblDato.Text = "Error, esa categoria ya existe";
+                    lblDato.Visible = true;
+                    return;
+                }
+                else
+                {
+                    lblDato.Text = "¡Categoria cargada con exito!";
+                    lblDato.Visible = true;
+                    negocio.AgregarMarca(txtNombre.Text);
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -33,7 +53,7 @@ namespace TP_Grupo10A
         {
         }
 
-    
-    
+
+
     }
 }

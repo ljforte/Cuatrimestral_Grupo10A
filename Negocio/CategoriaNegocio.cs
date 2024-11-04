@@ -89,13 +89,8 @@ namespace Negocio
         {
             try
             {
-
-
-
-                datos.setearConsulta("insert into Categorias (Nombre, Descripcion) VALUES (' " + cat + "', '" + desc + "')");
+                datos.setearConsulta("insert into Categorias (Nombre, Descripcion) VALUES ('" + cat + "', '" + desc + "')");
                 datos.ejecutarAccion();
-
-
             }
             catch (Exception ex)
             {
@@ -126,7 +121,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-
                 throw;
             }
             finally
