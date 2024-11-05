@@ -54,9 +54,9 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                        <a class="navbar-nav" href="/#">
-                            <img src="./Imagenes/LogoFBE.png" class="logoFBE" alt="Logo" />
-                        </a>
+                <a class="navbar-nav" href="/#">
+                    <img src="./Imagenes/LogoFBE.png" class="logoFBE" alt="Logo" />
+                </a>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -74,40 +74,43 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Contacto.aspx">Contacto <span class="sr-only">(current)</span></a>
                         </li>
-                        </ul>
+                    </ul>
                     <ul class="navbar-nav mx-auto">
                         <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2" Style="width: 300px;" placeholder="Buscar productos" aria-label="Buscar"></asp:TextBox>
                         <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-success my-2 my-sm-0" Text="Buscar" OnClick="btnBuscar_Click" />
 
                     </ul>
-                  <ul class="navbar-nav mr-auto">
-    <%--carrito--%>
+                    <ul class="navbar-nav mr-auto">
+                        <%--carrito--%>
 
-    <% if (((Dominio.Usuarios)Session["usuario"]) == null) { %>
-        <li class="nav-item">
-            <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Login" OnClick="btnLogin_Click" />
-        </li>
-        <li class="nav-item">
-            <asp:Button ID="btnRegistro" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Registrarse" OnClick="btnRegistro_Click" />
-        </li>
-    <% } %>
+                        <% if (((Dominio.Usuarios)Session["usuario"]) == null)
+                            { %>
+                        <li class="nav-item">
+                            <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Login" OnClick="btnLogin_Click" />
+                        </li>
+                        <li class="nav-item">
+                            <asp:Button ID="btnRegistro" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Registrarse" OnClick="btnRegistro_Click" />
+                        </li>
+                        <% } %>
 
-    <% if (Session["usuario"] != null && ((Dominio.Usuarios)Session["usuario"]).Tipo == Dominio.TipoUsuario.Cliente) { %>
-        <li class="nav-item">
-            <asp:Button ID="btnPerfil" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Perfil" OnClick="btnPerfil_click" />
-        </li>
-    <% } %>
+                        <% if (Session["usuario"] != null && ((Dominio.Usuarios)Session["usuario"]).Tipo == Dominio.TipoUsuario.Cliente)
+                            { %>
+                        <li class="nav-item">
+                            <asp:Button ID="btnPerfil" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Perfil" OnClick="btnPerfil_click" />
+                        </li>
+                        <% } %>
 
-    <% if (Session["usuario"] != null && ((Dominio.Usuarios)Session["usuario"]).Tipo == Dominio.TipoUsuario.Admin) { %>
-        <li class="nav-item">
-            <asp:Button ID="btnGestion" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Gestionar" OnClick="btnGestion_Click" />
-        </li>
-    <% } %>
+                        <% if (Session["usuario"] != null && ((Dominio.Usuarios)Session["usuario"]).Tipo == Dominio.TipoUsuario.Admin)
+                            { %>
+                        <li class="nav-item">
+                            <asp:Button ID="btnGestion" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Gestionar" OnClick="btnGestion_Click" />
+                        </li>
+                        <% } %>
 
-    <li class="nav-item">
-        <asp:Button ID="btnCarrito" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Carrito" OnClick="btnCarrito_Click" />
-    </li>
-</ul>
+                        <li class="nav-item">
+                            <asp:Button ID="btnCarrito" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Carrito" OnClick="btnCarrito_Click" />
+                        </li>
+                    </ul>
 
                 </div>
 

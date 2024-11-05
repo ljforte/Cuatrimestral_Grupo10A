@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,11 @@ namespace TP_Grupo10A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblDato.Visible = false;
+            
+            MarcasNegocio negocio = new MarcasNegocio();
+           dgvMarcas.DataSource = negocio.ListarMarcas();
+            dgvMarcas.DataBind();
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -40,6 +45,7 @@ namespace TP_Grupo10A
                     lblDato.Text = "¡Categoria cargada con exito!";
                     lblDato.Visible = true;
                     negocio.AgregarMarca(txtNombre.Text);
+                    Page_Load(sender, e);
                     return;
                 }
             }

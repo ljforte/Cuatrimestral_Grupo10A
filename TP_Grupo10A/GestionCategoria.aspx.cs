@@ -13,6 +13,9 @@ namespace TP_Grupo10A
         protected void Page_Load(object sender, EventArgs e)
         {
             lblDato.Visible = false;
+            CategoriaNegocio negocio = new CategoriaNegocio();
+            dgvCategoria.DataSource = negocio.ListarCategorias();
+            dgvCategoria.DataBind();
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -43,6 +46,7 @@ namespace TP_Grupo10A
                     negocio.AgregarCategoria(txtNombre.Text, txtDescripcion.Text);
                     lblDato.Text = "¡Categoria cargada con exito!";
                     lblDato.Visible = true;
+                    Page_Load(sender, e);
                     return;
                 }
             }
