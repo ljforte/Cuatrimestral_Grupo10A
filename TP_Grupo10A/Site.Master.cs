@@ -21,7 +21,7 @@ namespace TP_Grupo10A
 
         protected void btnPerfil_click(object sender, EventArgs e)
         {
-            Response.Redirect("Login.aspx", false);
+            Response.Redirect("Perfil.aspx", false);
         }
 
         
@@ -50,5 +50,10 @@ namespace TP_Grupo10A
     {
 
     }
+
+        protected void btnGestion_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Gestion.aspx", false);
+        }
     }
 }

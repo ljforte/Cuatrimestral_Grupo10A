@@ -21,7 +21,7 @@ namespace TP_Grupo10A
 
         protected void btnInicio_Click(object sender, EventArgs e)
         {
-            
+            Response.Redirect("default.aspx", false);
         }
 
         protected void btnProductos_Click(object sender, EventArgs e)
