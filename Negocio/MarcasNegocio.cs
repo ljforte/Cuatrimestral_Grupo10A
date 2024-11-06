@@ -90,5 +90,35 @@ namespace Negocio
             }
 
         }
+        public int BuscarIdMarca(string mar)
+        {
+            try
+            {
+                datos.setearConsulta("select MarcaID from Marcas where Nombre = '" + mar + "'");
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Marcas marca = new Marcas();
+                    if (!(datos.Lector["MarcaID"] is DBNull))
+                        marca.MarcaID = (int)datos.Lector["MarcaID"];
+                    return marca.MarcaID;
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
     }
 }
