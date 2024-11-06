@@ -53,6 +53,8 @@ namespace Negocio
 
                     if (!(datos.Lector["ImagenURL"] is DBNull))
                         categoria.ImagenURL = (string)datos.Lector["ImagenURL"];
+                    else
+                        categoria.ImagenURL = "./Imagenes/ImagenNoEncontrada.jpeg";
 
                     list.Add(categoria);
                 }

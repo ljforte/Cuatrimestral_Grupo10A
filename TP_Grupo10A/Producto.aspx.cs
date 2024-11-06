@@ -122,5 +122,15 @@ namespace TP_Grupo10A
             paginaActual++;
             CargarProductos();
         }
+
+        protected void btnVerDetalle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

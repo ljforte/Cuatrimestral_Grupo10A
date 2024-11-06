@@ -125,6 +125,7 @@
     <Content Include="Global.asax" />
     <Content Include="Imagenes\CorsairBanner.jpg" />
     <Content Include="Imagenes\fondoFBE.png" />
+    <Content Include="Imagenes\ImagenNoEncontrada.jpeg" />
     <Content Include="Imagenes\logoFBE.png" />
     <Content Include="Imagenes\OfertaPortada.png" />
     <Content Include="Perfil.aspx" />
