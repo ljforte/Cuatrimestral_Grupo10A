@@ -128,6 +128,7 @@
     <Content Include="Imagenes\logoFBE.png" />
     <Content Include="Imagenes\OfertaPortada.png" />
     <Content Include="Perfil.aspx" />
+    <Content Include="AltaProducto.aspx" />
     <Content Include="Producto.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Registro.aspx" />
@@ -255,6 +256,13 @@
     </Compile>
     <Compile Include="Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AltaProducto.aspx.cs">
+      <DependentUpon>AltaProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AltaProducto.aspx.designer.cs">
+      <DependentUpon>AltaProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Producto.aspx.cs">
       <DependentUpon>Producto.aspx</DependentUpon>

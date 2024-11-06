@@ -49,10 +49,11 @@ namespace Negocio
                     if (!(datos.Lector["Descripcion"] is DBNull))
                         categoria.Descripcion = (string)datos.Lector["Descripcion"];
 
-
-
                     if (!(datos.Lector["ImagenURL"] is DBNull))
                         categoria.ImagenURL = (string)datos.Lector["ImagenURL"];
+                    else
+                        categoria.ImagenURL = "./Imagenes/ImagenNoEncontrada.jpeg";
+
 
                     list.Add(categoria);
                 }
@@ -129,6 +130,36 @@ namespace Negocio
             }
 
         }
+        public int BuscarIdCat(string cat)
+        {
+            try
+            {
+                datos.setearConsulta("select CategoriaID from Categorias where Nombre = '" + cat + "'");
+                datos.ejecutarLectura();
 
+                if (datos.Lector.Read())
+                {
+                    Categorias categoria = new Categorias();
+
+                    if (!(datos.Lector["CategoriaID"] is DBNull))
+                        categoria.CategoriaID = (int)datos.Lector["CategoriaID"];
+                    return categoria.CategoriaID;
+                }
+                else
+                {
+                    return 0;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
     }
 }

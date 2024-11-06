@@ -17,6 +17,8 @@ namespace Negocio
         private AccesoDatos datos = new AccesoDatos();
         private List<Productos> list;
         private ImagenProductoNegocio IMGnegocio = new ImagenProductoNegocio();
+        private CategoriaNegocio Cat = new CategoriaNegocio();
+        private MarcasNegocio Mar = new MarcasNegocio();
 
         public List<Productos> ListarArticulos()
         {
@@ -156,6 +158,41 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+
+        public void AltaProducto(string Nombre, string Marca, float Precio, int Stock, string Descripcion, string Categoria, 
+                                                         bool Activo )
+        {
+            try
+            {
+                int CategoriaID = Cat.BuscarIdCat(Categoria);
+                int MarcaID = Mar.BuscarIdMarca(Marca);
+                
+                string consulta = @"INSERT INTO Productos (Nombre, MarcaID, Precio, Stock, Descripcion, CategoriaID, Estado) 
+                                   VALUES (@Nombre, @MarcaID, @Precio, @Stock, @Descripcion, @CategoriaID, @Activo)";
+
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@Nombre", Nombre);
+                datos.setearParametro("@MarcaID", MarcaID);
+                datos.setearParametro("@Precio", Precio);
+                datos.setearParametro("@Stock", Stock);
+                datos.setearParametro("@Descripcion", Descripcion);
+                datos.setearParametro("@CategoriaID", CategoriaID);
+                datos.setearParametro("@Activo", Activo);
+                datos.ejecutarLectura();
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
         }
     }
 }
