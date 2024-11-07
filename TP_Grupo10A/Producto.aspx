@@ -82,11 +82,12 @@
                 </asp:Repeater>
 
             </div>
-            <div class="btn-paginacion">
-                <asp:Button ID="BtnAnterior" runat="server" Text="Anterior" OnClick="BtnAnterior_Click" CssClass="btn btn-secondary" />
-                <asp:Button ID="BtnSiguiente" runat="server" Text="Siguiente" OnClick="BtnSiguiente_Click" CssClass="btn btn-secondary" />
-            </div>
+            <%--Paginacion--%>
 
+            <div class="btn-paginacion text-center mt-3 bg-light">
+                <asp:Button ID="BtnAnterior" runat="server" Text="Anterior" OnClick="BtnAnterior_Click" CssClass="btn btn-info" />
+                <asp:Button ID="BtnSiguiente" runat="server" Text="Siguiente" OnClick="BtnSiguiente_Click" CssClass="btn btn-info" />
+            </div>
         </main>
         <%--  
         <main class="col-9 themed-grid-col">
