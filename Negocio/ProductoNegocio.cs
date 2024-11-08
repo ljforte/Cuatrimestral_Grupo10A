@@ -19,6 +19,7 @@ namespace Negocio
         private ImagenProductoNegocio IMGnegocio = new ImagenProductoNegocio();
         private CategoriaNegocio Cat = new CategoriaNegocio();
         private MarcasNegocio Mar = new MarcasNegocio();
+        private Productos prod = new Productos();
 
         public List<Productos> ListarArticulos()
         {
@@ -264,33 +265,30 @@ namespace Negocio
             list = new List<Productos>();
             try
             {
+                int ProductoID = Convert.ToInt32(ID);
                 string consulta = @"SELECT P.ProductoID as ProductoID, P.Nombre, M.Nombre AS Marca, P.Precio, P.Descripcion, 
-                                   C.Nombre AS Categoria, P.MarcaID, C.CategoriaID
+                                   C.Nombre AS Categoria, P.MarcaID, C.CategoriaID, P.Stock as Stock
                             FROM Productos AS P
                             LEFT JOIN Marcas AS M ON M.MarcaID = P.MarcaID
-                            LEFT JOIN Categorias AS C ON C.CategoriaID = P.CategoriaID
-                            WHERE P.Estado = 1 AND P.Stock > 1";
+                            LEFT JOIN Categorias AS C ON C.CategoriaID = P.CategoriaID ";
 
-                consulta += " and P.ProductoID = " + ID;
+                consulta += " WHERE P.ProductoID = "+ ProductoID;
                 datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Productos Producto = new Productos();
-
-
                     if (!(datos.Lector["ProductoID"] is DBNull))
                         Producto.ProductoID = Convert.ToInt32(datos.Lector["ProductoID"]);
-
                     if (!(datos.Lector["Nombre"] is DBNull))
                         Producto.Nombre = (string)datos.Lector["Nombre"];
-
                     if (!(datos.Lector["Precio"] is DBNull))
                         Producto.Precio = Convert.ToSingle(datos.Lector["Precio"]);
-
                     if (!(datos.Lector["Descripcion"] is DBNull))
                         Producto.Descripcion = (string)datos.Lector["Descripcion"];
+                    if (!(datos.Lector["Stock"] is DBNull))
+                        Producto.stock = (int)datos.Lector["Stock"];
 
                     if (!(datos.Lector["Categoria"] is DBNull))
                     {
@@ -329,39 +327,32 @@ namespace Negocio
             }
         }
 
-        public void Modificar(string Nombre, string Marca, float Precio, int Stock, string Descripcion, string Categoria,
-                                                         bool Estado, int ProductoID)
+        public void Modificar(Productos prod)
         {
             try
             {
-                int CategoriaID = Cat.BuscarIdCat(Categoria);
-                int MarcaID = Mar.BuscarIdMarca(Marca);
 
                 string consulta = "storedModificarProducto";
-
-
                 datos.setearProcedimiento(consulta);
-                datos.setearParametro("@ProductoID", ProductoID);
-                datos.setearParametro("@Nombre", Nombre);
-                datos.setearParametro("@MarcaID", MarcaID);
-                datos.setearParametro("@Precio", Precio);
-                datos.setearParametro("@Stock", Stock);
-                datos.setearParametro("@Descripcion", Descripcion);
-                datos.setearParametro("@CategoriaID", CategoriaID);
-                datos.setearParametro("@Estado", Estado);
-                datos.ejecutarLectura();
-
+                datos.setearParametro("@Nombre", prod.Nombre);
+                datos.setearParametro("@MarcaID", prod.MarcaID.MarcaID);
+                datos.setearParametro("@Precio", prod.Precio);  
+                datos.setearParametro("@Stock", prod.stock);
+                datos.setearParametro("@Descripcion", prod.Descripcion);
+                datos.setearParametro("@CategoriaID", prod.CategoriaID.CategoriaID);
+                datos.setearParametro("@Estado", prod.Estado);
+                datos.setearParametro("@ProductoID", prod.ProductoID);
+                datos.ejecutarAccion();
 
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Error al modificar el producto", ex);  
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.cerrarConexion();  
             }
-
         }
     }
 }

@@ -200,7 +200,7 @@ SELECT P.ProductoID as ProductoID, P.Nombre, M.Nombre AS Marca, P.Precio, P.Desc
                             FROM Productos AS P
                             LEFT JOIN Marcas AS M ON M.MarcaID = P.MarcaID
                             LEFT JOIN Categorias AS C ON C.CategoriaID = P.CategoriaID
-GO
+
 
 CREATE PROCEDURE storedModificarProducto 
 @Nombre VARCHAR,
