@@ -12,14 +12,16 @@
         <asp:GridView ID="dgvListarProductosSP" runat="server" CssClass="table" DataKeyNames="ProductoID"
             OnSelectedIndexChanged="dgvProductos_SelectedIndexChanged"
             OnPageIndexChanging="dgvProductos_PageIndexChanging"
-            AllowPaging="true" PageSize="5"
-            Columns="false">
+            AllowPaging="true" PageSize="10"
+            Columns="true">
             <Columns>
                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                 <asp:BoundField HeaderText="Categoria" DataField="CategoriaID.Nombre" />
                 <asp:BoundField HeaderText="Marca" DataField="MarcaID.Nombre" />
                 <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString="{0:C}" />
+                <asp:BoundField HeaderText="Stock" DataField="Stock" />
                 <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="Editar" />
+                <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="Eliminar" />
             </Columns>
         </asp:GridView>
     </div>

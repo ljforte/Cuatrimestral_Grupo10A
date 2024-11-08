@@ -6,12 +6,12 @@
             <label for="ingresoNombre" class="form-label">Nombre</label>
             <asp:TextBox ID="txtNombre" runat="server" MaxLength="100" CssClass="form-control" Placeholder="Máximo 100 caracteres" />
         </div>
-<div class="col-md-4">
-    <label for="ingresoMarca" class="form-label">Marca</label>
-    <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select">
-        <asp:ListItem Text="Seleccionar..." Value="" />
-    </asp:DropDownList>
-</div>
+        <div class="col-md-4">
+            <label for="ingresoMarca" class="form-label">Marca</label>
+            <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select">
+                <asp:ListItem Text="Seleccionar..." Value="" />
+            </asp:DropDownList>
+        </div>
         <div class="col-12">
             <label for="ingresoPrecio" class="form-label">Precio</label>
             <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" Placeholder="Solo ingresa numeros" />
@@ -24,12 +24,12 @@
             <label for="ingresoDescripcion" class="form-label">Descripción</label>
             <asp:TextBox ID="txtDescripcion" runat="server" MaxLength="255" CssClass="form-control" TextMode="MultiLine" Rows="4" Placeholder="Máximo 255 caracteres" />
         </div>
-<div class="col-md-4">
-    <label for="ingresoCategoria" class="form-label">Categoría</label>
-    <asp:DropDownList ID="ddlCategorias" runat="server" CssClass="form-select">
-        <asp:ListItem Text="Choose..." Value="" />
-    </asp:DropDownList>
-</div>
+        <div class="col-md-4">
+            <label for="ingresoCategoria" class="form-label">Categoría</label>
+            <asp:DropDownList ID="ddlCategorias" runat="server" CssClass="form-select">
+                <asp:ListItem Text="Choose..." Value="" />
+            </asp:DropDownList>
+        </div>
         <div class="col-md-5">
             <label for="ingresoUrlImagen1" class="form-label">URL Imagen 1</label>
             <asp:TextBox ID="txtUrlImagen1" runat="server" CssClass="form-control" Placeholder="URL de la imagen 1" />
@@ -42,17 +42,21 @@
             <label for="ingresoUrlImagen3" class="form-label">URL Imagen 3</label>
             <asp:TextBox ID="txtUrlImagen3" runat="server" CssClass="form-control" Placeholder="URL de la imagen 3" />
         </div>
-  <div class="form-check">
-    <asp:CheckBox ID="checkBoxIsActive" runat="server" CssClass="form-check-input" Text="Activar codigo" />
-      <br>
-</div>
-  <div class="col-12">
-     <asp:Button ID="btnAltaProducto" runat="server" Text="Aceptar" CssClass="btn btn-primary" style="margin-top: 70px;" OnClick="btnAltaProducto_Click" />
-  </div>
-          <div class="col-12">
-     <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" style="margin-top: 20px;" OnClick="btnCancelar_Click" />
-  </div>
-</form>
-    
+        <div class="form-check">
+            <asp:CheckBox ID="checkBoxIsActive" runat="server" CssClass="form-check-input" Text="Activar codigo" />
+            <br>
+        </div>
+        <div class="col-12">
+            <asp:Button ID="btnAltaProducto" runat="server" Text="Aceptar" CssClass="btn btn-primary" Style="margin-top: 70px;" OnClick="btnAltaProducto_Click" />
+        </div>
+        <div class="col-12">
+            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" Style="margin-top: 20px;" OnClick="btnCancelar_Click" />
+        </div>
+        <div class="col-12">
+            <asp:Button ID="btnExito" runat="server" Text="Operación exitosa" CssClass="btn btn-success hidden"
+                Visible="false" OnClick="btnExito_Click" />
+        </div>
+    </form>
+
 </asp:Content>
 
