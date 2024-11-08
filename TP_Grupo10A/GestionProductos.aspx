@@ -5,6 +5,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="d-grid gap-2 col-6 mx-auto">
         <a href="AltaProducto.aspx" class="btn btn-primary" role="button">Cargar Producto</a>
-        <button class="btn btn-primary" type="button">Modificar Producto</button>
+        <div class="input-group mb-3">
+            <asp:TextBox ID="TxtNombre" runat="server" CssClass="form-control" placeholder="Buscar por nombre (Aun no me desarrollaron)" />
+            <asp:Button ID="BtnBuscar" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="BtnBuscar_Click" />
+        </div>
+        <asp:GridView ID="dgvListarProductosSP" runat="server" CssClass="table" DataKeyNames="ProductoID"
+            OnSelectedIndexChanged="dgvProductos_SelectedIndexChanged"
+            OnPageIndexChanging="dgvProductos_PageIndexChanging"
+            AllowPaging="true" PageSize="5"
+            Columns="false">
+            <Columns>
+                <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                <asp:BoundField HeaderText="Categoria" DataField="CategoriaID.Nombre" />
+                <asp:BoundField HeaderText="Marca" DataField="MarcaID.Nombre" />
+                <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString="{0:C}" />
+                <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="Editar" />
+            </Columns>
+        </asp:GridView>
     </div>
 </asp:Content>

@@ -192,3 +192,28 @@ INSERT INTO ImagenProducto (ProductoID, ImagenURL) VALUES
 (20, 'https://http2.mlstatic.com/D_NQ_NP_966214-MLA49500030797_032022-O.webp');
 
 GO
+
+
+CREATE PROCEDURE storedListarProductos as
+SELECT P.ProductoID as ProductoID, P.Nombre, M.Nombre AS Marca, P.Precio, P.Descripcion, 
+                                   C.Nombre AS Categoria, P.MarcaID, C.CategoriaID
+                            FROM Productos AS P
+                            LEFT JOIN Marcas AS M ON M.MarcaID = P.MarcaID
+                            LEFT JOIN Categorias AS C ON C.CategoriaID = P.CategoriaID
+                            WHERE P.Estado = 1 AND P.Stock > 1
+
+CREATE PROCEDURE storedModificarProducto 
+@Nombre VARCHAR,
+@MarcaID int,
+@Precio decimal,
+@Stock int,
+@Descripcion varchar(255),
+@CategoriaID int,
+@Estado BIT,
+@ProductoID int
+as
+UPDATE  Productos SET Nombre = @Nombre, MarcaID = @MarcaID, Precio = @Precio, Stock = @Stock, Descripcion = @Descripcion, CategoriaID = @CategoriaID, 
+Estado = @Estado 
+WHERE ProductoID = @ProductoID;
+
+

@@ -47,7 +47,10 @@
       <br>
 </div>
   <div class="col-12">
-     <asp:Button ID="btnAltaProducto" runat="server" Text="Enviar Alta" CssClass="btn btn-primary" style="margin-top: 70px;" OnClick="btnAltaProducto_Click" />
+     <asp:Button ID="btnAltaProducto" runat="server" Text="Aceptar" CssClass="btn btn-primary" style="margin-top: 70px;" OnClick="btnAltaProducto_Click" />
+  </div>
+          <div class="col-12">
+     <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" style="margin-top: 20px;" OnClick="btnCancelar_Click" />
   </div>
 </form>
     
