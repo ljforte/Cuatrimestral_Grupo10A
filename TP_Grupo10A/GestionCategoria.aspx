@@ -23,6 +23,8 @@
             <asp:GridView ID="dgvCategoria" runat="server" CssClass="table" AutoGenerateColumns="false">
                 <Columns>
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                    <asp:BoundField HeaderText="ID" DataField="CategoriaID" />
+
                     <asp:ButtonField HeaderText="Modificar" Text="Modificar" ControlStyle-CssClass="btn btn-light" CommandName="btnModificar" />
                     <asp:ButtonField HeaderText="Eliminar" Text="Eliminar" ControlStyle-CssClass="btn btn-danger" CommandName="btnEliminar" />
                 </Columns>

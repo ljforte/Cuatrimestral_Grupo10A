@@ -43,6 +43,9 @@ namespace Negocio
                 {
                     Categorias categoria = new Categorias();
 
+                    if (!(datos.Lector["CategoriaID"] is DBNull))
+                        categoria.CategoriaID = (int)datos.Lector["CategoriaID"];
+
                     if (!(datos.Lector["Nombre"] is DBNull))
                         categoria.Nombre = (string)datos.Lector["Nombre"];
 
@@ -68,6 +71,26 @@ namespace Negocio
                 datos.cerrarConexion();
             }
 
+        }
+
+        public bool EliminarCat(string catID)
+        {
+            try
+            {
+                datos.setearConsulta("delete * from Categorias where CategoriaID = @id");
+                datos.setearParametro("@id", catID);
+                datos.ejecutarAccion();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
 
         public ImagenProducto ObtenerImagen()

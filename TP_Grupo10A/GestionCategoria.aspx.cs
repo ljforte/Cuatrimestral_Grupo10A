@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,21 @@ namespace TP_Grupo10A
         {
             lblDato.Visible = false;
             CategoriaNegocio negocio = new CategoriaNegocio();
-            dgvCategoria.DataSource = negocio.ListarCategorias();
+           List< Categorias> categorias = new List<Categorias>();
+            categorias = negocio.ListarCategorias();
+            dgvCategoria.DataSource = categorias;
             dgvCategoria.DataBind();
+        }
+
+        protected void dgvCategoria_SelectIndexChanged(object sender, GridViewCommandEventArgs e)
+        {
+            List<Categorias> categorias = new List<Categorias>();
+            CategoriaNegocio neg = new CategoriaNegocio();
+            categorias = neg.ListarCategorias();
+            //categorias. = dgvCategoria.SelectedDataKey.Value.ToString();
+            //Response.Redirect($"EliminarCategoria.aspx?CategoriaID={categoriaID}");
+           // neg.EliminarCat();
+            
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
