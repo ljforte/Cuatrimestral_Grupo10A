@@ -36,13 +36,13 @@ namespace TP_Grupo10A
                 if (negocio.BuscarMarca(txtNombre.Text))
                 {
 
-                    lblDato.Text = "Error, esa categoria ya existe";
+                    lblDato.Text = "Error, esa marca ya existe";
                     lblDato.Visible = true;
                     return;
                 }
                 else
                 {
-                    lblDato.Text = "¡Categoria cargada con exito!";
+                    lblDato.Text = "¡Marca cargada con exito!";
                     lblDato.Visible = true;
                     negocio.AgregarMarca(txtNombre.Text);
                     Page_Load(sender, e);
@@ -59,7 +59,41 @@ namespace TP_Grupo10A
         {
         }
 
+        protected void dgvMarcas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            MarcasNegocio neg = new MarcasNegocio();
 
+            lblDato.Text = "Modificar";
+            lblDato.Visible = true;
+
+        }
+           
+
+        protected void dgvMarcas_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            MarcasNegocio neg = new MarcasNegocio();
+
+            // Obtener el índice de la fila que se está eliminando
+            int index = e.RowIndex;
+
+            // Obtener el ID de la marca desde DataKeyNames
+            int marcaID = Convert.ToInt32(dgvMarcas.DataKeys[index].Value);
+            
+                
+                if (neg.EliminarMarca(marcaID))
+                {
+                    lblDato.Text = "¡Marca eliminada con exito!";
+                    lblDato.Visible = true;
+                }
+                else
+                {
+                    lblDato.Text = "Error, no se puede eliminar esta marca";
+                }
+                Page_Load(sender,e);
+                
+                Page_Load(sender, e);
+        }
 
     }
 }

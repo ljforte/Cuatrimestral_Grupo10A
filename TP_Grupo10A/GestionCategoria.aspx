@@ -13,30 +13,26 @@
         <div class="form-group">
             <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" CssClass="btn btn-success" />
         </div>
+        <br />
         <div>
-            <asp:Label ID="lblDato" runat="server" CssClass="mx-2" Text=""></asp:Label>
+            <asp:Label ID="lblDato" runat="server" Visible="false" CssClass="mx-2" Text=""></asp:Label>
         </div>
     </div>
     <br />
     <div style="display: flex; justify-content: center; align-items: center;">
         <div style="width: 50%;">
             <asp:GridView ID="dgvCategoria" runat="server" DataKeyNames="CategoriaID" CssClass="table" AutoGenerateColumns="false"
-                OnSelectedIndexChanged="dgvCategoria_SelectedIndexChanged">
-
+                OnSelectedIndexChanged="dgvCategoria_SelectedIndexChanged" OnRowDeleting="dgvCategoria_RowDeleting">
                 <Columns>
                     <asp:BoundField HeaderText="ID" DataField="CategoriaID" />
                     <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
-
-                    <asp:CommandField HeaderText="Modificar" ShowSelectButton="true" SelectText="Modificar" />
-                    <asp:CommandField HeaderText="Eliminar" ShowSelectButton="true" SelectText="Eliminar" />
-
+                    <asp:CommandField ShowSelectButton="true" SelectText="Modificar" />
+                    <asp:CommandField ShowDeleteButton="true" DeleteText="Eliminar" />
                 </Columns>
-
             </asp:GridView>
         </div>
         <div>
-            <asp:Button ID="btnConfirmarEliminacion" runat="server" OnClick="btnConfirmarEliminacion_Click"  CssClass="btn btn-danger" Text="Eliminar" visibility="false" />
+            <asp:Button ID="btnConfirmarEliminacion" runat="server" OnClick="btnConfirmarEliminacion_Click" CssClass="btn btn-danger" Text="Eliminar" Visible="false" />
         </div>
-
     </div>
 </asp:Content>

@@ -19,7 +19,7 @@ namespace Negocio
             try
             {
                 string consulta = @"
-                                select Nombre from Marcas;
+                                select Nombre, MarcaID from Marcas;
                                 ";
 
                 datos.setearConsulta(consulta);
@@ -30,6 +30,8 @@ namespace Negocio
 
                     if (!(datos.Lector["Nombre"] is DBNull))
                         marca.Nombre = (string)datos.Lector["Nombre"];
+                    if (!(datos.Lector["MarcaID"] is DBNull))
+                        marca.MarcaID = (int)datos.Lector["MarcaID"];
                     list.Add(marca);
                 }
                 return list;
@@ -119,6 +121,27 @@ namespace Negocio
                 datos.cerrarConexion();
             }
 
+        }
+
+        public bool EliminarMarca(int id)
+        {
+            try
+            {
+
+            datos.setearConsulta("delete from Marcas where MarcaID = @ID ");
+            datos.setearParametro("@ID", id);
+            datos.ejecutarAccion();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

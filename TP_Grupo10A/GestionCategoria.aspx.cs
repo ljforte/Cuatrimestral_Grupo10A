@@ -16,7 +16,7 @@ namespace TP_Grupo10A
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblDato.Visible = false;
+            
             CategoriaNegocio negocio = new CategoriaNegocio();
             List<Categorias> categorias = new List<Categorias>();
             categorias = negocio.ListarCategorias();
@@ -88,17 +88,37 @@ namespace TP_Grupo10A
 
           //  if (ConfirmarEliminacion)
           //  {
-                CategoriaNegocio neg = new CategoriaNegocio();
-                neg.EliminarCat(int.Parse(dgvCategoria.SelectedDataKey.Value.ToString()));
-                ConfirmarEliminacion = false;
-                btnConfirmarEliminacion.Visible = false;
-                Page_Load(sender, e);
+               
            // }
+            lblDato.Text = "modificar";
+            lblDato.Visible= true;
         }
         protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
         {
-
         }
 
+        protected void dgvCategoria_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            CategoriaNegocio neg = new CategoriaNegocio();
+
+            int index = e.RowIndex;
+
+            int catID = Convert.ToInt32(dgvCategoria.DataKeys[index].Value);
+
+            if (neg.EliminarCat(catID))
+            {
+                lblDato.Text = "¡Categoria eliminada con exito!";
+                lblDato.Visible = true;
+            ConfirmarEliminacion = false;
+            btnConfirmarEliminacion.Visible = false;
+            Page_Load(sender, e);
+
+            }
+            else
+            {
+                lblDato.Text = "No se pudo eliminar la categoria";
+                lblDato.Visible = true;
+            }
+        }
     }
 }
