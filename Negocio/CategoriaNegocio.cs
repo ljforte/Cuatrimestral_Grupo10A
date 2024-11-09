@@ -73,11 +73,11 @@ namespace Negocio
 
         }
 
-        public bool EliminarCat(string catID)
+        public bool EliminarCat(int catID)
         {
             try
             {
-                datos.setearConsulta("delete * from Categorias where CategoriaID = @id");
+                datos.setearConsulta("delete from Categorias where CategoriaID = @id");
                 datos.setearParametro("@id", catID);
                 datos.ejecutarAccion();
                 return true;

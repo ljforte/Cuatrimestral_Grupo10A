@@ -11,14 +11,19 @@ namespace TP_Grupo10A
 {
     public partial class GestionCategoria : System.Web.UI.Page
     {
+        public bool ConfirmarEliminacion { get; set; }
+        public int Id = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             lblDato.Visible = false;
             CategoriaNegocio negocio = new CategoriaNegocio();
-           List< Categorias> categorias = new List<Categorias>();
+            List<Categorias> categorias = new List<Categorias>();
             categorias = negocio.ListarCategorias();
             dgvCategoria.DataSource = categorias;
             dgvCategoria.DataBind();
+            ConfirmarEliminacion = false;
+            btnConfirmarEliminacion.Visible = false;
         }
 
         protected void dgvCategoria_SelectIndexChanged(object sender, GridViewCommandEventArgs e)
@@ -28,8 +33,9 @@ namespace TP_Grupo10A
             categorias = neg.ListarCategorias();
             //categorias. = dgvCategoria.SelectedDataKey.Value.ToString();
             //Response.Redirect($"EliminarCategoria.aspx?CategoriaID={categoriaID}");
-           // neg.EliminarCat();
-            
+
+            //neg.EliminarCat();
+
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -44,7 +50,8 @@ namespace TP_Grupo10A
                     lblDato.Visible = true;
                     return;
                 }
-                else if (string.IsNullOrEmpty(txtDescripcion.Text)){
+                else if (string.IsNullOrEmpty(txtDescripcion.Text))
+                {
                     lblDato.Text = "Debe ingresar una descripcion";
                     lblDato.Visible = true;
                     return;
@@ -52,7 +59,7 @@ namespace TP_Grupo10A
                 if (negocio.BuscarCat(txtNombre.Text))
                 {
                     lblDato.Text = "Error, esa categoria ya existe";
-                    lblDato.Visible=true;
+                    lblDato.Visible = true;
                     return;
                 }
                 else
@@ -70,5 +77,28 @@ namespace TP_Grupo10A
                 throw;
             }
         }
+
+        protected void dgvCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+          //  Id = int.Parse(dgvCategoria.SelectedDataKey.Value.ToString());
+
+          //  btnConfirmarEliminacion.Visible = true;
+          //  ConfirmarEliminacion = true;
+
+          //  if (ConfirmarEliminacion)
+          //  {
+                CategoriaNegocio neg = new CategoriaNegocio();
+                neg.EliminarCat(int.Parse(dgvCategoria.SelectedDataKey.Value.ToString()));
+                ConfirmarEliminacion = false;
+                btnConfirmarEliminacion.Visible = false;
+                Page_Load(sender, e);
+           // }
+        }
+        protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

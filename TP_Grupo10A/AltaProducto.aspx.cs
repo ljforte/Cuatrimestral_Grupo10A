@@ -65,7 +65,7 @@ namespace TP_Grupo10A
                     if (!int.TryParse(txtStock.Text, out stock) || stock < 0)
                     { return; }
 
-                    int mar = marca.BuscarIdMarca(ddlMarca.SelectedValue);
+                  //  int mar = marca.BuscarIdMarca(ddlMarca.SelectedValue);
                     int cat = categoria.BuscarIdCat(ddlCategorias.SelectedValue);
 
                     List<Productos> lista = Producto.ListarArticulosPorID(Request.QueryString["ID"]);
@@ -78,7 +78,7 @@ namespace TP_Grupo10A
                     seleccionado.CategoriaID = new Categorias();
                     seleccionado.CategoriaID.CategoriaID = cat;
                     seleccionado.MarcaID = new Marcas();
-                    seleccionado.MarcaID.MarcaID = mar;
+                  //  seleccionado.MarcaID.MarcaID = mar;
                     seleccionado.Estado = Estado;
                     seleccionado.stock = stock;
                     seleccionado.ProductoID = ProductoID;
@@ -142,7 +142,7 @@ namespace TP_Grupo10A
                 {
                     Productos seleccionado = new Productos();
 
-                    int mar = marca.BuscarIdMarca(ddlMarca.SelectedValue);
+                   // int mar = marca.BuscarIdMarca(ddlMarca.SelectedValue);
                     int cat = categoria.BuscarIdCat(ddlCategorias.SelectedValue);
                     int ProductoID = int.Parse(Request.QueryString["ID"]);
                     seleccionado.Nombre = txtNombre.Text;
@@ -151,14 +151,14 @@ namespace TP_Grupo10A
                     seleccionado.CategoriaID = new Categorias();
                     seleccionado.CategoriaID.CategoriaID = cat;
                     seleccionado.MarcaID = new Marcas();
-                    seleccionado.MarcaID.MarcaID = mar;
+                   // seleccionado.MarcaID.MarcaID = mar;
                     seleccionado.Estado = Estado;
                     seleccionado.stock = stock;
                     seleccionado.ProductoID = ProductoID;
 
-                    Producto.Modificar(seleccionado);
+                   // Producto.Modificar(seleccionado);
 
-                    btnExito.Visible = true;
+                  //  btnExito.Visible = true;
                     btnAltaProducto.Visible = false;
                     btnCancelar.Visible = false;
                 }
@@ -174,7 +174,7 @@ namespace TP_Grupo10A
                         Estado
                         );
 
-                    btnExito.Visible = true;
+                  //  btnExito.Visible = true;
                     btnAltaProducto.Visible = false;
                     btnCancelar.Visible = false;
                 }
