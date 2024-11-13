@@ -128,6 +128,8 @@
     <Content Include="Imagenes\ImagenNoEncontrada.jpeg" />
     <Content Include="Imagenes\logoFBE.png" />
     <Content Include="Imagenes\OfertaPortada.png" />
+    <Content Include="ModificarCategoria.aspx" />
+    <Content Include="ModificarMarca.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="AltaProducto.aspx" />
     <Content Include="Producto.aspx" />
@@ -250,6 +252,20 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarCategoria.aspx.cs">
+      <DependentUpon>ModificarCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarCategoria.aspx.designer.cs">
+      <DependentUpon>ModificarCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarMarca.aspx.cs">
+      <DependentUpon>ModificarMarca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarMarca.aspx.designer.cs">
+      <DependentUpon>ModificarMarca.aspx</DependentUpon>
     </Compile>
     <Compile Include="Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>

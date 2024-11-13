@@ -81,17 +81,10 @@ namespace TP_Grupo10A
         protected void dgvCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-          //  Id = int.Parse(dgvCategoria.SelectedDataKey.Value.ToString());
+          Id = int.Parse(dgvCategoria.SelectedDataKey.Value.ToString());
 
-          //  btnConfirmarEliminacion.Visible = true;
-          //  ConfirmarEliminacion = true;
+            Response.Redirect("ModificarCategoria.aspx", false);
 
-          //  if (ConfirmarEliminacion)
-          //  {
-               
-           // }
-            lblDato.Text = "modificar";
-            lblDato.Visible= true;
         }
         protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
         {
