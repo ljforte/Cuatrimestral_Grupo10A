@@ -44,7 +44,7 @@
                     <ItemTemplate>
                         <div class="producto-item">
                             <div class="card-header py-3">
-                                <h4 class="my-0 fw-normal"><%# Eval("Nombre") %></h4>
+                                <h4 class="my-0 fw-normal"><%# Eval("ProductoID") %></h4>
                             </div>
                             <div class="card-body p-3"  min-height: "700px">
                                 <h4 class="card-title"> $ <%# Eval("Precio") %></h4>
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                             <div class="card-footer ">
-                                <asp:Button ID="btnVerDetalle" runat="server" Text="Ver Detalle" CssClass="btn btn-primary" OnClick="btnVerDetalle_Click" />
+                                <asp:Button ID="btnVerDetalle" runat="server" Text="Ver Detalle" CssClass="btn btn-primary" CommandArgument='<%# Eval("ProductoID") %>' OnClick="btnVerDetalle_Click" />
                                 <asp:Button ID="btnAgregar" runat="server" Text="Comprar" CssClass="btn btn-success" OnClick="btnAgregar_Click" />
                             </div>
 

@@ -91,7 +91,7 @@ namespace Negocio
         }
 
 
-        public List<Productos> ListarArticulos(string Categoria)
+        public List<Productos> ListarArticulosPorCategoria(string Categoria)
         {
             list = new List<Productos>();
             try

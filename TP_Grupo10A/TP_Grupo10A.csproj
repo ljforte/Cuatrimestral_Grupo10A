@@ -117,6 +117,7 @@
     <Content Include="Content\style.css" />
     <Content Include="Content\styleProducto.css" />
     <Content Include="Default.aspx" />
+    <Content Include="DetalleProducto.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Gestion.aspx" />
     <Content Include="GestionCategoria.aspx" />
@@ -219,6 +220,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleProducto.aspx.cs">
+      <DependentUpon>DetalleProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetalleProducto.aspx.designer.cs">
+      <DependentUpon>DetalleProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gestion.aspx.cs">
       <DependentUpon>Gestion.aspx</DependentUpon>

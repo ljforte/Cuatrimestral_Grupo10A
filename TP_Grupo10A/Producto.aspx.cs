@@ -6,17 +6,18 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
 
 namespace TP_Grupo10A
 {
     public partial class Producto : System.Web.UI.Page
     {
-        private int productosPorPagina = 9;
+        private int productosPorPagina = 11;
         private int paginaActual = 1;
 
-        public List<Dominio.Productos> listaProductos;
-        public List<Dominio.Categorias> listaCategorias;
-        public List<Dominio.Marcas> listaMarcas;
+        public List<Productos> listaProductos;
+        public List<Marcas> listaMarcas;
+        public List<Categorias> listaCategorias;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,10 +32,9 @@ namespace TP_Grupo10A
                 else
                 {
                     CargarProductos();
-                    CargarCategorias();
-                    CargarMarcas();
-
                 }
+                CargarCategorias();
+                CargarMarcas();
             }
         }
 
@@ -59,19 +59,33 @@ namespace TP_Grupo10A
         // Los botones siguiente y anterior estan siempre pero se juega ocultando y dando vista
         private void CargarProductos()
         {
-            ProductoNegocio negocio = new ProductoNegocio();
-            listaProductos = negocio.ListarArticulos();
+            try
+            {
+                ProductoNegocio negocio = new ProductoNegocio();
+                listaProductos = negocio.ListarArticulos();
 
-            /* Math ceiling redondea la division, si da 2.3, lo pasa a 3.. redonde hacia arriba
-             para siempre tener una pagina aunque de menos de 10*/
+                Paginacion();
+            }
+            catch (Exception ex)
+            {
+                // Manejar la excepción (por ejemplo, registrarla y mostrar un mensaje amigable)
+                Console.WriteLine("Ocurrió un error: " + ex.Message);
+            }
+        }
+
+        private void Paginacion()
+        {
+            ; // Ejemplo de constante para productos por página
             int totalPaginas = (int)Math.Ceiling((double)listaProductos.Count / productosPorPagina);
-
-
+            // Asegurarse de que paginaActual no exceda totalPaginas
+            if (paginaActual > totalPaginas)
+            {
+                paginaActual = totalPaginas;
+            }
             var productosPagina = listaProductos
-            .Skip((paginaActual - 1) * productosPorPagina)
-            .Take(productosPorPagina)
-            .ToList();
-
+                .Skip((paginaActual-1) * productosPorPagina)
+                .Take(productosPorPagina)
+                .ToList();
 
             RepeaterProductos.DataSource = productosPagina;
             RepeaterProductos.DataBind();
@@ -79,32 +93,14 @@ namespace TP_Grupo10A
             // Actualizar la interfaz para mostrar botones de paginación si es necesario
             BtnSiguiente.Visible = paginaActual < totalPaginas;
             BtnAnterior.Visible = paginaActual > 1;
-
         }
-
 
         private void CargarProductosPorCategoria(string Categoria)
         {
             ProductoNegocio negocio = new ProductoNegocio();
-            listaProductos = negocio.ListarArticulos(Categoria);
+            listaProductos = negocio.ListarArticulosPorCategoria(Categoria);
 
-            /* Math ceiling redondea la division, si da 2.3, lo pasa a 3.. redonde hacia arriba
-             para siempre tener una pagina aunque de menos de 10*/
-            int totalPaginas = (int)Math.Ceiling((double)listaProductos.Count / productosPorPagina);
-
-
-            var productosPagina = listaProductos
-            .Skip((paginaActual - 1) * productosPorPagina)
-            .Take(productosPorPagina)
-            .ToList();
-
-
-            RepeaterProductos.DataSource = productosPagina;
-            RepeaterProductos.DataBind();
-
-            // Actualizar la interfaz para mostrar botones de paginación si es necesario
-            BtnSiguiente.Visible = paginaActual < totalPaginas;
-            BtnAnterior.Visible = paginaActual > 1;
+            Paginacion();
 
         }
 
@@ -119,12 +115,24 @@ namespace TP_Grupo10A
 
         protected void BtnSiguiente_Click(object sender, EventArgs e)
         {
-            paginaActual++;
-            CargarProductos();
+            ProductoNegocio negocio = new ProductoNegocio();
+            int totalPaginas = (int)Math.Ceiling((double)negocio.ListarArticulos().Count / productosPorPagina);
+
+            if (paginaActual <= totalPaginas)
+            {
+                paginaActual++;
+                CargarProductos();
+            }
+
         }
 
         protected void btnVerDetalle_Click(object sender, EventArgs e)
         {
+            // Obtener el ID del producto desde el CommandArgument del botón
+            string productoID = ((Button)sender).CommandArgument;
+
+            // Redirigir a la página de detalles del producto con el ID como parámetro de consulta
+            Response.Redirect($"DetalleProducto.aspx?productoID={productoID}");
 
         }
 
