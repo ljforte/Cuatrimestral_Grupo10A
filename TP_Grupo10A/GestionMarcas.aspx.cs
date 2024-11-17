@@ -64,6 +64,8 @@ namespace TP_Grupo10A
             Button clickedButton = sender as Button;
             MarcasNegocio neg = new MarcasNegocio();
 
+            Response.Redirect("ModificarMarca.aspx", false);
+
             lblDato.Text = "Modificar";
             lblDato.Visible = true;
 
