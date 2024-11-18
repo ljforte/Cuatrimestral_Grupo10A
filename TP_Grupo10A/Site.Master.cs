@@ -16,7 +16,7 @@ namespace TP_Grupo10A
         {
             CarritoDetalleNegocio _carritoDetalleNeg = new CarritoDetalleNegocio();
             if (!IsPostBack) {
-                cantidadProducto = _carritoDetalleNeg.CantidadDeItem(1);
+                cantidadProducto = _carritoDetalleNeg.CantidadDeItem(2);
             }
                 
 
