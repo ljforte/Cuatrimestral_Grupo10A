@@ -6,12 +6,23 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TP_Grupo10A
 {
     public partial class DetalleProducto : System.Web.UI.Page
     {
-        ProductoNegocio negocio = new ProductoNegocio();
+        private ProductoNegocio _productoNeg;
+        private CarritoDetalleNegocio _detalleNeg;
+        
+        private Carrito _carrito;
+        private CarritoDetalle _carritoDetalle;
+        private Productos _producto;
+        public DetalleProducto() {
+            _productoNeg = new ProductoNegocio();
+            _detalleNeg = new CarritoDetalleNegocio();
+            
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,17 +33,17 @@ namespace TP_Grupo10A
                 if (!string.IsNullOrEmpty(productoID))
                 {
                     // Llamar a un método para obtener los detalles del producto
-                    
-                    Productos producto = negocio.ListarArticulosPorID(productoID)[0];
+
+                    _producto = _productoNeg.ListarArticulosPorID(productoID)[0];
 
                     // Mostrar los detalles del producto en la interfaz
-                    txtNombre.Text= producto.Nombre;
-                    txtDescripcion.Text = producto.Descripcion;
-                    txtMarcas.Text = producto.MarcaID.Nombre;
-                    txtPrecio.Text = producto.Precio.ToString();
-                    txtStock.Text=producto.stock.ToString();
+                    txtNombre.Text= _producto.Nombre;
+                    txtDescripcion.Text = _producto.Descripcion;
+                    txtMarcas.Text = _producto.MarcaID.Nombre;
+                    txtPrecio.Text = _producto.Precio.ToString();
+                    txtStock.Text=_producto.stock.ToString();
 
-                    rptImagenes.DataSource = producto.ListImagenes;
+                    rptImagenes.DataSource = _producto.ListImagenes;
                     rptImagenes.DataBind();
                     // Agregar más campos según sea necesario
                 }
@@ -46,7 +57,31 @@ namespace TP_Grupo10A
 
         protected void btnAgregarCarrito_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+                _carritoDetalle = new CarritoDetalle();
+
+                string productoID = Request.QueryString["productoID"];
+                _producto = _productoNeg.ListarArticulosPorID(productoID)[0];
+
+                _carritoDetalle.ProductoID = _producto.ProductoID;
+                _carritoDetalle.Cantidad = int.Parse(txtCantidad.Text);
+                _carritoDetalle.PrecioUnitario = _producto.Precio;
+
+                //_carrito = new Carrito();
+                //_carritoDetalle.CarritoID = _carrito.CarritoID;
+
+                _detalleNeg.AgregarDetalle(_carritoDetalle);
+                Console.Write(_carritoDetalle);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
     }
 }

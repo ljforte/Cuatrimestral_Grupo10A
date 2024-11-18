@@ -80,8 +80,8 @@
                         <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-success my-2 my-sm-0" Text="Buscar" OnClick="btnBuscar_Click" />
 
                     </ul>
-                    <ul class="navbar-nav mr-auto">
-                        <%--carrito--%>
+                    <%--carrito--%>
+                    <ul class="navbar-nav mr-auto">                        
 
                         <% if (((Dominio.Usuarios)Session["usuario"]) == null)
                             { %>
@@ -108,7 +108,13 @@
                         <% } %>
 
                         <li class="nav-item">
-                            <asp:Button ID="btnCarrito" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Carrito" OnClick="btnCarrito_Click" />
+
+                            <button class="btn btn-danger sm rounded-circle btn-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
+                                <%=cantidadProducto%>
+                            </button>
+                          
+                           
+                            
                         </li>
                     </ul>
 

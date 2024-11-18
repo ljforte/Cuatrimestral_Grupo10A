@@ -271,8 +271,7 @@ namespace Negocio
                             FROM Productos AS P
                             LEFT JOIN Marcas AS M ON M.MarcaID = P.MarcaID
                             LEFT JOIN Categorias AS C ON C.CategoriaID = P.CategoriaID ";
-
-                consulta += " WHERE P.ProductoID = "+ ProductoID;
+                if(ID!="")   consulta += " WHERE P.ProductoID = "+ ProductoID;
                 datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
 

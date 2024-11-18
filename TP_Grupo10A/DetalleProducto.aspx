@@ -58,7 +58,7 @@
                     <div class="row mb-3 text-center">
                         <div class="col-4 themed-grid-col">
                             <asp:Label ID="lblCantidad" runat="server" Text="Cantidad: "></asp:Label>
-                            <input type="number" id="cantidad" value="1" min="1" max="5" />
+                            <asp:TextBox ID="txtCantidad" runat="server" TextMode="Number" value="1" min="1" max="5" />
                         </div>
 
                         <div class="col-4 themed-grid-col">

@@ -74,7 +74,7 @@
                             </div>
                             <div class="card-footer ">
                                 <asp:Button ID="btnVerDetalle" runat="server" Text="Ver Detalle" CssClass="btn btn-primary" CommandArgument='<%# Eval("ProductoID") %>' OnClick="btnVerDetalle_Click" />
-                                <asp:Button ID="btnAgregar" runat="server" Text="Comprar" CssClass="btn btn-success" OnClick="btnAgregar_Click" />
+                                <asp:Button ID="btnAgregar" runat="server" Text="Agregar " CssClass="btn btn-success" OnClick="btnAgregar_Click" />
                             </div>
 
                         </div>

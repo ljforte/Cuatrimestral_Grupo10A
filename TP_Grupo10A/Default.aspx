@@ -3,6 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="./Content/style.css" rel="stylesheet" type="text/css" />
     <main>
+        <%--Primer carousel --%>
         <div id="carouselPortada" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -24,6 +25,7 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+        <%--Segundo Carousel--%>
         <div id="carouselProveedores" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">

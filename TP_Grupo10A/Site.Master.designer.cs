@@ -69,15 +69,6 @@ namespace TP_Grupo10A
         protected global::System.Web.UI.WebControls.Button btnGestion;
 
         /// <summary>
-        /// Control btnCarrito.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCarrito;
-
-        /// <summary>
         /// Control MainContent.
         /// </summary>
         /// <remarks>

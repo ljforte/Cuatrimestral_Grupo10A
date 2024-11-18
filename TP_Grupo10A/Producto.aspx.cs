@@ -15,6 +15,7 @@ namespace TP_Grupo10A
         private int productosPorPagina = 11;
         private int paginaActual = 1;
 
+        public int cantidadProducto = 0;
         public List<Productos> listaProductos;
         public List<Marcas> listaMarcas;
         public List<Categorias> listaCategorias;
