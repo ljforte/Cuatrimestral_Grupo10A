@@ -74,8 +74,6 @@ namespace TP_Grupo10A
 
                 _detalleNeg.AgregarDetalle(_carritoDetalle);
                 Console.Write(_carritoDetalle);
-
-
             }
             catch (Exception ex)
             {

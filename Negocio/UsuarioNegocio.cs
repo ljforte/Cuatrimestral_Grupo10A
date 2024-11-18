@@ -9,30 +9,25 @@ namespace Negocio
 {
     public class UsuarioNegocio
     {
-        public bool Loguear(Usuarios user)
+        public Usuarios Loguear(string email, string password)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("select UsuarioID, Rol from Usuarios Where Email = @mail AND UsuarioPassword = @pass");
-                datos.setearParametro("@mail", user.Email);
-                datos.setearParametro("@pass", user.UsuarioPassword);
+                datos.setearParametro("@mail", email);
+                datos.setearParametro("@pass", password);
 
                 datos.ejecutarLectura();
-                while (datos.Lector.Read())
+                if (datos.Lector.Read())
                 {
-                    user.UsuarioID = (int)datos.Lector["UsuarioID"];
-                    if((int)(datos.Lector["Rol"])== 2)
+                    return new Usuarios(email, password)
                     {
-                        user.Tipo = TipoUsuario.Admin;
-                    }
-                    else if((int)(datos.Lector["Rol"]) == 1)
-                    {
-                        user.Tipo = TipoUsuario.Cliente;
-                    }
-                    return true;
+                        UsuarioID = (int)datos.Lector["UsuarioID"],
+                        Tipo = (int)datos.Lector["Rol"] == 2 ? TipoUsuario.Admin : TipoUsuario.Cliente
+                    };
                 }
-                return false;
+                return null;
             }
             catch (Exception ex)
             {

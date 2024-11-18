@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
+
+    public enum EstadoPedido
+    {
+        Pendiente,
+        Confirmado,
+        Enviado,
+        Cancelado
+    }
+
     public class Pedidos
     {
         public int PedidoID {  get; set; }

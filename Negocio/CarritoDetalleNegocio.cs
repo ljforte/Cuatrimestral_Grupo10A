@@ -88,6 +88,29 @@ namespace Negocio
             }
         }
 
+
+        public void AgregarDetalle(Carrito carrito, int ProductoID, int Cantidad, float Precio )
+        {
+            try
+            {
+                string consulta = @"INSERT INTO CarritoDetalle (CarritoID, ProductoID, Cantidad, PrecioUnitario) 
+                            VALUES (@CarritoID, @ProductoID, @Cantidad, @PrecioUnitario)"; 
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@CarritoID", carrito.CarritoID);
+                datos.setearParametro("@ProductoID", ProductoID);
+                datos.setearParametro("@Cantidad", Cantidad);
+                datos.setearParametro("@PrecioUnitario", Precio);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public bool BuscarDetalle(int carritoDetalleID)
         {
             try

@@ -43,13 +43,13 @@
                 <asp:Repeater ID="RepeaterProductos" runat="server">
                     <ItemTemplate>
                         <div class="producto-item">
-                            <div class="card-header py-3">
-                                <h4 class="my-0 fw-normal"><%# Eval("ProductoID") %></h4>
-                            </div>
-                            <div class="card-body p-3"  min-height: "700px">
-                                <h4 class="card-title"> $ <%# Eval("Precio") %></h4>
-                                <h5 class="card-text"><%# Eval("Descripcion") %></h5>
-                            </div>
+<div class="card-header py-3">
+    <asp:Label ID="lblProductoID" runat="server" Text='<%# Eval("ProductoID") %>' CssClass="my-0 fw-normal"></asp:Label>
+</div>
+<div class="card-body p-3" min-height="700px">
+    <h4 class="card-title"> $ <asp:Label ID="lblPrecio" runat="server" Text='<%# Eval("Precio") %>'></asp:Label></h4>
+    <h5 class="card-text"><%# Eval("Descripcion") %></h5>
+</div>
                             <%--Carousel https://getbootstrap.com/docs/5.3/components/carousel/#how-it-works--%>
                             <div class="image-container">
                                 <div id="carousel<%# Container.ItemIndex %>" class="carousel slide" data-bs-ride="carousel">
@@ -73,6 +73,11 @@
                                 </div>
                             </div>
                             <div class="card-footer ">
+                             <div class="d-flex justify-content-center align-items-center mb-3">
+                            <asp:Button ID="btnDecrementar" runat="server" Text="-" CssClass="btn btn-secondary btn-sm" CommandArgument='<%# Eval("ProductoID") %>' OnClick="btnDecrementar_Click" />
+                            <asp:TextBox ID="TxtCantidad" runat="server" Text="1" CssClass="form-control mx-2 text-center" Width="50px" />
+                            <asp:Button ID="btnIncrementar" runat="server" Text="+" CssClass="btn btn-secondary btn-sm" CommandArgument='<%# Eval("ProductoID") %>' OnClick="btnIncrementar_Click" />
+                        </div>
                                 <asp:Button ID="btnVerDetalle" runat="server" Text="Ver Detalle" CssClass="btn btn-primary" CommandArgument='<%# Eval("ProductoID") %>' OnClick="btnVerDetalle_Click" />
                                 <asp:Button ID="btnAgregar" runat="server" Text="Agregar " CssClass="btn btn-success" OnClick="btnAgregar_Click" />
                             </div>

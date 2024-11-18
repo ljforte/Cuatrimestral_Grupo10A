@@ -16,38 +16,35 @@ namespace TP_Grupo10A
             mensajeError.Visible = false;
         }
         protected void btnIngresar_Click(object sender, EventArgs e)
-        { 
-            Usuarios user;
-            UsuarioNegocio negocio = new UsuarioNegocio();
-            
+        {
+
             try
             {
-                user = new Usuarios(txtEmail.Text, txtContraseña.Text);
-               if(negocio.Loguear(user))
+                UsuarioNegocio negocio = new UsuarioNegocio();
+                Usuarios usuarioLogueado = negocio.Loguear(txtEmail.Text, txtContraseña.Text);
+                if (usuarioLogueado != null)
                 {
-                    Session.Add("Usuario", user);
-                    if (user.Tipo == TipoUsuario.Admin)
+                    Session["UsuarioLogueado"] = usuarioLogueado;
+                    if (usuarioLogueado.Tipo == TipoUsuario.Cliente)
+                    {
+                        Response.Redirect("TeLogueaste.aspx", false);
+                    }
+                    else if (usuarioLogueado.Tipo == TipoUsuario.Admin)
                     {
                         Response.Redirect("Gestion.aspx", false);
-                        return;
                     }
-                    else if(user.Tipo == TipoUsuario.Cliente)
-                    {
-                    Response.Redirect("TeLogueaste.aspx", false);
-                    return;
-                }
                 }
                 else
                 {
                     mensajeError.Visible = true;
-                    Session.Add("error", "Usuario o contraseña incorrecta");
+                    Session["error"] = "Usuario o contraseña incorrecta";
                 }
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
-                throw;
+                throw ex;
             }
+            
         }
     }
 }

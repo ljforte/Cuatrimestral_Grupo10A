@@ -19,6 +19,12 @@ namespace TP_Grupo10A
         public List<Productos> listaProductos;
         public List<Marcas> listaMarcas;
         public List<Categorias> listaCategorias;
+        private Carrito _carrito;
+        private CarritoDetalleNegocio _carritoDetalle = new CarritoDetalleNegocio();
+        private Productos _producto;
+        private CarritoNegocio _carritoNegocio = new CarritoNegocio();
+
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -139,7 +145,54 @@ namespace TP_Grupo10A
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            Button btnAgregar = (Button)sender;
+            RepeaterItem item = (RepeaterItem)btnAgregar.NamingContainer;
+            int productoID = int.Parse(((Label)item.FindControl("lblProductoID")).Text);
+            float precioUnitario = float.Parse(((Label)item.FindControl("lblPrecio")).Text);
+            TextBox txtCantidad = (TextBox)item.FindControl("TxtCantidad");
+            int cantidad = int.Parse(txtCantidad.Text);
 
+
+            if (Session["UsuarioLogueado"] == null || ((Usuarios)Session["UsuarioLogueado"]).Tipo == TipoUsuario.Admin)
+            {
+                Response.Redirect("~/Login.aspx");
+                return;
+            }
+
+            Usuarios usuarioLogueado = (Usuarios)Session["UsuarioLogueado"];
+            if (_carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado) == null)
+            {
+                _carritoNegocio.CrearCarrito(usuarioLogueado);
+            }
+            else
+            {
+                _carritoDetalle.AgregarDetalle(_carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado),productoID, cantidad, precioUnitario);
+            };
+        }
+
+        protected void btnDecrementar_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            RepeaterItem item = (RepeaterItem)btn.NamingContainer;
+            TextBox txtCantidad = (TextBox)item.FindControl("TxtCantidad");
+
+            int cantidad = int.Parse(txtCantidad.Text);
+            if (cantidad > 1)
+            {
+                cantidad--;
+                txtCantidad.Text = cantidad.ToString();
+            }
+        }
+
+        protected void btnIncrementar_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            RepeaterItem item = (RepeaterItem)btn.NamingContainer;
+            TextBox txtCantidad = (TextBox)item.FindControl("TxtCantidad");
+
+            int cantidad = int.Parse(txtCantidad.Text);
+            cantidad++;
+            txtCantidad.Text = cantidad.ToString();
         }
     }
 }
