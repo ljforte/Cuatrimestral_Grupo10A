@@ -130,36 +130,40 @@
 
 
         <!-- Footer -->
-        <footer class="footer text-dark pt-5 pb-4">
+       <footer class="footer pt-5 pb-4 bg-dark text-light">
             <div class="container text-center text-md-left">
                 <div class="row text-center text-md-left d-flex align-items-center justify-content-around">
                     <!-- Información de la Compania -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h5 class="text-uppercase mb-4 font-weight-bold">FBE Hardware</h5>
+                        <a href="Default.aspx"  class="text-light" style="text-decoration: none;">
+                            <h5 class="text-uppercase mb-4 font-weight-bold">FBE Hardware</h5>
                         <p>
                             FBE Hardware es su tienda de confianza para todos sus componentes de hardware y accesorios. Desde tarjetas gráficas hasta periféricos, ofrecemos productos de alta calidad a precios competitivos.
                         </p>
+                        </a>
                     </div>
 
                     <!-- Productos -->
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                         <h5 class="text-uppercase mb-4 font-weight-bold">Productos</h5>
+
                         <p>
-                            <a href="#" class="text-dark" style="text-decoration: none;">Tarjetas Gráficas</a>
+                            <a  href="Producto.aspx?categoria=Tarjetas Gráficas" class="text-light" style="text-decoration: none;">Tarjetas Gráficas</a>
                         </p>
                         <p>
-                            <a href="#" class="text-dark" style="text-decoration: none;">Procesadores</a>
+                            <a href="Producto.aspx?categoria=Procesadores" class="text-light" style="text-decoration: none;">Procesadores</a>
                         </p>
                         <p>
-                            <a href="#" class="text-dark" style="text-decoration: none;">Placas Base</a>
+                            <a href="Producto.aspx?categoria=Placas Base" class="text-light" style="text-decoration: none;">Placas Base</a>
                         </p>
                         <p>
-                            <a href="#" class="text-dark" style="text-decoration: none;">Memoria RAM</a>
+                            <a href="Producto.aspx?categoria=Memoria RAM" class="text-light" style="text-decoration: none;">Memoria RAM</a>
                         </p>
                     </div>
 
                     <!-- Contacto -->
                     <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <a href="Contacto.aspx" class="text-light" style="text-decoration: none;">
                         <h5 class="text-uppercase mb-4 font-weight-bold">Contacto</h5>
                         <p>
                             Av. Siempre Viva 126
@@ -170,6 +174,7 @@
                         <p>
                             +11 2345 6789
                         </p>
+                        </a>
                     </div>
 
                     <!-- Mapa -->
