@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -16,6 +17,8 @@ namespace Negocio
 
         public Carrito ObtenerCarritoPorUsuario(Usuarios usuario)
         {
+            Carrito carrito = new Carrito();
+            
             try
             {
                 string consulta = @"SELECT CarritoID as CarritoID, UsuarioID as Usuario, FechaCreacion as Fecha FROM Carrito where UsuarioID = "
@@ -62,7 +65,5 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
-
     }
 }

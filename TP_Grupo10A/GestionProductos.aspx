@@ -12,7 +12,7 @@
         <asp:GridView ID="dgvListarProductosSP" runat="server" CssClass="table" DataKeyNames="ProductoID"
             OnSelectedIndexChanged="dgvProductos_SelectedIndexChanged"
             OnPageIndexChanging="dgvProductos_PageIndexChanging"
-            AllowPaging="true" PageSize="10"
+            AllowPaging="true" PageSize="10" AutoGenerateColumns="false"
             Columns="true">
             <Columns>
                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />

@@ -17,5 +17,7 @@ namespace Dominio
         {
             get { return Detalles.Sum(d => d.PrecioUnitario * d.Cantidad); }
         }
+
+        Productos producto { get; set; }
     }
 }

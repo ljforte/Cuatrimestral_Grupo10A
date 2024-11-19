@@ -89,7 +89,7 @@ namespace Negocio
         }
 
 
-        public void AgregarDetalle(Carrito carrito, int ProductoID, int Cantidad, float Precio )
+        public bool AgregarDetalle(Carrito carrito, int ProductoID, int Cantidad, float Precio )
         {
             try
             {
@@ -101,6 +101,7 @@ namespace Negocio
                 datos.setearParametro("@Cantidad", Cantidad);
                 datos.setearParametro("@PrecioUnitario", Precio);
                 datos.ejecutarAccion();
+                return true;
             }
             catch (Exception ex)
             {
@@ -111,6 +112,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
         public bool BuscarDetalle(int carritoDetalleID)
         {
             try
@@ -206,5 +208,134 @@ namespace Negocio
             }
         }
 
+        public int CantidadDeItems(Carrito carrito)
+        {
+            int cantidad = 0;
+            try
+            {
+                string consulta = "SELECT SUM(Cantidad) as TotalCantidad FROM CarritoDetalle WHERE CarritoID = @CarritoID"; datos.setearConsulta(consulta);
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@CarritoID", carrito.CarritoID);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read() && !(datos.Lector["TotalCantidad"] is DBNull))
+                {
+                    cantidad = (int)datos.Lector["TotalCantidad"];
+                }
+
+                return cantidad;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        public List<CarritoDetalle> VerCarritoDetalles(Carrito carrito)
+        {
+            List<CarritoDetalle> list = new List<CarritoDetalle>();
+            try
+            {
+                string consulta = @"
+            SELECT 
+                cd.CarritoDetalleID as CarritoDetalleID, 
+                cd.CarritoID, 
+                cd.ProductoID, 
+                cd.Cantidad, 
+                cd.PrecioUnitario,
+                p.Nombre AS NombreProducto,
+                p.Descripcion AS DescripcionProducto,
+                p.Precio AS PrecioProducto
+            FROM CarritoDetalle cd
+            INNER JOIN Productos p ON cd.ProductoID = p.ProductoID
+            WHERE cd.CarritoID = @CarritoID";
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@CarritoID", carrito.CarritoID);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    var precioUnitario = datos.Lector["PrecioUnitario"];
+                    var precioProducto = datos.Lector["PrecioProducto"];
+
+                    CarritoDetalle detalle = new CarritoDetalle
+                    {
+                        CarritoDetalleID = (int)datos.Lector["CarritoDetalleID"],
+                        CarritoID = (int)datos.Lector["CarritoID"],
+                        ProductoID = (int)datos.Lector["ProductoID"],
+                        Cantidad = (int)datos.Lector["Cantidad"],
+                        PrecioUnitario = precioUnitario == DBNull.Value ? 0f : Convert.ToSingle(precioUnitario),
+                        producto = new Productos
+                        {
+                            Nombre = datos.Lector["NombreProducto"].ToString(),
+                            Descripcion = datos.Lector["DescripcionProducto"].ToString(),
+                            Precio = precioProducto == DBNull.Value ? 0f : Convert.ToSingle(precioProducto)
+                        }
+
+                    };
+                    list.Add(detalle);
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool ActualizarCantidad(int carritoID, int productoID, int cantidad)
+        {
+            try
+            {
+                string consulta = @"
+            UPDATE CarritoDetalle
+            SET Cantidad = Cantidad + @Cantidad
+            WHERE CarritoID = @CarritoID AND ProductoID = @ProductoID";
+
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@Cantidad", cantidad);
+                datos.setearParametro("@CarritoID", carritoID);
+                datos.setearParametro("@ProductoID", productoID);
+
+                datos.ejecutarAccion();
+                return true; 
+            }
+            catch (Exception ex)
+            {
+                throw ex; 
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        public bool EliminarCarritoDetalle(int carritoDetalleID)
+        {
+            try
+            {
+                datos.setearProcedimiento("spEliminarCarritoDetalle");
+                datos.setearParametro("@CarritDetalleID", carritoDetalleID);
+                datos.ejecutarAccion();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

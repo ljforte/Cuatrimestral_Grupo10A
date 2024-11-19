@@ -108,13 +108,14 @@
                         <% } %>
 
                         <li class="nav-item">
-
-                            <button class="btn btn-danger sm rounded-circle btn-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
-                                <%=cantidadProducto%>
-                            </button>
-                          
-                           
-                            
+                            <asp:LinkButton
+                                ID="btnVerCarrito"
+                                runat="server"
+                                CssClass="btn btn-danger sm rounded-circle btn-sm d-flex align-items-center justify-content-center"
+                                Style="width: 35px; height: 35px;"
+                                OnClick="btnVerCarrito_Click">
+        <%= cantidadProducto %> 
+    </asp:LinkButton>
                         </li>
                     </ul>
 

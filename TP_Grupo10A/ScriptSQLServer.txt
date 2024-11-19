@@ -218,3 +218,51 @@ Estado = @Estado
 WHERE ProductoID = @ProductoID;
 
 
+
+-- este trigger es para que si agregas nuevamente un producto que ya esta en detalle carrito, lo sume
+-- y no genere un detalle carrito nuevo, es decir si generaste un detallecarrito para ese cliente con ProducotI=1
+-- y le volves a dar "agregar" en producto, n ogeneras un nuevo detallecarrito si no que modificas el que esta generado
+
+CREATE TRIGGER trg_InsertarCarritoDetalle
+ON CarritoDetalle
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @ProductoID INT, @CarritoID INT, @Cantidad INT, @PrecioUnitario DECIMAL(10,2);
+    
+    SELECT @ProductoID = ProductoID, @CarritoID = CarritoID, @Cantidad = Cantidad, @PrecioUnitario = PrecioUnitario
+    FROM inserted;
+    
+    -- Comprobar si ya existe un carrito detalle con ese productoid
+    IF EXISTS (
+        SELECT 1
+        FROM CarritoDetalle
+        WHERE ProductoID = @ProductoID AND CarritoID = @CarritoID
+    )
+    BEGIN
+        -- Si  existe, sumar 1 a la cantidad
+        UPDATE CarritoDetalle
+        SET Cantidad = Cantidad + @Cantidad
+        WHERE ProductoID = @ProductoID AND CarritoID = @CarritoID;
+    END
+    ELSE
+    BEGIN
+        -- si no existe deja seguir el insert
+        INSERT INTO CarritoDetalle (CarritoID, ProductoID, Cantidad, PrecioUnitario)
+        VALUES (@CarritoID, @ProductoID, @Cantidad, @PrecioUnitario);
+    END
+END;
+GO
+
+
+--SP PARA ELIMINAR DETALLECARRITO
+
+
+CREATE PROCEDURE spEliminarCarritoDetalle
+    @CarritoDetalleID INT
+AS
+BEGIN
+    DELETE FROM CarritoDetalle
+    WHERE CarritoDetalleID = @CarritoDetalleID
+END;
+

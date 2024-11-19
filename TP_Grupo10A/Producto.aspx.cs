@@ -160,14 +160,27 @@ namespace TP_Grupo10A
             }
 
             Usuarios usuarioLogueado = (Usuarios)Session["UsuarioLogueado"];
-            if (_carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado) == null)
+            if (usuarioLogueado != null)
             {
-                _carritoNegocio.CrearCarrito(usuarioLogueado);
+                Negocio.CarritoNegocio carritoNegocio = new CarritoNegocio();
+                Dominio.Carrito carrito = carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado);
+
+                if (carrito != null)
+                {
+                    Negocio.CarritoDetalleNegocio detalleNegocio = new CarritoDetalleNegocio();
+                    bool detalleAgregado = detalleNegocio.AgregarDetalle(carrito, productoID, cantidad, precioUnitario);
+
+                    if (detalleAgregado)
+                    {
+                      
+                        Response.Redirect(Request.RawUrl); // Vuelve a cargar la URL actual
+                    }
+                }
+                else
+                {
+                    _carritoDetalle.AgregarDetalle(_carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado), productoID, cantidad, precioUnitario);
+                };
             }
-            else
-            {
-                _carritoDetalle.AgregarDetalle(_carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado),productoID, cantidad, precioUnitario);
-            };
         }
 
         protected void btnDecrementar_Click(object sender, EventArgs e)
