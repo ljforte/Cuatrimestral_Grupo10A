@@ -163,6 +163,10 @@ namespace TP_Grupo10A
             if (usuarioLogueado != null)
             {
                 Negocio.CarritoNegocio carritoNegocio = new CarritoNegocio();
+                if (carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado) == null) 
+                {
+                    carritoNegocio.CrearCarrito(usuarioLogueado);
+                }
                 Dominio.Carrito carrito = carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado);
 
                 if (carrito != null)
