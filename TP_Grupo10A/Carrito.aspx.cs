@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
@@ -20,39 +21,38 @@ namespace TP_Grupo10A
             {
                 CargarCarrito();
             }
+
         }
 
         private void CargarCarrito()
         {
-         
-
+            // verificacion usuario logeado
             Usuarios usuarioLogueado = (Usuarios)Session["UsuarioLogueado"];
+
             if (usuarioLogueado == null)
             {
                 Response.Redirect("~/Login.aspx");
                 return;
             }
+            //cargo carrito segun usuario
 
             carrito = _carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado);
 
 
             if (carrito == null)
             {
-                lblMensaje.Text = "Tu carrito está vacío.";
-                rptCarrito.DataSource = null;
-                rptCarrito.DataBind();
+
+                Response.Redirect("CarritoNull.aspx");
                 return;
             }
 
             List<CarritoDetalle> detalles = _carritoDetalleNegocio.VerCarritoDetalles(carrito);
-            if (detalles.Count == 0)
+            if (detalles == null || detalles.Count == 0)
             {
-                lblMensaje.Text = "Tu carrito está vacío.";
+                Response.Redirect("CarritoNull.aspx");
+                return;
             }
-            else
-            {
-                lblMensaje.Text = string.Empty; // Limpia el mensaje
-            }
+            // Si el carrito tiene productos
 
             rptCarrito.DataSource = detalles;
             rptCarrito.DataBind();
@@ -60,29 +60,18 @@ namespace TP_Grupo10A
 
 
 
-        // NO ESTA FUNCIONANDO, debo verificar.
-        protected void rptCarrito_ItemCommand(object source, RepeaterCommandEventArgs e)
+        protected void btnEliminar_Command(object sender, CommandEventArgs e)
         {
-            if (e.CommandName == "EliminarProducto")
+            if (e.CommandName == "Eliminar")
             {
-                
+                // Obtener el CarritoDetalleID desde CommandArgument
                 int carritoDetalleID = Convert.ToInt32(e.CommandArgument);
-
-               
-                CarritoDetalleNegocio carritoNegocio = new CarritoDetalleNegocio();
-                bool resultado = carritoNegocio.EliminarCarritoDetalle(carritoDetalleID);
-  
-                if (resultado)
-                {
-                    lblMensaje.Text = "Producto eliminado correctamente.";
-                    rptCarrito.DataBind(); 
-                }
-                else
-                {
-                    lblMensaje.Text = "Hubo un error al eliminar el producto del carrito.";
-                }
+                CarritoDetalleNegocio negocio = new CarritoDetalleNegocio();
+                negocio.EliminarDetalle(carritoDetalleID);
+                CargarCarrito();
             }
         }
+
     }
 
 }

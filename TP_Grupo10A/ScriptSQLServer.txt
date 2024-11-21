@@ -278,3 +278,32 @@ END;
 SELECT CarritoID as CarritoID, UsuarioID as Usuario, FechaCreacion as Fecha FROM Carrito
 
 SELECT * from Usuarios
+
+
+
+
+
+
+
+// Este trigger elimina un CARRITO si no hay mas CARRITODETALLE relacionados a el. Deja en null el carrito en caso
+de eliminar el ultimo detalle
+
+
+CREATE TRIGGER trg_EliminarCarritoVacio
+ON CarritoDetalle
+AFTER DELETE
+AS
+BEGIN
+    -- Para ver carritos que ya no tienen registros de CarritoDetalle
+    DELETE FROM Carrito
+    WHERE CarritoID IN (
+        SELECT DISTINCT CarritoID
+        FROM DELETED -- Registros que fueron eliminados
+        WHERE NOT EXISTS (
+            SELECT 1
+            FROM CarritoDetalle
+            WHERE CarritoDetalle.CarritoID = DELETED.CarritoID
+        )
+    );
+END;
+GO

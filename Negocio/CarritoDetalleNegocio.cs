@@ -37,7 +37,7 @@ namespace Negocio
             {
                 int id = Convert.ToInt32(IdProducto);
                 string consulta = "SELECT CarritoDetalleID, CarritoID, ProductoID, Cantidad, PrecioUnitario FROM CarritoDetalle";
-                if(IdProducto!= " " ) consulta += " WHERE P.ProductoID = "+ id;
+                if (!string.IsNullOrWhiteSpace(IdProducto)) consulta += " WHERE ProductoID = " + id;
                 datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -173,7 +173,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                return false;
                 throw ex;
             }
             finally
@@ -181,6 +180,8 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+
         public int CantidadDeItem(int productoID)
         {
             try
@@ -251,7 +252,7 @@ namespace Negocio
                 p.Nombre AS NombreProducto,
                 p.Descripcion AS DescripcionProducto,
                 p.Precio AS PrecioProducto
-            FROM CarritoDetalle cd
+                FROM CarritoDetalle cd
             INNER JOIN Productos p ON cd.ProductoID = p.ProductoID
             WHERE cd.CarritoID = @CarritoID";
 
@@ -335,6 +336,30 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public bool ValidarCarritoTieneDetalles(int carritoID)
+        {
+            try
+            {
+                datos.setearConsulta("SELECT COUNT(*) FROM CarritoDetalle WHERE CarritoID = @CarritoID");
+                datos.setearParametro("@CarritoID", carritoID);
+                int detalles = (int)datos.ejecutarAccionScalar();
+
+                if (detalles > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al validar el carrito.", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

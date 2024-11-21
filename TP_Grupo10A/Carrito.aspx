@@ -5,7 +5,7 @@
     <asp:Label ID="lblMensaje" runat="server" CssClass="alert alert-info"></asp:Label>
 
     <!--  Carrito -->
-    <div class="accordion" id="accordionCarrito">
+    <div class="accordion" id="accordionCarrito" runat="server">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingCarrito">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCarrito" aria-expanded="true" aria-controls="collapseCarrito">
@@ -16,10 +16,11 @@
                 <div class="accordion-body">
                     <asp:Repeater ID="rptCarrito" runat="server">
                         <ItemTemplate>
+                            <asp:HiddenField ID="hfCarritoDetalleID" runat="server" Value='<%# Eval("CarritoDetalleID") %>' />
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src='<%# Eval("Producto.ListImagenes.Count > 0 ? Producto.ListImagenes[0].URL : \"/Imagenes/ImagenNoEncontrada.jpeg\"") %>' class="img-fluid rounded-start" alt="Producto">
+                                       <img src='<%# Eval("Producto.ListImagenes.Count > 0 ? Producto.ListImagenes[0].URL : \"/Imagenes/ImagenNoEncontrada.jpeg\"") %>' class="img-fluid rounded-start" alt="Producto">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -33,7 +34,14 @@
                                                 Precio Unitario: $<%# Eval("PrecioUnitario") %><br />
                                                 Subtotal: $<%# Convert.ToInt32(Eval("Cantidad")) * Convert.ToSingle(Eval("PrecioUnitario")) %>
                         </p>
-                       <button class="btn btn-danger btn-sm" OnCommand="EliminarProducto" CommandArgument='<%# Eval("CarritoDetalleID") %>'>Eliminar</button>
+                      <asp:Button 
+                            ID="btnEliminar" 
+                            runat="server" 
+                            CssClass="btn btn-danger btn-sm" 
+                            Text="Eliminar" 
+                            CommandName="Eliminar" 
+                            CommandArgument='<%# Eval("CarritoDetalleID") %>' 
+                            OnCommand="btnEliminar_Command" />
                     </div>
                                     </div>
                                 </div>
@@ -43,9 +51,8 @@
                 </div>
             </div>
         </div>
-
         <!--  Entrega -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="entrega" runat="server">
             <h2 class="accordion-header" id="headingEntrega">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEntrega" aria-expanded="false" aria-controls="collapseEntrega">
                     Entrega
@@ -61,7 +68,7 @@
         </div>
 
         <!-- Pago -->
-        <div class="accordion-item">
+        <div class="accordion-item" id="pago" runat="server"> 
             <h2 class="accordion-header" id="headingPago">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePago" aria-expanded="false" aria-controls="collapsePago">
                     Pago
