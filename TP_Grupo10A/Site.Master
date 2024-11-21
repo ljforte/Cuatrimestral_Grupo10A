@@ -94,6 +94,9 @@
                         <li class="nav-item">
                             <asp:Button ID="btnGestion" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Gestionar" OnClick="btnGestion_Click" />
                         </li>
+                        <li class="nav-item">
+                            <asp:Button ID="btnDesloguear" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Desloguearse" visible="false" OnClick="btnDesloguear_Click"  />
+                        </li>
 
 
                         <li class="nav-item">

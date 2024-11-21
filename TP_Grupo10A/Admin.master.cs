@@ -16,7 +16,9 @@ namespace TP_Grupo10A
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-
+            Session.Abandon();
+            Session.Clear(); 
+            Response.Redirect("Login.aspx");
         }
 
         protected void btnInicio_Click(object sender, EventArgs e)

@@ -69,6 +69,15 @@ namespace TP_Grupo10A
         protected global::System.Web.UI.WebControls.Button btnGestion;
 
         /// <summary>
+        /// Control btnDesloguear.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDesloguear;
+
+        /// <summary>
         /// Control btnVerCarrito.
         /// </summary>
         /// <remarks>

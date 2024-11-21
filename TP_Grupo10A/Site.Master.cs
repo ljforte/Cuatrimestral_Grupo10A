@@ -31,6 +31,7 @@ namespace TP_Grupo10A
                     btnGestion.Visible = false;
                     btnLogin.Visible = false;
                     btnRegistro.Visible = false;
+                    btnDesloguear.Visible = true;
                 }
                 else
                 {
@@ -38,6 +39,7 @@ namespace TP_Grupo10A
                     btnVerCarrito.Visible=false;
                     btnLogin.Visible = false;
                     btnRegistro.Visible = false;
+                    btnDesloguear.Visible = true;
                 }
                
                 if (carrito != null)
@@ -113,5 +115,11 @@ namespace TP_Grupo10A
             }
         }
 
+        protected void btnDesloguear_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Session.Clear();
+            Response.Redirect("Login.aspx");
+        }
     }
 }
