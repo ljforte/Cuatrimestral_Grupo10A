@@ -7,20 +7,12 @@ using System.Threading.Tasks;
 namespace Dominio
 {
 
-    public enum EstadoPedido
-    {
-        Pendiente,
-        Confirmado,
-        Enviado,
-        Cancelado
-    }
-
     public class Pedidos
     {
         public int PedidoID {  get; set; }
         public int UsuarioID {  get; set; }
         public DateTime FechaPedido {  get; set; }
-        public string EstadoPedido { get; set; }
+        public Estado Estado { get; set; }
         public float Total { get; set; }
     }
 }

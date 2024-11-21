@@ -18,11 +18,27 @@ namespace TP_Grupo10A
         private Dominio.Carrito carrito;
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnGestion.Visible = false;
+
             if (Session["UsuarioLogueado"] != null)
             { 
                 Usuarios usuarioLogueado = (Usuarios)Session["UsuarioLogueado"];
                 carrito = _carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado);
 
+                if (usuarioLogueado.Tipo == TipoUsuario.Cliente)
+                {
+                btnPerfil.Visible = true;
+                    btnGestion.Visible = false;
+                    btnLogin.Visible = false;
+                    btnRegistro.Visible = false;
+                }
+                else
+                {
+                    btnGestion.Visible=true;
+                    btnVerCarrito.Visible=false;
+                    btnLogin.Visible = false;
+                    btnRegistro.Visible = false;
+                }
                
                 if (carrito != null)
                 {
@@ -78,7 +94,7 @@ namespace TP_Grupo10A
 
         protected void btnGestion_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("GestionProductos.aspx", false);
         }
         protected void btnVerCarrito_Click(object sender, EventArgs e)
         {

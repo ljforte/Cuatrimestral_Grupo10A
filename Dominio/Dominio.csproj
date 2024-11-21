@@ -46,6 +46,7 @@
     <Compile Include="Categorias.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Direcciones.cs" />
+    <Compile Include="Estado.cs" />
     <Compile Include="ImagenProducto.cs" />
     <Compile Include="Marcas.cs" />
     <Compile Include="Pedidos.cs" />

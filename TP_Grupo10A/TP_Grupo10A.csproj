@@ -123,6 +123,7 @@
     <Content Include="Gestion.aspx" />
     <Content Include="GestionCategoria.aspx" />
     <Content Include="GestionMarcas.aspx" />
+    <Content Include="GestionPedidos.aspx" />
     <Content Include="GestionProductos.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Imagenes\CorsairBanner.jpg" />
@@ -258,6 +259,13 @@
     </Compile>
     <Compile Include="GestionMarcas.aspx.designer.cs">
       <DependentUpon>GestionMarcas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionPedidos.aspx.cs">
+      <DependentUpon>GestionPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionPedidos.aspx.designer.cs">
+      <DependentUpon>GestionPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="GestionProductos.aspx.cs">
       <DependentUpon>GestionProductos.aspx</DependentUpon>

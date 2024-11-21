@@ -17,7 +17,7 @@
     <form id="form1" runat="server">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarNav">
-           
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -30,13 +30,16 @@
                 <ul class="navbar-nav mx-auto">
 
                     <li class="nav-item">
+                        <asp:Button ID="btnPedidos" runat="server" CssClass="btn btn-success my-2 my-sm-0 nav-link" OnClick="btnPedidos_Click" Text="Pedidos" />
+                    </li>
+                    <li class="nav-item">
                         <asp:Button ID="btnProductos" runat="server" CssClass="btn btn-success my-2 my-sm-0 nav-link" OnClick="btnProductos_Click" Text="Productos" />
                     </li>
                     <li class="nav-item">
-                        <asp:Button ID="btnMarcas" runat="server" CssClass="btn btn-secondary my-2 my-sm-0 nav-link" OnClick="btnMarcas_Click" Text="Marcas" />
+                        <asp:Button ID="btnMarcas" runat="server" CssClass="btn btn-success my-2 my-sm-0 nav-link" OnClick="btnMarcas_Click" Text="Marcas" />
                     </li>
                     <li class="nav-item">
-                        <asp:Button ID="btnCategorias" runat="server" CssClass="btn btn-danger my-2 my-sm-0 nav-link" OnClick="btnCategorias_Click" Text="Categorias" />
+                        <asp:Button ID="btnCategorias" runat="server" CssClass="btn btn-success my-2 my-sm-0 nav-link" OnClick="btnCategorias_Click" Text="Categorias" />
                     </li>
 
                 </ul>
