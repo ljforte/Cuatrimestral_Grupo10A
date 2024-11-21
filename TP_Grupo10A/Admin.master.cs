@@ -38,5 +38,10 @@ namespace TP_Grupo10A
         {
             Response.Redirect("GestionCategoria.aspx");
         }
+
+        protected void btnPedidos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("GestionPedidos.aspx");
+        }
     }
 }

@@ -20,6 +20,14 @@ INSERT INTO Usuarios (Nombre, Email, Usuariopassword, Rol) VALUES
 ('Cliente','cliente@cliente.com','cliente',1);
 GO
 
+CREATE TABLE EstadoPedido ( EstadoID INT PRIMARY KEY IDENTITY(1,1), Descripcion NVARCHAR(50) NOT NULL ); 
+
+GO
+
+INSERT INTO EstadoPedido (Descripcion) VALUES ('Pendiente'), ('Enviado'), ('Entregado');
+
+GO
+
 CREATE TABLE Roles  (
 ID INT PRIMARY KEY IDENTITY(1,1),
 Rol NVARCHAR(30) NOT NULL

@@ -31,7 +31,7 @@ namespace TP_Grupo10A
                     }
                     else if (usuarioLogueado.Tipo == TipoUsuario.Admin)
                     {
-                        Response.Redirect("GestionProductos.aspx", false);
+                        Response.Redirect("GestionPedidos.aspx", false);
                     }
                     
                  
