@@ -175,11 +175,15 @@ namespace Negocio
             try 
             {
                 datos.setearConsulta(
-             "SELECT COUNT(*) FROM Usuarios WHERE Email = @Email"
+             "SELECT COUNT(*) as Total FROM Usuarios WHERE Email = @Email"
                 );
                 datos.setearParametro("@Email", email);
                 datos.ejecutarLectura();
-                return datos.Lector.Read(); // devuelve segun encuentre o no resultados
+                if (datos.Lector.Read())
+                {
+                    return (int)datos.Lector["Total"] > 0; //  si el total es mayor que 0 true
+                }
+                return false;
             }
             catch (Exception ex)
             {
