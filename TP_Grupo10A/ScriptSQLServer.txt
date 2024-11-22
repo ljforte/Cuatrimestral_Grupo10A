@@ -272,19 +272,7 @@ BEGIN
     WHERE CarritoDetalleID = @CarritoDetalleID
 END;
 
-SELECT CarritoID as CarritoID, UsuarioID as Usuario, FechaCreacion as Fecha FROM Carrito
-
-SELECT * from Usuarios
-
-
-
-
-
-
-
-// Este trigger elimina un CARRITO si no hay mas CARRITODETALLE relacionados a el. Deja en null el carrito en caso
-de eliminar el ultimo detalle
-
+GO
 
 CREATE TRIGGER trg_EliminarCarritoVacio
 ON CarritoDetalle
@@ -359,6 +347,7 @@ GO
 -- AGREGO EL NO ESPECIFICADO COMO DEFAULT PARA ADMIN Y CLIENTE QUE YA ESTAN CARGADOS
 ALTER TABLE Usuarios
 ADD Apellido VARCHAR(50) NOT NULL ;
+GO
 
 INSERT INTO Usuarios (Nombre, Email, Usuariopassword, Rol,Apellido) VALUES 
 ('Admin','admin@admin.com','admin',2,'admin'),
@@ -369,7 +358,10 @@ ALTER TABLE Pedidos
 ALTER COLUMN EstadoPedido INT;
 GO
 
-// importante cambiar varchar a int
+
 
 ALTER TABLE Direcciones 
 ALTER COLUMN Telefono INT;
+
+GO
+
