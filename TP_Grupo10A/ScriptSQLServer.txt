@@ -83,24 +83,6 @@ CREATE TABLE CarritoDetalle (
 GO
 
 
-CREATE TABLE Pedidos (
-    PedidoID INT PRIMARY KEY IDENTITY(1,1),
-    UsuarioID INT FOREIGN KEY REFERENCES Usuarios(UsuarioID),
-    FechaPedido DATETIME NOT NULL DEFAULT GETDATE(),
-    EstadoPedido NVARCHAR(20) NOT NULL,
-    Total DECIMAL(10, 2) NOT NULL
-);
-GO
-
-CREATE TABLE PedidosDetalle (
-    PedidoDetalleID INT PRIMARY KEY IDENTITY(1,1),
-    PedidoID INT FOREIGN KEY REFERENCES Pedidos(PedidoID) ON DELETE CASCADE,
-    ProductoID INT FOREIGN KEY REFERENCES Productos(ProductoID),
-    Cantidad INT NOT NULL,
-    PrecioUnitario DECIMAL(10, 2) NOT NULL
-);
-GO
-
 CREATE TABLE Direcciones (
     DireccionID INT PRIMARY KEY IDENTITY(1,1),
     UsuarioID INT FOREIGN KEY REFERENCES Usuarios(UsuarioID),
@@ -363,5 +345,26 @@ GO
 ALTER TABLE Direcciones 
 ALTER COLUMN Telefono INT;
 
+
+drop table PedidosDetalle
+drop table Pedidos
+
+CREATE TABLE Pedidos (
+    PedidoID INT PRIMARY KEY IDENTITY(1,1),            
+    UsuarioID INT NOT NULL FOREIGN KEY REFERENCES Usuarios(UsuarioID),
+    DireccionID INT FOREIGN KEY REFERENCES Direcciones(DireccionID),   
+    FechaPedido DATETIME NOT NULL DEFAULT GETDATE(),  
+    EstadoPedido NVARCHAR(20) NOT NULL,               
+    Total DECIMAL(10, 2) NOT NULL,                    
+    MetodoDePago NVARCHAR(20) NOT NULL                
+);
 GO
 
+CREATE TABLE PedidosDetalle (
+    PedidoDetalleID INT PRIMARY KEY IDENTITY(1,1),
+    PedidoID INT FOREIGN KEY REFERENCES Pedidos(PedidoID) ON DELETE CASCADE,
+    ProductoID INT FOREIGN KEY REFERENCES Productos(ProductoID),
+    Cantidad INT NOT NULL,
+    PrecioUnitario DECIMAL(10, 2) NOT NULL
+);
+GO

@@ -5,7 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 
-
+    <asp:Label ID="lblError" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
     <asp:Label ID="lblMensaje" runat="server" CssClass="alert alert-info"></asp:Label>
 
     <!--  Carrito -->

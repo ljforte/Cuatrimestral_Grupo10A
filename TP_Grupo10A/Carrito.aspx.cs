@@ -16,6 +16,8 @@ namespace TP_Grupo10A
         private Dominio.Carrito carrito;
         private DireccionNegocio direccionNegocio = new DireccionNegocio();
         private UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+        private PedidoNegocio pedidoNegocio = new PedidoNegocio();
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -85,7 +87,7 @@ namespace TP_Grupo10A
 
         protected void btnConfirmarCarrito_Click(object sender, EventArgs e)
         {
-            
+
             collapseCarrito.Attributes.Add("class", "collapse");
             collapseEntrega.Attributes.Add("class", "collapse show");
             cargarDirecciones();
@@ -124,7 +126,7 @@ namespace TP_Grupo10A
 
                 ddlDirecciones.DataSource = direcciones;
                 ddlDirecciones.DataTextField = "DireccionCompleta";
-                ddlDirecciones.DataValueField = "DireccionID"; 
+                ddlDirecciones.DataValueField = "DireccionID";
                 ddlDirecciones.DataBind();
                 ddlDirecciones.Items.Insert(0, new ListItem("Seleccionar direccion..", ""));
 
@@ -134,7 +136,7 @@ namespace TP_Grupo10A
         protected void rblEntrega_SelectedIndexChanged(object sender, EventArgs e)
         {
             direccionContainer.Visible = rblEntrega.SelectedValue == "domicilio";
-            if(direccionContainer.Visible)
+            if (direccionContainer.Visible)
             {
                 cargarDirecciones();
             }
@@ -144,7 +146,7 @@ namespace TP_Grupo10A
         {
             if (rblPago.SelectedValue == "tarjeta")
             {
-                tarjetaContainer.Visible = true; 
+                tarjetaContainer.Visible = true;
             }
             else
             {
@@ -154,10 +156,60 @@ namespace TP_Grupo10A
 
         protected void btnConfirmarCompra_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (rblPago.SelectedValue == "efectivo")
+                {
+                    // direccion seleccionada
+                    int DireccionID = int.Parse(ddlDirecciones.SelectedValue);
+                    Direcciones dire = direccionNegocio.BuscarDireccionPorID(DireccionID);
 
+                    // Obtener los detalles del carrito
+                    Usuarios usuarioLogueado = (Usuarios)Session["UsuarioLogueado"];
+                    carrito = _carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado);
+                    List<CarritoDetalle> detallesCarrito = _carritoDetalleNegocio.VerCarritoDetalles(carrito);
+
+                    // Calcular el total del pedido
+                    int totalPedido = detallesCarrito.Sum(detalle => (int)(detalle.Cantidad * detalle.PrecioUnitario));
+
+                    // verificacion de seleccion de tipo de envio
+                    // si es domicilio setea envio, si no sale por retiro
+                    EstadoPedido estadoPedido = rblEntrega.SelectedValue == "domicilio"
+                    ? EstadoPedido.Envio
+                    : EstadoPedido.Retiro;
+
+                    // Crear el pedido
+                    bool pedidoCreado = pedidoNegocio.CrearPedido(
+                        usuarioLogueado,
+                        dire,
+                        Pago.Efectivo,
+                        estadoPedido, 
+                        detallesCarrito,
+                        totalPedido
+                    );
+
+                    if (pedidoCreado)
+                    {
+                        lblError.Text = string.Empty;
+                        Response.Redirect("~/default.aspx"); // generar nueva
+                    }
+                    else
+                    {
+                        lblError.Text = "Hubo un error al procesar el pedido. Inténtelo nuevamente.";
+                    }
+                }
+                else
+                {
+                    lblError.Text = "Método de pago no soportado en este flujo.";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = "Ocurrió un error al procesar la compra: " + ex.Message;
+            }
         }
 
-
     }
-
 }
+

@@ -17,7 +17,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("select PD.PedidoDetalleID, pd.PedidoID, pd.ProductoID, pd.Cantidad, pd.PrecioUnitario, P.Nombre as NombreProducto from PedidosDetalle PD\r\njoin Productos P on p.ProductoID = pd.ProductoID\r\nwhere PedidoID = @PID");
+                datos.setearConsulta("select PD.PedidoDetalleID, pd.PedidoID, pd.ProductoID, pd.Cantidad, pd.PrecioUnitario from PedidosDetalle PD\r\njoin Productos P on p.ProductoID = pd.ProductoID\r\nwhere PedidoID = @PID");
                 datos.setearParametro("@PID", PedidoID);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -32,8 +32,6 @@ namespace Negocio
                         pedidosDetalle.Cantidad = (int)datos.Lector["Cantidad"];
                     if (!(datos.Lector["PrecioUnitario"] is DBNull))
                         pedidosDetalle.PrecioUnitario = Convert.ToSingle(datos.Lector["PrecioUnitario"]);
-                    if (!(datos.Lector["NombreProducto"] is DBNull))
-                        pedidosDetalle.ProductoNombre = (datos.Lector["NombreProducto"].ToString());
                     if (!(datos.Lector["ProductoID"] is DBNull))
                         pedidosDetalle.ProductoID = (int)(datos.Lector["ProductoID"]);
 

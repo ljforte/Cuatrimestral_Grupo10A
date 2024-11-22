@@ -19,16 +19,17 @@ namespace TP_Grupo10A
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string PedidoID = Request.QueryString["PedidoID"];
+           /* string PedidoID = Request.QueryString["PedidoID"];
             Pedido = pedidoNegocio.ListarPedidoPorID(PedidoID);
             dgvProductos.DataSource = detallePedidoNegocio.ListarPedidoDetalle(PedidoID);
 
             dgvProductos.DataBind();
 
 
-        lblEstadoPedido.Text = Pedido.Estado;
+                lblEstadoPedido.Text = Pedido.Estado;
             lblNombreClienteCampo.Text = Pedido.NombreCliente;
             lblFechaCampo.Text = Pedido.FechaPedido.ToString();
-        }
+        */
+            }
     }
 }

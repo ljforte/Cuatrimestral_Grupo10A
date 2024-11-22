@@ -56,5 +56,50 @@ namespace Negocio
             }
 
         }
+
+
+        public Direcciones BuscarDireccionPorID(int direccionID)
+        {
+            try
+            {
+                Direcciones direccion = null;
+
+                string consulta = @"SELECT 
+                                Calle, 
+                                Ciudad, 
+                                Telefono, 
+                                CodigoPostal, 
+                                UsuarioID 
+                            FROM Direcciones 
+                            WHERE DireccionID = @DireccionID";
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@DireccionID", direccionID);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    direccion = new Direcciones
+                    {
+                        Calle = (string)datos.Lector["Calle"],
+                        Ciudad = (string)datos.Lector["Ciudad"],
+                        Telefono = Convert.ToInt32(datos.Lector["Telefono"]),
+                        CodigoPostal = (string)datos.Lector["CodigoPostal"],
+                        UsuarioID = Convert.ToInt32(datos.Lector["UsuarioID"])
+                    };
+                }
+
+                return direccion;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar dirección por ID", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
+

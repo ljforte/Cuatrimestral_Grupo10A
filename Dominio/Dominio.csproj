@@ -45,6 +45,7 @@
     <Compile Include="CarritoDetalle.cs" />
     <Compile Include="Categorias.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="DetallePagoTarjeta.cs" />
     <Compile Include="Direcciones.cs" />
     <Compile Include="Estado.cs" />
     <Compile Include="ImagenProducto.cs" />
