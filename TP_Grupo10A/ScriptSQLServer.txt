@@ -307,3 +307,52 @@ BEGIN
     );
 END;
 GO
+
+
+-- ACTUALIZACIONES PARA TABLA DETALLE PEDIDO Y SUS VARIANTES DE PAGO
+CREATE TABLE MedioDePago (
+    MedioDePagoID INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(50) NOT NULL
+);
+GO
+
+INSERT INTO MedioDePago (Nombre)
+VALUES ('Efectivo'), ('Tarjeta');
+GO
+
+
+ALTER TABLE Pedidos
+ADD MedioDePagoID INT FOREIGN KEY REFERENCES MedioDePago(MedioDePagoID);
+GO
+
+
+
+CREATE TABLE DetallePagoTarjeta (
+    NumeroTarjeta INT NOT NULL,
+    CodigoSeguridad INT NOT NULL,
+    NombreTarjeta NVARCHAR(100) NOT NULL,
+    FechaVencimiento DATE NOT NULL,
+    PRIMARY KEY (NumeroTarjeta)
+);
+GO
+
+
+-- TRIGER CREADO PARA VALIDAR FECHA DE VENCIMIENTO EN TARJETA, SI EL INGRESO EN LA TABLA ES MENOR A LA FECHA ACTUAL
+-- HACE UN ROLLBACK Y NO VALIDA LA TRAANSACCION
+
+CREATE TRIGGER trg_ValidarFechaVencimiento
+ON DetallePagoTarjeta
+AFTER INSERT
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM Inserted
+        WHERE FechaVencimiento < DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1)
+    )
+    BEGIN
+        RAISERROR ('La fecha de vencimiento no puede ser anterior al mes y año actuales.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
+GO
