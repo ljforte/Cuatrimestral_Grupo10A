@@ -23,6 +23,7 @@ namespace TP_Grupo10A
         private CarritoDetalleNegocio _carritoDetalle = new CarritoDetalleNegocio();
         private Productos _producto;
         private CarritoNegocio _carritoNegocio = new CarritoNegocio();
+        private ProductoNegocio _productoNegocio;   
 
         
 
@@ -159,6 +160,8 @@ namespace TP_Grupo10A
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+
+            _productoNegocio = new ProductoNegocio();
             Button btnAgregar = (Button)sender;
             RepeaterItem item = (RepeaterItem)btnAgregar.NamingContainer;
             int productoID = int.Parse(((Label)item.FindControl("lblProductoID")).Text);

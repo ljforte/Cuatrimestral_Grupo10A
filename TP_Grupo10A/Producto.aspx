@@ -42,7 +42,8 @@
                     <ItemTemplate>
                         <div class="producto-item">
                             <div class="card-header py-3">
-                                <asp:Label ID="lblProductoID" runat="server" Text='<%# Eval("ProductoID") %>' CssClass="my-0 fw-normal"></asp:Label>
+                                <asp:Label ID="lblProductoID" runat="server" Text='<%# Eval("ProductoID") %>' CssClass="my-0 fw-normal" Visible="false"></asp:Label>
+                                <asp:Label ID="lblNombre" runat="server" Text='<%# Eval("Nombre") %>' CssClass="my-0 fw-normal"></asp:Label>
                             </div>
                             <%--CUERPO--%>
                             <div class="card-body p-3" min-height="700px">

@@ -52,7 +52,7 @@ namespace TP_Grupo10A
                 bool validar = negocio.ValidarRegistroExistente(txtEmail.Text);
                 if (validar)
                 {
-                    Response.Redirect("Login.aspx?mensaje=Usuario%20ya%20registrado,%20logeate%20por%20favor");
+                    Response.Redirect("Login.aspx?mensaje=Usuario%20ya%20registrado,%20ingrese%20por%20favor");
                 }
                 else
                 {

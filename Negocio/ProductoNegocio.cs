@@ -399,7 +399,7 @@ namespace Negocio
                     List<ImagenProducto> img = IMGnegocio.listarImagenes(producto.ProductoID);
                     if (img.Count > 0)
                         producto.ListImagenes = img;
-                    
+
                     list.Add(producto);
                 }
                 return list;
@@ -412,6 +412,33 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+        public int ObtenerIdProducto(string nombre)
+        {
+            int productoID = -1;
+            try
+            {
+                string consulta = @" SELECT ProductoID FROM Productos WHERE Nombre = @Nombre";
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@Nombre", nombre);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    if (!(datos.Lector["ProductoID"] is DBNull))
+                    {
+                        productoID = Convert.ToInt32(datos.Lector["ProductoID"]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el ID del producto: " + ex.Message, ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return productoID;
         }
     }
 }
