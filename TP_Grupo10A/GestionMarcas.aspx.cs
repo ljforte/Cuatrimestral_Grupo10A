@@ -1,8 +1,10 @@
 ﻿using Dominio;
+using Microsoft.Ajax.Utilities;
 using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -63,11 +65,10 @@ namespace TP_Grupo10A
         {
             Button clickedButton = sender as Button;
             MarcasNegocio neg = new MarcasNegocio();
+            int index = dgvMarcas.SelectedIndex;
+            int marcaID = Convert.ToInt32(dgvMarcas.DataKeys[index].Value);
+            Response.Redirect("ModificarMarca.aspx?ID=" + marcaID , false);
 
-            Response.Redirect("ModificarMarca.aspx", false);
-
-            lblDato.Text = "Modificar";
-            lblDato.Visible = true;
 
         }
            
@@ -76,13 +77,12 @@ namespace TP_Grupo10A
         {
             MarcasNegocio neg = new MarcasNegocio();
 
-            // Obtener el índice de la fila que se está eliminando
             int index = e.RowIndex;
-
-            // Obtener el ID de la marca desde DataKeyNames
             int marcaID = Convert.ToInt32(dgvMarcas.DataKeys[index].Value);
-            
-                
+
+
+            if(!neg.BuscarProductoConMarca(marcaID.ToString()))
+            {
                 if (neg.EliminarMarca(marcaID))
                 {
                     lblDato.Text = "¡Marca eliminada con exito!";
@@ -93,8 +93,13 @@ namespace TP_Grupo10A
                     lblDato.Text = "Error, no se puede eliminar esta marca";
                 }
                 Page_Load(sender,e);
-                
-                Page_Load(sender, e);
+            }
+            else
+            {
+                lblDato.Text = "Error, esta marca pertenece a un producto";
+            }
+            
+            
         }
 
     }

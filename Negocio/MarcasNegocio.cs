@@ -46,12 +46,12 @@ namespace Negocio
             }
         }
 
-       public void AgregarMarca(string marca)
+        public void AgregarMarca(string marca)
         {
             try
             {
-                 datos.setearConsulta("insert into Marcas (Nombre) VALUES ('"+ marca +"')");
-               // datos.setearConsulta("insert into Marcas (Nombre) VALUES ('Asrock')");
+                datos.setearConsulta("insert into Marcas (Nombre) VALUES ('" + marca + "')");
+                // datos.setearConsulta("insert into Marcas (Nombre) VALUES ('Asrock')");
                 datos.ejecutarAccion();
 
             }
@@ -128,14 +128,73 @@ namespace Negocio
             try
             {
 
-            datos.setearConsulta("delete from Marcas where MarcaID = @ID ");
-            datos.setearParametro("@ID", id);
-            datos.ejecutarAccion();
+                datos.setearConsulta("delete from Marcas where MarcaID = @ID ");
+                datos.setearParametro("@ID", id);
+                datos.ejecutarAccion();
                 return true;
             }
             catch (Exception ex)
             {
                 return false;
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool BuscarProductoConMarca(string MarcaID)
+        {
+            try
+            {
+                datos.setearConsulta("select * from Productos P join Marcas M on M.MarcaID =  P.MarcaID where M.MarcaID =" + MarcaID);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    return true;
+
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            finally
+            {
+
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool ModificarMarca(string MarcaID, string Nombre)
+        {
+            try
+            {
+                datos.setearConsulta("UPDATE Marcas SET Nombre = @Nombre WHERE MarcaID = @MarcaID");
+                datos.setearParametro("@Nombre", Nombre);
+                datos.setearParametro("@MarcaID", MarcaID);
+                datos.ejecutarAccion();
+
+                datos.cerrarConexion();
+
+                datos.setearConsulta("SELECT 1 FROM Marcas WHERE MarcaID = @MarcaID AND Nombre = @Nombre"); 
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return true;
+                }
+                else { return false; }
+
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
             finally

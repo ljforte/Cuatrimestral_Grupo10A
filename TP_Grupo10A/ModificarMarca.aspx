@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.master" AutoEventWireup="true" CodeBehind="ModificarMarca.aspx.cs" Inherits="TP_Grupo10A.ModificarMarca" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="Gestion" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-      <div class="container">
+    <div class="container">
         <div class="row justify-content-center" style="margin-top: 50px;">
             <div class="col-md-6 col-lg-4 text-center">
                 <asp:Label ID="lblTitulo" runat="server" Text="Modificar Marca" CssClass="h3"></asp:Label>
@@ -23,6 +24,12 @@
                     <div class="col-sm-8">
                         <asp:TextBox ID="txtNombre" runat="server" Style="width: 850px;" CssClass="form-control" />
                     </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <label for="lblNombre" class="col-sm-4 col-form-label">
+                        <asp:Label ID="lblDato" runat="server" Text=" " CssClass="col-form-label"></asp:Label>
+                    </label>
                 </div>
 
                 <div class="row justify-content-center" style="margin-top: 25px;">
