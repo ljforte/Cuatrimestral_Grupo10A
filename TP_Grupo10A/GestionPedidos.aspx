@@ -21,10 +21,19 @@
             </div>
         </div>
 
+        <br />
+
         <div class="row w-100 justify-content-center">
             <div class="col-12">
-                <asp:GridView ID="dgvPedidos" CssClass="table table-striped mx-auto" runat="server">
+                <asp:GridView ID="dgvPedidos" CssClass="table table-striped mx-auto" DataKeyNames="PedidoID" AutoGenerateColumns="false" runat="server">
+                    <Columns>
+                        <asp:BoundField HeaderText="ID" DataField="PedidoID" />
+                        <asp:BoundField HeaderText="Nombre" DataField="NombreCliente" />
+                        <asp:BoundField HeaderText="Estado" DataField="Estado" />
+                        <asp:CommandField HeaderText="Detalle" ShowSelectButton="true" SelectText="Ver" />
+                    </Columns>
                 </asp:GridView>
+
             </div>
         </div>
     </div>

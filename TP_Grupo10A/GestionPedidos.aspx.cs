@@ -12,7 +12,9 @@ namespace TP_Grupo10A
     public partial class GestionPedidos : System.Web.UI.Page
     {
         public EstadoNegocio Negocio = new EstadoNegocio();
+        public PedidoNegocio NegocioPedido = new PedidoNegocio();
         public List<Estado> estados = new List<Estado>();
+        public List<Pedidos> Pedidos = new List<Pedidos>();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -26,8 +28,8 @@ namespace TP_Grupo10A
                 }
             }
 
-
-
+            dgvPedidos.DataSource = NegocioPedido.ListarPedidos();
+            dgvPedidos.DataBind();
         }
 
 
