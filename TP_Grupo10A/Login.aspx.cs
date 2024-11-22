@@ -14,6 +14,12 @@ namespace TP_Grupo10A
         protected void Page_Load(object sender, EventArgs e)
         {
             mensajeError.Visible = false;
+            if (Request.QueryString["mensaje"] != null)
+            {
+                string mensaje = Server.UrlDecode(Request.QueryString["mensaje"]);
+                lblMensaje.Text = mensaje; // Muestra el mensaje en un Label
+                lblMensaje.Visible = true;
+            }
         }
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
