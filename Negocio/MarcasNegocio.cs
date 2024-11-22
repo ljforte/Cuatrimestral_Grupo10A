@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Dominio;
@@ -79,6 +80,39 @@ namespace Negocio
                 else
                 {
                     return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
+        public Marcas BuscarDatosMarca(string ID)
+        {
+            try
+            {
+                datos.setearConsulta("select * from Marcas where MarcaID = '" + ID + "'");
+                datos.ejecutarLectura();
+
+                    Marcas marca = new Marcas();
+                if (datos.Lector.Read())
+                {
+                    if (!(datos.Lector["MarcaID"] is DBNull))
+                        marca.MarcaID = (int)datos.Lector["MarcaID"];
+                    if (!(datos.Lector["Nombre"] is DBNull))
+                        marca.Nombre = datos.Lector["Nombre"].ToString();
+                    return marca;
+                }
+                else
+                {
+                    return marca;
                 }
 
             }

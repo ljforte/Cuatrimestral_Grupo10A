@@ -17,6 +17,8 @@ namespace TP_Grupo10A
         protected void Page_Load(object sender, EventArgs e)
         {
             MarcaID = Request.QueryString["ID"];
+            Marcas=Negocio.BuscarDatosMarca(MarcaID);
+            txtNombre.Text = Marcas.Nombre;
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
