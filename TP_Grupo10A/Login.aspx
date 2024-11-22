@@ -12,6 +12,7 @@
 
 
     <div class="container">
+        <asp:Label ID="lblMensaje" runat="server" CssClass="text-danger" Visible="false"></asp:Label>
         <div class="row">
             <div class="col-2"></div>
 
@@ -30,7 +31,6 @@
                 </div>
                 <div>
                     <asp:Label ID="mensajeError" runat="server" Text="Datos incorrectos" ForeColor="Red"></asp:Label>
-
 
                 </div>
                 <div class="mt-3">

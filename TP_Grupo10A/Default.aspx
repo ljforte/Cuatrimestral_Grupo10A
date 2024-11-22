@@ -4,16 +4,17 @@
     <link href="./Content/style.css" rel="stylesheet" type="text/css" />
     <main>
         <%--Primer carousel --%>
+
         <div id="carouselPortada" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="./Imagenes/fondoFBE.png" class="d-block w-100" alt="Imagen 1">
+                    <img src="./Imagenes/fondoFBE.png" class="d-block w-100" alt="Imagen 1" height:50 width:200>
                 </div>
                 <div class="carousel-item">
-                    <img src="./Imagenes/OfertaPortada.png" class="d-block w-100" alt="Imagen 2">
+                    <img src="./Imagenes/OfertaPortada.png" class="d-block w-100" alt="Imagen 2"height:50 width:200>
                 </div>
                 <div class="carousel-item">
-                    <img src="./Imagenes/CorsairBanner.jpg" class="d-block w-100" alt="Imagen 3">
+                    <img src="./Imagenes/CorsairBanner.jpg" class="d-block w-100" alt="Imagen 3"height:50 width:200>
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselPortada" data-bs-slide="prev">
@@ -25,9 +26,19 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+
+    <style>
+#carouselProveedores .carousel-inner .col img {    
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+    </style>
+
         <%--Segundo Carousel--%>
         <div id="carouselProveedores" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
+
                 <div class="carousel-item active">
                     <div class="row">
                         <div class="col">

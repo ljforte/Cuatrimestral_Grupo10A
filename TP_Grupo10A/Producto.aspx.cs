@@ -30,19 +30,33 @@ namespace TP_Grupo10A
         {
             if (!IsPostBack)
             {
-                string Categoria = Request.QueryString["CATEGORIA"];
+                string categoria = Request.QueryString["CATEGORIA"];
+                string nombre = Request.QueryString["nombre"];
 
-                if (!string.IsNullOrEmpty(Categoria))
+                if (!string.IsNullOrEmpty(nombre))
                 {
-                    CargarProductosPorCategoria(Categoria);
+                  CargarProductoPorFiltro(nombre);
+                }
+                else if (!string.IsNullOrEmpty(categoria))
+                {
+                    CargarProductosPorCategoria(categoria);
                 }
                 else
                 {
                     CargarProductos();
                 }
+
                 CargarCategorias();
-                CargarMarcas();
+              //CargarMarcas();
             }
+        }
+
+        private void CargarProductoPorFiltro(string nombre)
+        {
+            ProductoNegocio negocio = new ProductoNegocio();
+            listaProductos = negocio.Filtrar(nombre);
+
+            Paginacion();
         }
 
         private void CargarCategorias()
@@ -53,13 +67,13 @@ namespace TP_Grupo10A
             RepeaterCategorias.DataBind();
         }
 
-        private void CargarMarcas()
-        {
-            MarcasNegocio negocio = new MarcasNegocio();
-            listaMarcas = negocio.ListarMarcas ();
-            RepeaterMarcas.DataSource = listaMarcas;
-            RepeaterMarcas.DataBind();
-        }
+        //private void CargarMarcas()
+        //{
+        //    MarcasNegocio negocio = new MarcasNegocio();
+        //    listaMarcas = negocio.ListarMarcas ();
+        //    RepeaterMarcas.DataSource = listaMarcas;
+        //    RepeaterMarcas.DataBind();
+        //}
 
         // Cambie el metodo cargarProductos para que el repeater cargue solo los productos que le indiquemos
         // por pagina. La obtencion de la lista es la misma pero luego calculo el total de paginas.

@@ -75,9 +75,11 @@
                             <a class="nav-link" href="Contacto.aspx">Contacto <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
+                    <%--BUSCAR--%>
                     <ul class="navbar-nav mx-auto">
                         <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2" Style="width: 300px;" placeholder="Buscar productos" aria-label="Buscar"></asp:TextBox>
                         <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-success my-2 my-sm-0" Text="Buscar" OnClick="btnBuscar_Click" />
+                        
 
                     </ul>
                     <%--carrito--%>
