@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TP_Grupo10A.SiteMaster" %>
 
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -19,7 +21,14 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-
+    <style>
+        body {
+            background-image: url('./imagenes/FondoMaster.png');
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+        }
+    </style>
 
     <%--    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="whatsap" viewBox="0 0 16 16">
@@ -79,7 +88,7 @@
                     <ul class="navbar-nav mx-auto">
                         <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control me-2" Style="width: 300px;" placeholder="Buscar productos" aria-label="Buscar"></asp:TextBox>
                         <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-success my-2 my-sm-0" Text="Buscar" OnClick="btnBuscar_Click" />
-                        
+
 
                     </ul>
                     <%--carrito--%>
@@ -97,7 +106,7 @@
                             <asp:Button ID="btnGestion" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Gestionar" OnClick="btnGestion_Click" />
                         </li>
                         <li class="nav-item">
-                            <asp:Button ID="btnDesloguear" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Desloguearse" visible="false" OnClick="btnDesloguear_Click"  />
+                            <asp:Button ID="btnDesloguear" runat="server" CssClass="btn btn-outline-primary my-2 my-sm-0 me-2" Text="Desloguearse" Visible="false" OnClick="btnDesloguear_Click" />
                         </li>
 
 

@@ -130,8 +130,10 @@
     <Content Include="Global.asax" />
     <Content Include="Imagenes\CorsairBanner.jpg" />
     <Content Include="Imagenes\fondoFBE.png" />
+    <Content Include="Imagenes\FondoMaster.png" />
     <Content Include="Imagenes\ImagenNoEncontrada.jpeg" />
     <Content Include="Imagenes\logoFBE.png" />
+    <Content Include="Imagenes\MasterAdminFondo.png" />
     <Content Include="Imagenes\OfertaPortada.png" />
     <Content Include="ModificarCategoria.aspx" />
     <Content Include="ModificarMarca.aspx" />
