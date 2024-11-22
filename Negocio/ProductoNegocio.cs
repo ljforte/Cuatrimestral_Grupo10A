@@ -161,14 +161,14 @@ namespace Negocio
             }
         }
 
-        public void AltaProducto(string Nombre, string Marca, float Precio, int Stock, string Descripcion, string Categoria, 
-                                                         bool Activo )
+        public void AltaProducto(string Nombre, string Marca, float Precio, int Stock, string Descripcion, string Categoria,
+                                                         bool Activo)
         {
             try
             {
                 int CategoriaID = Cat.BuscarIdCat(Categoria);
                 int MarcaID = Mar.BuscarIdMarca(Marca);
-                
+
                 string consulta = @"INSERT INTO Productos (Nombre, MarcaID, Precio, Stock, Descripcion, CategoriaID, Estado) 
                                    VALUES (@Nombre, @MarcaID, @Precio, @Stock, @Descripcion, @CategoriaID, @Activo)";
 
@@ -271,7 +271,7 @@ namespace Negocio
                             FROM Productos AS P
                             LEFT JOIN Marcas AS M ON M.MarcaID = P.MarcaID
                             LEFT JOIN Categorias AS C ON C.CategoriaID = P.CategoriaID ";
-                if(ID!="")   consulta += " WHERE P.ProductoID = "+ ProductoID;
+                if (ID!="") consulta += " WHERE P.ProductoID = "+ ProductoID;
                 datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
 
@@ -335,7 +335,7 @@ namespace Negocio
                 datos.setearProcedimiento(consulta);
                 datos.setearParametro("@Nombre", prod.Nombre);
                 datos.setearParametro("@MarcaID", prod.MarcaID.MarcaID);
-                datos.setearParametro("@Precio", prod.Precio);  
+                datos.setearParametro("@Precio", prod.Precio);
                 datos.setearParametro("@Stock", prod.stock);
                 datos.setearParametro("@Descripcion", prod.Descripcion);
                 datos.setearParametro("@CategoriaID", prod.CategoriaID.CategoriaID);
@@ -346,11 +346,71 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al modificar el producto", ex);  
+                throw new Exception("Error al modificar el producto", ex);
             }
             finally
             {
-                datos.cerrarConexion();  
+                datos.cerrarConexion();
+            }
+        }
+        //FILTRA POR DESCRIPCION O MARCA
+        public List<Productos> Filtrar(string nombre)
+        {
+            list = new List<Productos>();
+            try
+            {
+                string consulta = @"
+            SELECT P.ProductoID, P.Nombre, M.Nombre AS Marca, P.Precio, P.Descripcion, 
+                   C.Nombre AS Categoria, P.MarcaID, C.CategoriaID
+            FROM Productos AS P
+            LEFT JOIN Marcas AS M ON M.MarcaID = P.MarcaID
+            LEFT JOIN Categorias AS C ON C.CategoriaID = P.CategoriaID
+            WHERE P.Estado = 1 AND P.Stock > 1
+            AND P.Descripcion LIKE @Nombre
+            OR M.Nombre LIKE @Nombre";
+                //AND P.Descripcion LIKE '%emoria%'
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@Nombre", "%" + nombre + "%");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Productos producto = new Productos();
+                    if (!(datos.Lector["ProductoID"] is DBNull))
+                        producto.ProductoID = Convert.ToInt32(datos.Lector["ProductoID"]);
+                    if (!(datos.Lector["Nombre"] is DBNull))
+                        producto.Nombre = (string)datos.Lector["Nombre"];
+                    if (!(datos.Lector["Precio"] is DBNull))
+                        producto.Precio = Convert.ToSingle(datos.Lector["Precio"]);
+                    if (!(datos.Lector["Descripcion"] is DBNull))
+                        producto.Descripcion = (string)datos.Lector["Descripcion"];
+                    if (!(datos.Lector["Categoria"] is DBNull))
+                    {
+                        producto.CategoriaID = new Categorias();
+                        producto.CategoriaID.Nombre = (string)datos.Lector["Categoria"];
+                    }
+                    if (!(datos.Lector["Marca"] is DBNull))
+                    {
+                        producto.MarcaID = new Marcas();
+                        producto.MarcaID.Nombre = (string)datos.Lector["Marca"];
+                    }
+
+                    List<ImagenProducto> img = IMGnegocio.listarImagenes(producto.ProductoID);
+                    if (img.Count > 0)
+                        producto.ListImagenes = img;
+                    
+                    list.Add(producto);
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al filtrar productos por nombre: " + ex.Message, ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

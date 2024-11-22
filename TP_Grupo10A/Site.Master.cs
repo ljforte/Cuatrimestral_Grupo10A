@@ -75,6 +75,8 @@ namespace TP_Grupo10A
         }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
+            string nombre = txtBuscar.Text;
+            Response.Redirect($"Producto.aspx?nombre={nombre}");
 
         }
 
