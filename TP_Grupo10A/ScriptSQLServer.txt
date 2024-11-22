@@ -356,3 +356,8 @@ BEGIN
     END
 END;
 GO
+
+ALTER TABLE Pedidos
+ALTER COLUMN EstadoPedido INT;
+
+GO
