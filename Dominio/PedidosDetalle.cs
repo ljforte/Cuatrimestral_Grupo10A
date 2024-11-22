@@ -13,5 +13,7 @@ namespace Dominio
         public int ProductoID { get; set; }
         public int Cantidad { get; set; }
         public float PrecioUnitario { get; set; }
-    }
+
+        public string ProductoNombre { get; set; }
+     }
 }

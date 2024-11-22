@@ -38,7 +38,7 @@ namespace TP_Grupo10A
 
             int Id = int.Parse(dgvPedidos.SelectedDataKey.Value.ToString());
 
-            Response.Redirect("DetallePedido.aspx?id=" + Id, false);
+            Response.Redirect("DetallePedido.aspx?PedidoID=" + Id, false);
 
         }
 
