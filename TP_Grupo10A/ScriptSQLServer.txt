@@ -15,10 +15,7 @@ CREATE TABLE Usuarios (
 );
 GO
 
-INSERT INTO Usuarios (Nombre, Email, Usuariopassword, Rol) VALUES 
-('Admin','admin@admin.com','admin',2),
-('Cliente','cliente@cliente.com','cliente',1);
-GO
+
 
 CREATE TABLE EstadoPedido ( EstadoID INT PRIMARY KEY IDENTITY(1,1), Descripcion NVARCHAR(50) NOT NULL ); 
 
@@ -360,6 +357,12 @@ GO
 -- AGREGO EL NO ESPECIFICADO COMO DEFAULT PARA ADMIN Y CLIENTE QUE YA ESTAN CARGADOS
 ALTER TABLE Usuarios
 ADD Apellido VARCHAR(50) NOT NULL ;
+
+INSERT INTO Usuarios (Nombre, Email, Usuariopassword, Rol,Apellido) VALUES 
+('Admin','admin@admin.com','admin',2,'admin'),
+('Cliente','cliente@cliente.com','cliente',1,'cliente');
+GO
+
 ALTER TABLE Pedidos
 ALTER COLUMN EstadoPedido INT;
 GO
