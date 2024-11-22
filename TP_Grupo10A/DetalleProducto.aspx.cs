@@ -37,11 +37,11 @@ namespace TP_Grupo10A
                     _producto = _productoNeg.ListarArticulosPorID(productoID)[0];
 
                     // Mostrar los detalles del producto en la interfaz
-                    txtNombre.Text= _producto.Nombre;
-                    txtDescripcion.Text = _producto.Descripcion;
-                    txtMarcas.Text = _producto.MarcaID.Nombre;
-                    txtPrecio.Text = _producto.Precio.ToString();
-                    txtStock.Text=_producto.stock.ToString();
+                    lblNombre.Text= _producto.Nombre;
+                    lblDescripcion.Text = _producto.Descripcion;
+                    lblMarcas.Text = _producto.MarcaID.Nombre;
+                    lblPrecio.Text = _producto.Precio.ToString();
+                    lblStock.Text=_producto.stock.ToString();
 
                     rptImagenes.DataSource = _producto.ListImagenes;
                     rptImagenes.DataBind();

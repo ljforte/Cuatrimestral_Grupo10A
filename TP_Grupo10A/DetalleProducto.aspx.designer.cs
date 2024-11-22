@@ -24,6 +24,15 @@ namespace TP_Grupo10A
         protected global::System.Web.UI.WebControls.Label lblTitulo;
 
         /// <summary>
+        /// Control lblNombreLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombreLabel;
+
+        /// <summary>
         /// Control lblNombre.
         /// </summary>
         /// <remarks>
@@ -33,13 +42,13 @@ namespace TP_Grupo10A
         protected global::System.Web.UI.WebControls.Label lblNombre;
 
         /// <summary>
-        /// Control txtNombre.
+        /// Control lblDescripcionLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+        protected global::System.Web.UI.WebControls.Label lblDescripcionLabel;
 
         /// <summary>
         /// Control lblDescripcion.
@@ -51,13 +60,13 @@ namespace TP_Grupo10A
         protected global::System.Web.UI.WebControls.Label lblDescripcion;
 
         /// <summary>
-        /// Control txtDescripcion.
+        /// Control lblMarcasLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
+        protected global::System.Web.UI.WebControls.Label lblMarcasLabel;
 
         /// <summary>
         /// Control lblMarcas.
@@ -69,13 +78,13 @@ namespace TP_Grupo10A
         protected global::System.Web.UI.WebControls.Label lblMarcas;
 
         /// <summary>
-        /// Control txtMarcas.
+        /// Control lblPrecioLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMarcas;
+        protected global::System.Web.UI.WebControls.Label lblPrecioLabel;
 
         /// <summary>
         /// Control lblPrecio.
@@ -87,13 +96,13 @@ namespace TP_Grupo10A
         protected global::System.Web.UI.WebControls.Label lblPrecio;
 
         /// <summary>
-        /// Control txtPrecio.
+        /// Control lblStockLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecio;
+        protected global::System.Web.UI.WebControls.Label lblStockLabel;
 
         /// <summary>
         /// Control lblStock.
@@ -103,15 +112,6 @@ namespace TP_Grupo10A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStock;
-
-        /// <summary>
-        /// Control txtStock.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStock;
 
         /// <summary>
         /// Control lblCantidad.

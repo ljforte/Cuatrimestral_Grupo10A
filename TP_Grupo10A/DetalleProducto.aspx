@@ -1,98 +1,91 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DetalleProducto.aspx.cs" Inherits="TP_Grupo10A.DetalleProducto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid d-flex justify-content-center align-items-center vh-80">
-        <div class="card p-1">
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-4 shadow-lg">
             <div class="row mb-3 text-center">
-                <%--Datos del Producto--%>
                 <div class="col-md-6 themed-grid-col">
                     <div class="container">
-                        <asp:Label ID="lblTitulo" runat="server" CssClass="display-4" Text="Detalle de Producto"></asp:Label>
+                        <asp:Label ID="lblTitulo" runat="server" CssClass="h5" Text="Detalle de Producto"></asp:Label>
                     </div>
-                    <%--Nombre--%>
+
                     <div class="row m-3">
                         <div class="col-md-6 themed-grid-col">
-                            <asp:Label ID="lblNombre" runat="server" Text="Nombre"  cssclass="form-label"></asp:Label>
+                            <asp:Label ID="lblNombreLabel" runat="server" Text="Nombre:" CssClass="form-label font-weight-bold"></asp:Label>
                         </div>
                         <div class="col-md-6 themed-grid-col">
-                            <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                            <asp:Label ID="lblNombre" runat="server" CssClass="form-control bg-light"></asp:Label>
                         </div>
                     </div>
-                    <%--DESCRIPCION--%>
                     <div class="row m-3">
                         <div class="col-md-6 themed-grid-col">
-                            <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion"  class="form-label"></asp:Label>
+                            <asp:Label ID="lblDescripcionLabel" runat="server" Text="Descripcion:" CssClass="form-label font-weight-bold"></asp:Label>
                         </div>
                         <div class="col-md-6 themed-grid-col">
-                            <asp:TextBox ID="txtDescripcion" runat="server" MaxLength="255" CssClass="form-control" TextMode="MultiLine" Rows="4" Placeholder="Máximo 255 caracteres" />
+                            <asp:Label ID="lblDescripcion" runat="server" CssClass="form-control bg-light"></asp:Label>
                         </div>
                     </div>
-                    <%--MARCA--%>
                     <div class="row m-3">
                         <div class="col-md-6 themed-grid-col">
-                            <asp:Label ID="lblMarcas" runat="server" Text="Marcas"  class="form-label"></asp:Label>
+                            <asp:Label ID="lblMarcasLabel" runat="server" Text="Marcas:" CssClass="form-label font-weight-bold"></asp:Label>
                         </div>
                         <div class="col-md-6 themed-grid-col">
-                            <asp:TextBox ID="txtMarcas" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                            <asp:Label ID="lblMarcas" runat="server" CssClass="form-control bg-light"></asp:Label>
                         </div>
                     </div>
-                    <%--PRECIO--%>
                     <div class="row m-3">
                         <div class="col-md-6 themed-grid-col">
-                            <asp:Label ID="lblPrecio" runat="server" Text="Precio"  class="form-label"></asp:Label>
+                            <asp:Label ID="lblPrecioLabel" runat="server" Text="Precio:" CssClass="form-label font-weight-bold"></asp:Label>
                         </div>
                         <div class="col-md-6 themed-grid-col">
-                            <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                            <asp:Label ID="lblPrecio" runat="server" CssClass="form-control bg-light"></asp:Label>
                         </div>
                     </div>
-                    <%--STOCK--%>
                     <div class="row m-3">
                         <div class="col-md-6 themed-grid-col">
-                            <asp:Label ID="lblStock" runat="server" Text="Stock Disponible"  class="form-label"></asp:Label>
+                            <asp:Label ID="lblStockLabel" runat="server" Text="Stock Disponible:" CssClass="form-label font-weight-bold"></asp:Label>
                         </div>
                         <div class="col-md-6 themed-grid-col">
-                            <asp:TextBox ID="txtStock" runat="server" CssClass="form-control" ReadOnly="true"></asp:TextBox>
+                            <asp:Label ID="lblStock" runat="server" CssClass="form-control bg-light"></asp:Label>
                         </div>
                     </div>
-                    <%--comprar--%>
                     <div class="row mb-3 text-center">
                         <div class="col-4 themed-grid-col">
-                            <asp:Label ID="lblCantidad" runat="server" Text="Cantidad: "></asp:Label>
-                            <asp:TextBox ID="txtCantidad" runat="server" TextMode="Number" value="1" min="1" max="5" />
+                            <asp:Label ID="lblCantidad" runat="server" Text="Cantidad: " CssClass="form-label font-weight-bold"></asp:Label>
+                            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" TextMode="Number" value="1" min="1" max="5" />
                         </div>
 
                         <div class="col-4 themed-grid-col">
                             <asp:Button ID="btnAgregarCarrito" runat="server" Text="Agregar Carrito" OnClick="btnAgregarCarrito_Click" CssClass="btn btn-outline-primary btn-sm" />
                         </div>
                         <div class="col-4 themed-grid-col">
-
                             <asp:Button ID="btnComprar" runat="server" Text="Comprar Ahora" OnClick="btnComprar_Click" CssClass="btn btn-success btn-sm" />
                         </div>
                     </div>
-
-
                 </div>
-                <%--Imagenes del Producto--%>
+                <%--Carrusel de Imagenes del Producto--%>
                 <div class="col-6">
-                    <div class="container">
-                        <asp:Repeater ID="rptImagenes" runat="server">
-                            <HeaderTemplate>
-                                <div class="row">
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <div class="col-md-6 mb-4">
-                                    <img src='<%# Eval("ImagenUrl") %>' class="card-img-top fixed-size-img" alt='<%# Eval("ImagenUrl") %>' width="200" height="200">
-                                </div>
-                                <%# Container.ItemIndex % 2 == 1 ? "</div><div class='row'>" : "" %>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                </div>
-                            </FooterTemplate>
-                        </asp:Repeater>
+                    <div id="productCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <asp:Repeater ID="rptImagenes" runat="server">
+                                <ItemTemplate>
+                                    <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
+                                        <img src='<%# Eval("ImagenUrl") %>' class="d-block w-100 img-fluid rounded" alt='<%# Eval("ImagenUrl") %>'>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                        <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </asp:Content>
-
