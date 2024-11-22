@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="TP_Grupo10A.Registro" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <style>
@@ -41,9 +42,9 @@
             <div class="col-md-4">
                 <label for="txtNombre" class="form-label">Nombre</label>
                 <asp:TextBox ID="txtNombre" MaxLength="50" CssClass="form-control custom2-width txt-color" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="revNombre" runat="server" 
-                    ControlToValidate="txtNombre" 
-                    ValidationExpression="^[a-zA-Z\s]+$" 
+                <asp:RegularExpressionValidator ID="revNombre" runat="server"
+                    ControlToValidate="txtNombre"
+                    ValidationExpression="^[a-zA-Z\s]+$"
                     ErrorMessage="El nombre no puede contener números." CssClass="text-danger"></asp:RegularExpressionValidator>
             </div>
 
@@ -54,14 +55,21 @@
         </div>
         <br />
         <div class="row g-3">
-            <div class="col-md-5">
-                <label for="txtEmail" class="form-label">Email</label>
-                <asp:TextBox ID="txtEmail" MaxLength="100" CssClass="form-control custom-width txt-color" type="email" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="revEmail" runat="server" 
-                    ControlToValidate="txtEmail" 
-                    ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" 
-                    ErrorMessage="Ingrese un email válido." CssClass="text-danger"></asp:RegularExpressionValidator>
-            </div>
+<div class="col-md-5">
+    <label for="txtEmail" class="form-label">Email</label>
+    <asp:TextBox ID="txtEmail" MaxLength="100" CssClass="form-control custom-width txt-color" 
+                 type="email" runat="server"></asp:TextBox>
+    <asp:RegularExpressionValidator ID="revEmail" runat="server" 
+        ControlToValidate="txtEmail" 
+        ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" 
+        ErrorMessage="Ingrese un email válido." CssClass="text-danger"></asp:RegularExpressionValidator>
+</div>
+
+<script>
+    // PAra que el explorador no traiga el autocompletado con el correo que ya tengamos guardado
+    document.getElementById('<%= txtEmail.ClientID %>').setAttribute('autocomplete', 'off');
+</script>
+
 
             <div class="col-md-5">
                 <label for="Genero" class="form-label">Género</label>
@@ -108,9 +116,9 @@
             <div class="col-md-6">
                 <label for="txtTelefono" class="form-label">Teléfono</label>
                 <asp:TextBox ID="txtTelefono" MaxLength="20" CssClass="form-control custom-width txt-color" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="revTelefono" runat="server" 
-                    ControlToValidate="txtTelefono" 
-                    ValidationExpression="^\d+$" 
+                <asp:RegularExpressionValidator ID="revTelefono" runat="server"
+                    ControlToValidate="txtTelefono"
+                    ValidationExpression="^\d+$"
                     ErrorMessage="El teléfono solo puede contener números." CssClass="text-danger"></asp:RegularExpressionValidator>
             </div>
         </div>
