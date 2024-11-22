@@ -25,7 +25,8 @@
 
         <div class="row w-100 justify-content-center">
             <div class="col-12">
-                <asp:GridView ID="dgvPedidos" CssClass="table table-striped mx-auto" DataKeyNames="PedidoID" AutoGenerateColumns="false" runat="server">
+                <asp:GridView ID="dgvPedidos" CssClass="table table-striped mx-auto" DataKeyNames="PedidoID" AutoGenerateColumns="false" runat="server"
+                    OnSelectedIndexChanged="dgvPedidos_SelectedIndexChanged">
                     <Columns>
                         <asp:BoundField HeaderText="ID" DataField="PedidoID" />
                         <asp:BoundField HeaderText="Nombre" DataField="NombreCliente" />

@@ -33,7 +33,14 @@ namespace TP_Grupo10A
         }
 
 
+        protected void dgvPedidos_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+            int Id = int.Parse(dgvPedidos.SelectedDataKey.Value.ToString());
+
+            Response.Redirect("DetallePedido.aspx?id=" + Id, false);
+
+        }
 
 
     }
