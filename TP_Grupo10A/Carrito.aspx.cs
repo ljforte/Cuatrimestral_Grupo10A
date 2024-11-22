@@ -14,11 +14,18 @@ namespace TP_Grupo10A
         private CarritoNegocio _carritoNegocio = new CarritoNegocio();
         private CarritoDetalleNegocio _carritoDetalleNegocio = new CarritoDetalleNegocio();
         private Dominio.Carrito carrito;
+        private DireccionNegocio direccionNegocio = new DireccionNegocio();
+        private UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                /*accordionCarrito.Attributes["class"] = "accordion-item";
+                accordionEntrega.Attributes["class"] = "accordion-item disabled";
+                accordionPago.Attributes["class"] = "accordion-item disabled";
+                direccionContainer.Visible = false;
+                */
                 CargarCarrito();
             }
 
@@ -71,6 +78,85 @@ namespace TP_Grupo10A
                 CargarCarrito();
             }
         }
+
+        ///////// MANEJO DE DESPLEGABLES (ACCORDEON) DE CARRITO ENTREGA PAGO ////////////
+        // Manehjo de collapse para switchear los accordion de entrega/pago/carrito
+        //con show se abre el acordeon y con collapse solo lo cierra, para que no se pueda acceder
+
+        protected void btnConfirmarCarrito_Click(object sender, EventArgs e)
+        {
+            
+            collapseCarrito.Attributes.Add("class", "collapse");
+            collapseEntrega.Attributes.Add("class", "collapse show");
+            cargarDirecciones();
+        }
+
+        protected void btnConfirmarEntrega_Click(object sender, EventArgs e)
+        {
+            collapseEntrega.Attributes.Add("class", "collapse");
+            collapsePago.Attributes.Add("class", "collapse show");
+        }
+
+        protected void btnVolverCarrito_Click(object sender, EventArgs e)
+        {
+            collapseEntrega.Attributes.Add("class", "collapse");
+            collapseCarrito.Attributes.Add("class", "collapse show");
+        }
+
+        protected void btnVolverEntrega_Click(object sender, EventArgs e)
+        {
+            collapsePago.Attributes.Add("class", "collapse");
+            collapseEntrega.Attributes.Add("class", "collapse show");
+            cargarDirecciones();
+        }
+
+
+        private void cargarDirecciones()
+        {
+            Usuarios usuarioLogueado = (Usuarios)Session["UsuarioLogueado"];
+
+            if (usuarioLogueado != null)
+            {
+
+                int usuarioID = usuarioNegocio.BuscarUsuarioID(usuarioLogueado);
+                List<Direcciones> direcciones = direccionNegocio.BuscarDireccionesPorUsuario(usuarioID);
+
+
+                ddlDirecciones.DataSource = direcciones;
+                ddlDirecciones.DataTextField = "DireccionCompleta";
+                ddlDirecciones.DataValueField = "DireccionID"; 
+                ddlDirecciones.DataBind();
+                ddlDirecciones.Items.Insert(0, new ListItem("Seleccionar direccion..", ""));
+
+            }
+        }
+
+        protected void rblEntrega_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            direccionContainer.Visible = rblEntrega.SelectedValue == "domicilio";
+            if(direccionContainer.Visible)
+            {
+                cargarDirecciones();
+            }
+        }
+
+        protected void rblPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rblPago.SelectedValue == "tarjeta")
+            {
+                tarjetaContainer.Visible = true; 
+            }
+            else
+            {
+                tarjetaContainer.Visible = false;
+            }
+        }
+
+        protected void btnConfirmarCompra_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 

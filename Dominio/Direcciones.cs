@@ -14,6 +14,15 @@ namespace Dominio
         public string Ciudad {  get; set; }
         public string CodigoPostal { get; set; }
         public string Pais {  get; set; }
-        public string Telefono {  get; set; }
+        public int Telefono {  get; set; }
+
+
+        public string DireccionCompleta
+        {
+            get
+            {
+                return Calle + " " + Ciudad + " " + CodigoPostal + " " + Telefono;
+            }
+        }
     }
 }

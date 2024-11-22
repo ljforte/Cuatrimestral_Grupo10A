@@ -325,14 +325,16 @@ GO
 
 
 CREATE TABLE DetallePagoTarjeta (
-    NumeroTarjeta INT NOT NULL,
-    CodigoSeguridad INT NOT NULL,
-    NombreTarjeta NVARCHAR(100) NOT NULL,
-    FechaVencimiento DATE NOT NULL,
-    PRIMARY KEY (NumeroTarjeta)
+    DetallePagoID INT PRIMARY KEY IDENTITY(1,1),
+    NumeroTarjeta BIGINT NOT NULL,              
+    CodigoSeguridad INT NOT NULL,               
+    NombreTarjeta NVARCHAR(100) NOT NULL,       
+    FechaVencimiento DATE NOT NULL,             
+    PedidoID INT NOT NULL,                      
+    CONSTRAINT FK_DetallePagoTarjeta_Pedidos FOREIGN KEY (PedidoID)
+    REFERENCES Pedidos(PedidoID)                
 );
 GO
-
 
 -- TRIGER CREADO PARA VALIDAR FECHA DE VENCIMIENTO EN TARJETA, SI EL INGRESO EN LA TABLA ES MENOR A LA FECHA ACTUAL
 -- HACE UN ROLLBACK Y NO VALIDA LA TRAANSACCION
@@ -366,3 +368,8 @@ GO
 ALTER TABLE Pedidos
 ALTER COLUMN EstadoPedido INT;
 GO
+
+// importante cambiar varchar a int
+
+ALTER TABLE Direcciones 
+ALTER COLUMN Telefono INT;

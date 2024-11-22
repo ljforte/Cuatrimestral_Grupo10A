@@ -46,7 +46,7 @@ namespace TP_Grupo10A
                     Ciudad = txtCiudad.Text,
                     CodigoPostal = txtCP.Text,
                     Pais = ddlPais.SelectedValue,
-                    Telefono = txtTelefono.Text
+                    Telefono = int.Parse(txtTelefono.Text)
                 };
 
                 bool validar = negocio.ValidarRegistroExistente(txtEmail.Text);
