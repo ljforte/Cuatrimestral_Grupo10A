@@ -67,9 +67,9 @@
                 <div class="col-6">
                     <div id="productCarousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            <asp:Repeater ID="rptImagenes" runat="server">
+                            <asp:Repeater ID="rptImagenes"  runat="server"  >
                                 <ItemTemplate>
-                                    <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>">
+                                    <div class="carousel-item <%# Container.ItemIndex == 0 ? "active" : "" %>" data-bs-interval="3000">
                                         <img src='<%# Eval("ImagenUrl") %>' class="d-block w-100 img-fluid rounded" alt='<%# Eval("ImagenUrl") %>'>
                                     </div>
                                 </ItemTemplate>
