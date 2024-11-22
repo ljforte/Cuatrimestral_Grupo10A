@@ -14,7 +14,7 @@ namespace TP_Grupo10A
     {
         private ProductoNegocio _productoNeg;
         private CarritoDetalleNegocio _detalleNeg;
-        
+        private List<ImagenProducto> ListIMG = new List<ImagenProducto>();
         private Carrito _carrito;
         private CarritoDetalle _carritoDetalle;
         private Productos _producto;
@@ -22,32 +22,30 @@ namespace TP_Grupo10A
             _productoNeg = new ProductoNegocio();
             _detalleNeg = new CarritoDetalleNegocio();
             
+            
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                // Obtener el ID del producto desde el parámetro de consulta
                 string productoID = Request.QueryString["productoID"];
 
                 if (!string.IsNullOrEmpty(productoID))
                 {
-                    // Llamar a un método para obtener los detalles del producto
-
                     _producto = _productoNeg.ListarArticulosPorID(productoID)[0];
+                    List<ImagenProducto> imagenes = _producto.ListImagenes; 
 
-                    // Mostrar los detalles del producto en la interfaz
-                    lblNombre.Text= _producto.Nombre;
+                    lblNombre.Text = _producto.Nombre;
                     lblDescripcion.Text = _producto.Descripcion;
                     lblMarcas.Text = _producto.MarcaID.Nombre;
                     lblPrecio.Text = _producto.Precio.ToString();
-                    lblStock.Text=_producto.stock.ToString();
+                    lblStock.Text = _producto.stock.ToString();
 
-                    rptImagenes.DataSource = _producto.ListImagenes;
+                    rptImagenes.DataSource = imagenes;
                     rptImagenes.DataBind();
-                    // Agregar más campos según sea necesario
                 }
             }
+
         }
 
         protected void btnComprar_Click(object sender, EventArgs e)
