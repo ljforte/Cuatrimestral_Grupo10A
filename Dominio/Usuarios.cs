@@ -25,6 +25,13 @@ namespace Dominio
         public DateTime FechaRegistro { get; set; }
         public bool Estado {  get; set; }
 
+        public Usuarios(int usuarioID, string nombre, string apellido, string email)
+        {
+            UsuarioID = usuarioID;
+            Nombre = nombre;
+            Apellido = apellido;
+            Email = email;
+        }
         public Usuarios(string mail, string pass)
         {
             Email = mail;

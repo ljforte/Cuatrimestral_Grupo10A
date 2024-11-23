@@ -31,7 +31,7 @@ namespace Negocio
                     if (!(datos.Lector["Cantidad"] is DBNull))
                         pedidosDetalle.Cantidad = (int)datos.Lector["Cantidad"];
                     if (!(datos.Lector["PrecioUnitario"] is DBNull))
-                        pedidosDetalle.PrecioUnitario = Convert.ToSingle(datos.Lector["PrecioUnitario"]);
+                        pedidosDetalle.PrecioUnitario = Convert.ToDecimal(datos.Lector["PrecioUnitario"]);
                     if (!(datos.Lector["ProductoID"] is DBNull))
                         pedidosDetalle.ProductoID = (int)(datos.Lector["ProductoID"]);
 

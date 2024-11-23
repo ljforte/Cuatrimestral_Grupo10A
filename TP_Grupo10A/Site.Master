@@ -22,16 +22,21 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <style>
-        body {
-            background-image: url('./imagenes/FondoMaster.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
+     body {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.9), /* Negro con opacidad */
+        rgba(0, 0, 0, 0.9)
+    ), 
+    url('./imagenes/FondoMaster.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff; /* Asegura legibilidad */
+}
 
 
         input[type="text"], input[type="password"], textarea {
-            color: white;
+            color: black;
             background-color: transparent;
         }
 

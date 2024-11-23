@@ -67,19 +67,30 @@ namespace Negocio
             {
                 throw ex;
             }
+            finally
+            {
+                cerrarConexion();
+            }
         }
 
         public int ejecutarAccionScalar()
         {
-            comando.Connection = conexion;
             try
             {
+                comando.Connection = conexion;
                 conexion.Open();
-                return int.Parse(comando.ExecuteScalar().ToString());
+                return Convert.ToInt32(comando.ExecuteScalar());
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Error al ejecutar el comando scalar.", ex);
+            }
+            finally
+            {
+                if (conexion.State == System.Data.ConnectionState.Open)
+                {
+                    conexion.Close();
+                }
             }
         }
 
@@ -95,5 +106,25 @@ namespace Negocio
             conexion.Close();
         }
 
+
+        public void abrirConexion()
+        {
+            try
+            {
+                if (conexion.State == System.Data.ConnectionState.Closed)
+                {
+                    conexion.Open();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al abrir la conexión.", ex);
+            }
+        }
+
+        public void limpiarParametros()
+        {
+            comando.Parameters.Clear();
+        }
     }
 }

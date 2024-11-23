@@ -58,6 +58,56 @@ namespace Negocio
         }
 
 
+        public Direcciones BuscarDireccionPorUsuario(int usuarioID)
+        {
+
+            List<Direcciones> listDirecciones = new List<Direcciones>();
+            try
+            {
+                string consulta = @"select
+                                    d.Calle as Calle,
+                                    d.Ciudad as Ciudad,
+                                    d.Telefono as Telefono,
+                                    d.CodigoPostal as CodigoPostal,
+									u.UsuarioID as Usuario,
+                                    d.DireccionID as DireccionID
+                                    FROM Direcciones d                                      
+                                    INNER JOIN Usuarios u ON  u.UsuarioID = d.UsuarioID 
+                                    WHERE d.UsuarioID = @UsuarioID";
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@UsuarioID", usuarioID);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Direcciones dire = new Direcciones
+                    {
+                        DireccionID = (int)datos.Lector["DireccionID"],
+                        Calle = (string)datos.Lector["Calle"],
+                        Ciudad = (string)datos.Lector["Ciudad"],
+                        Telefono = (int)datos.Lector["Telefono"],
+                        CodigoPostal = (string)datos.Lector["CodigoPostal"]
+                    };
+                    listDirecciones.Add(dire);
+                }
+
+                Direcciones direc = listDirecciones[0];
+                return direc;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al cargar libreta de direcciones", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
+
+
         public Direcciones BuscarDireccionPorID(int direccionID)
         {
             try

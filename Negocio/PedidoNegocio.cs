@@ -11,11 +11,12 @@ namespace Negocio
 {
     public class PedidoNegocio
     {
-        public AccesoDatos datos = new AccesoDatos();
-        public Pedidos Pedido = new Pedidos();
-        public List<Pedidos> lista = new List<Pedidos>();
-        public Pedidos _pedido = new Pedidos();
-        public PedidoDetalleNegocio pedidoNegocio = new PedidoDetalleNegocio();
+        private AccesoDatos datos = new AccesoDatos();
+        private Pedidos Pedido = new Pedidos();
+        private List<Pedidos> lista = new List<Pedidos>();
+        private Pedidos _pedido = new Pedidos();
+        private PedidoDetalleNegocio pedidoNegocio = new PedidoDetalleNegocio();
+        private AccesoDatos datos2 = new AccesoDatos();
 
 
         /*
@@ -101,54 +102,289 @@ namespace Negocio
               }
 
 
-          }*/
+          }
 
 
         public bool CrearPedido(Usuarios usuario, Direcciones direccion, Pago metodoDePago, EstadoPedido estado, List<CarritoDetalle> carritoDetalle, int total)
         {
+            int pedidoID, usuID;
 
             try
             {
-                // scope identity obtiene el ultimo valor generado por la columna identity dentro del mismo contexto
-
-                string consulta = @"
+                try
+                {
+                    // Consulta para insertar el pedido
+                    string consulta = @"
             INSERT INTO Pedidos (UsuarioID, DireccionID, FechaPedido, EstadoPedido, Total, MetodoDePago) 
-            VALUES (@UsuarioID, @DireccionID, GETDATE(), @EstadoPedido, @Total, @MetodoDePago);
-            SELECT SCOPE_IDENTITY();";
+            VALUES (@UsuarioID, @DireccionID, GETDATE(), @EstadoPedido, @Total, @MetodoDePago);";
 
-               
-                datos.setearConsulta(consulta);
-                datos.setearParametro("@UsuarioID", usuario.UsuarioID);
-                datos.setearParametro("@DireccionID", direccion.DireccionID);
-                datos.setearParametro("@EstadoPedido", estado.ToString());
-                datos.setearParametro("@Total", total ); 
-                datos.setearParametro("@MetodoDePago", metodoDePago.ToString());
-                datos.ejecutarAccion();
+                    datos.setearConsulta(consulta);
+                    datos.setearParametro("@UsuarioID", usuario.UsuarioID);
+                    datos.setearParametro("@DireccionID", direccion.DireccionID);
+                    datos.setearParametro("@EstadoPedido", estado.ToString());
+                    datos.setearParametro("@Total", total);
+                    datos.setearParametro("@MetodoDePago", metodoDePago.ToString());
+                    datos.ejecutarAccion();
 
-
-                int pedidoID = datos.ejecutarAccionScalar();
-
-                if (pedidoNegocio.GuardarDetallesPedido(carritoDetalle, pedidoID))
-                {
-                    return true;
+                    usuID = usuario.UsuarioID;
                 }
-                else
+                catch (Exception ex)
                 {
-                    return false;
+                    throw new Exception("Error al crear el pedido.", ex);
                 }
+                finally
+                {
+                    datos.cerrarConexion();
+                }
+
+
+                pedidoID = ObtenerUltimoPedidoPorUsuario(usuID);
+
+                bool resultado = pedidoNegocio.GuardarDetallesPedido(carritoDetalle, pedidoID);
+                return resultado;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al crear el pedido", ex);
+                throw new Exception("Error al crear los detalles del pedido.", ex);
+            }
+        }
+        */
+
+        public bool CrearPedido(int pedidoID, Usuarios usuario, Direcciones direccion, Pago metodoDePago, EstadoPedido estado, int total)
+        {
+            try
+            {
+                string consulta = @"
+            UPDATE Pedidos
+            SET UsuarioID = @UsuarioID,
+                DireccionID = @DireccionID,
+                FechaPedido = GETDATE(),
+                EstadoPedido = @EstadoPedido,
+                Total = @Total,
+                MetodoDePago = @MetodoDePago
+            WHERE PedidoID = @PedidoID;
+        ";
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@PedidoID", pedidoID);  // PedidoID a actualizar
+                datos.setearParametro("@UsuarioID", usuario.UsuarioID);
+                datos.setearParametro("@DireccionID", direccion.DireccionID);
+                datos.setearParametro("@EstadoPedido", estado.ToString());
+                datos.setearParametro("@Total", total);
+                datos.setearParametro("@MetodoDePago", metodoDePago.ToString());
+
+                datos.ejecutarAccion();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el pedido.", ex);
             }
             finally
             {
                 datos.cerrarConexion();
             }
-
-            
-
-
         }
+    
+
+        public int ObtenerUltimoPedidoPorUsuario(int usuarioID)
+        {
+            try
+            {
+                // Obtenemos el pedido con el PedidoID más alto para el usuario
+                datos2.setearConsulta(@"
+                SELECT TOP 1 PedidoID 
+                FROM Pedidos 
+                WHERE UsuarioID = @UsuarioID 
+                ORDER BY PedidoID DESC;");
+                datos2.setearParametro("@UsuarioID", usuarioID);
+                datos2.ejecutarLectura();
+
+                if (datos2.Lector.Read())
+                {
+                    int id = Convert.ToInt32(datos2.Lector["PedidoID"]);
+                    return id;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el último pedido por UsuarioID.", ex);
+            }
+            finally
+            {
+                datos2.cerrarConexion();
+            }
+        }
+
+
+
+        public void CrearCarritoVacio(int UsuarioID, Direcciones dire)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {                
+                string consulta = @"
+                INSERT INTO Pedidos (UsuarioID, DireccionID, FechaPedido, EstadoPedido, Total, MetodoDePago)
+                VALUES (@UsuarioID, @DireccionID, GETDATE(), 'NoData', 0.0, 'Efectivo');";  
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("UsuarioID", UsuarioID);
+                datos.setearParametro("DireccionID", dire.DireccionID);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al crear el carrito vacío.", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        public Pedidos ObtenerPedidoPorID(int pedidoID)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+
+                string consulta = @"
+    SELECT 
+        p.PedidoID, 
+        p.FechaPedido, 
+        p.EstadoPedido, 
+        p.Total, 
+        p.MetodoDePago,
+        u.UsuarioID, 
+        u.Nombre AS UsuarioNombre, 
+        u.Apellido AS UsuarioApellido, 
+        u.Email as Email,
+        d.DireccionID, 
+        d.UsuarioID AS DireccionUsuarioID, 
+        d.Calle, 
+        d.Ciudad, 
+        d.CodigoPostal, 
+        d.Pais, 
+        d.Telefono
+    FROM Pedidos p
+    LEFT JOIN Usuarios u ON p.UsuarioID = u.UsuarioID
+    LEFT JOIN Direcciones d ON p.DireccionID = d.DireccionID
+    WHERE p.PedidoID = @PedidoID;
+";
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@PedidoID", pedidoID);
+                datos.ejecutarLectura();
+
+                Pedidos pedido = null;
+
+                // Si se encuentra el pedido, lo instanciamos
+                if (datos.Lector.Read())
+                {
+                    pedido = new Pedidos
+                    {
+                        PedidoID = Convert.ToInt32(datos.Lector["PedidoID"]),
+                        FechaPedido = Convert.ToDateTime(datos.Lector["FechaPedido"]),
+                        Estado = Enum.TryParse<EstadoPedido>(datos.Lector["EstadoPedido"].ToString(), true, out var estadoPedido) ? estadoPedido : EstadoPedido.NoData,
+                        Total = Convert.ToSingle(datos.Lector["Total"]),
+                        MetodoDePago = Enum.TryParse<Pago>(datos.Lector["MetodoDePago"].ToString(), true, out var metodoDePago) ? metodoDePago : Pago.Efectivo,
+                        Usuario = new Usuarios(
+                                Convert.ToInt32(datos.Lector["UsuarioID"]),
+                                datos.Lector["UsuarioNombre"].ToString(),
+                                datos.Lector["UsuarioApellido"].ToString(),
+                                datos.Lector["Email"].ToString()
+                        ),
+                        Direcciones = new Direcciones
+                        {
+                            DireccionID = Convert.ToInt32(datos.Lector["DireccionID"]),
+                            UsuarioID = Convert.ToInt32(datos.Lector["DireccionUsuarioID"]),
+                            Calle = datos.Lector["Calle"].ToString(),
+                            Ciudad = datos.Lector["Ciudad"].ToString(),
+                            CodigoPostal = datos.Lector["CodigoPostal"].ToString(),
+                            Pais = datos.Lector["Pais"].ToString(),
+                            Telefono = Convert.ToInt32(datos.Lector["Telefono"])
+                        }
+                    };
+                }
+
+                // Consulta para obtener los detalles del pedido
+                if (pedido != null)
+                {
+                    pedido.Detalles = ObtenerDetallesPorPedidoID(pedido.PedidoID);
+                }
+
+                return pedido;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el pedido por ID.", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+        private List<PedidosDetalle> ObtenerDetallesPorPedidoID(int pedidoID)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<PedidosDetalle> detalles = new List<PedidosDetalle>();
+
+            try
+            {
+                string consulta = @"
+            SELECT 
+                pd.ProductoID, 
+                pd.Cantidad, 
+                pd.PrecioUnitario, 
+                pr.Nombre AS ProductoNombre
+            FROM PedidosDetalle pd
+            INNER JOIN Productos pr ON pd.ProductoID = pr.ProductoID
+            WHERE pd.PedidoID = @PedidoID;
+        ";
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@PedidoID", pedidoID);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    var detalle = new PedidosDetalle
+                    {
+                        ProductoID = Convert.ToInt32(datos.Lector["ProductoID"]),
+                        Cantidad = Convert.ToInt32(datos.Lector["Cantidad"]),
+                        PrecioUnitario = Convert.ToDecimal(datos.Lector["PrecioUnitario"]),
+                        producto = new Productos
+                        {
+                            ProductoID = Convert.ToInt32(datos.Lector["ProductoID"]),
+                            Nombre = datos.Lector["ProductoNombre"].ToString()
+                        }
+                    };
+
+                    detalles.Add(detalle);
+                }
+
+                return detalles;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los detalles del pedido.", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
+
     }
 }

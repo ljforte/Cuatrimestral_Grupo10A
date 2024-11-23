@@ -28,6 +28,7 @@ namespace Dominio
     {
         Envio,
         Retiro,
-        Entregado
+        Entregado,
+        NoData
     }
 }

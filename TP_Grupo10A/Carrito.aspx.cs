@@ -17,6 +17,7 @@ namespace TP_Grupo10A
         private DireccionNegocio direccionNegocio = new DireccionNegocio();
         private UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
         private PedidoNegocio pedidoNegocio = new PedidoNegocio();
+        private PedidoDetalleNegocio pedidoDetalleNegocio = new PedidoDetalleNegocio();
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -160,14 +161,19 @@ namespace TP_Grupo10A
             {
                 if (rblPago.SelectedValue == "efectivo")
                 {
-                    // direccion seleccionada
-                    int DireccionID = int.Parse(ddlDirecciones.SelectedValue);
-                    Direcciones dire = direccionNegocio.BuscarDireccionPorID(DireccionID);
+                    
 
                     // Obtener los detalles del carrito
                     Usuarios usuarioLogueado = (Usuarios)Session["UsuarioLogueado"];
                     carrito = _carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado);
                     List<CarritoDetalle> detallesCarrito = _carritoDetalleNegocio.VerCarritoDetalles(carrito);
+
+                    //primer direccion cargada del cliente
+                    Direcciones dire = direccionNegocio.BuscarDireccionPorUsuario(usuarioLogueado.UsuarioID);
+
+                    pedidoNegocio.CrearCarritoVacio(usuarioLogueado.UsuarioID, dire);
+                    int pedidoID = pedidoNegocio.ObtenerUltimoPedidoPorUsuario(usuarioLogueado.UsuarioID);
+                    pedidoDetalleNegocio.GuardarDetallesPedido(detallesCarrito,pedidoID);
 
                     // Calcular el total del pedido
                     int totalPedido = detallesCarrito.Sum(detalle => (int)(detalle.Cantidad * detalle.PrecioUnitario));
@@ -180,18 +186,17 @@ namespace TP_Grupo10A
 
                     // Crear el pedido
                     bool pedidoCreado = pedidoNegocio.CrearPedido(
+                        pedidoID,
                         usuarioLogueado,
                         dire,
                         Pago.Efectivo,
-                        estadoPedido, 
-                        detallesCarrito,
-                        totalPedido
+                        estadoPedido,
+                        totalPedido                        
                     );
 
                     if (pedidoCreado)
                     {
-                        lblError.Text = string.Empty;
-                        Response.Redirect("~/default.aspx"); // generar nueva
+                        Response.Redirect($"~/CompraExitosa.aspx?PedidoID={pedidoID}");
                     }
                     else
                     {
