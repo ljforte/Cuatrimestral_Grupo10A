@@ -17,7 +17,7 @@ namespace TP_Grupo10A
         public List<Pedidos> Pedidos = new List<Pedidos>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*
+            
             if (!IsPostBack)
             {
                 ddlEstadosPedido.Items.Add(new ListItem("Estado (Sin especificar)", "0"));
@@ -31,7 +31,7 @@ namespace TP_Grupo10A
 
             dgvPedidos.DataSource = NegocioPedido.ListarPedidos();
             dgvPedidos.DataBind();
-            */
+            
         }
 
 
