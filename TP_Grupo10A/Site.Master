@@ -42,7 +42,7 @@
 
 
         label, .aspLabel {
-            color: white;
+            color: black;
         }
 
         .footer {

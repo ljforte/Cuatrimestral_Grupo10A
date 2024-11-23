@@ -70,7 +70,7 @@
                         <asp:ListItem Value="retiro" Text="Retiro en tienda"></asp:ListItem>
                     </asp:RadioButtonList>
                     <div id="direccionContainer" runat="server" class="mt-3" visible="false">
-                        <asp:DropDownList ID="ddlDirecciones" runat="server" CssClass="form-select"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlDirecciones" runat="server" AutoPostBack="true" CssClass="form-select"></asp:DropDownList>
                     </div>
                     <asp:Button ID="btnVolverCarrito" runat="server" CssClass="btn btn-secondary" Text="Volver al Carrito" OnClick="btnVolverCarrito_Click" />
                     <asp:Button ID="btnConfirmarEntrega" runat="server" CssClass="btn btn-primary" Text="Confirmar" OnClick="btnConfirmarEntrega_Click" />
