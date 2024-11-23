@@ -36,7 +36,7 @@ namespace TP_Grupo10A
 
         private void CargarCarrito()
         {
-            // verificacion usuario logeado
+            
             Usuarios usuarioLogueado = (Usuarios)Session["UsuarioLogueado"];
 
             if (usuarioLogueado == null)
@@ -44,7 +44,7 @@ namespace TP_Grupo10A
                 Response.Redirect("~/Login.aspx");
                 return;
             }
-            //cargo carrito segun usuario
+           
 
             carrito = _carritoNegocio.ObtenerCarritoPorUsuario(usuarioLogueado);
 
@@ -62,7 +62,7 @@ namespace TP_Grupo10A
                 Response.Redirect("CarritoNull.aspx");
                 return;
             }
-            // Si el carrito tiene productos
+            
 
             rptCarrito.DataSource = detalles;
             rptCarrito.DataBind();

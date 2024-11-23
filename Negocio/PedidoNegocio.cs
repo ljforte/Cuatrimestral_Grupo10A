@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Negocio
 {
@@ -19,49 +20,70 @@ namespace Negocio
         private AccesoDatos datos2 = new AccesoDatos();
 
 
+
+        public List<Pedidos> ListarPedidos()
+        {
+
+            try
+            {
+                datos.setearConsulta("SELECT P.PedidoID, p.FechaPedido, U.Nombre as NombreCliente, E.Descripcion as EstadoPedido, p.Total from Pedidos P\r\njoin Usuarios U on U.UsuarioID = P.UsuarioID\r\nJoin EstadoPedido E on E.EstadoID = P.EstadoPedido\r\njoin PedidosDetalle PD on PD.PedidoDetalleID = p.PedidoID");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Pedido = new Pedidos();
+                    if (!(datos.Lector["PedidoID"] is DBNull))
+                        Pedido.PedidoID = (int)datos.Lector["PedidoID"];
+                    if (!(datos.Lector["FechaPedido"] is DBNull))
+                        Pedido.FechaPedido = (DateTime)datos.Lector["FechaPedido"];
+
+                    if (!(datos.Lector["NombreCliente"] is DBNull))
+                        Pedido.Usuario.Nombre = datos.Lector["NombreCliente"].ToString();
+
+                    if (!(datos.Lector["EstadoPedido"] is DBNull))
+
+                        switch (datos.Lector["EstadoPedido"].ToString())
+                        {
+                            case "Envio":
+                                Pedido.Estado = EstadoPedido.Envio;
+                                break;
+
+                            case "Retiro":
+                                Pedido.Estado = EstadoPedido.Retiro;
+                                break;
+
+                            case "Entregado":
+                                Pedido.Estado = EstadoPedido.Entregado;
+                                break;
+
+                            case "NoData":
+                                Pedido.Estado = EstadoPedido.NoData;
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                    if (!(datos.Lector["Total"] is DBNull))
+                        Pedido.Total = Convert.ToSingle(datos.Lector["Total"]);
+
+                    lista.Add(Pedido);
+                }
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
+        }
         /*
-          public List<Pedidos> ListarPedidos()
-          {
-
-              try
-              {
-                  datos.setearConsulta("SELECT P.PedidoID, p.FechaPedido, U.Nombre as NombreCliente, E.Descripcion as EstadoPedido, p.Total from Pedidos P\r\njoin Usuarios U on U.UsuarioID = P.UsuarioID\r\nJoin EstadoPedido E on E.EstadoID = P.EstadoPedido\r\njoin PedidosDetalle PD on PD.PedidoDetalleID = p.PedidoID");
-                  datos.ejecutarLectura();
-
-                  while (datos.Lector.Read())
-                  {
-                      Pedido = new Pedidos();
-                      if (!(datos.Lector["PedidoID"] is DBNull))
-                          Pedido.PedidoID = (int)datos.Lector["PedidoID"];
-                      if (!(datos.Lector["FechaPedido"] is DBNull))
-                          Pedido.FechaPedido = (DateTime)datos.Lector["FechaPedido"];
-
-                      if (!(datos.Lector["NombreCliente"] is DBNull))
-                          Pedido.NombreCliente = datos.Lector["NombreCliente"].ToString();
-
-                      if (!(datos.Lector["EstadoPedido"] is DBNull))
-                          Pedido.Estado = datos.Lector["EstadoPedido"].ToString();
-
-                      if (!(datos.Lector["Total"] is DBNull))
-                          Pedido.Total = Convert.ToSingle(datos.Lector["Total"]);
-
-                      lista.Add(Pedido);
-                  }
-                  return lista;
-
-              }
-              catch (Exception ex)
-              {
-                  throw;
-              }
-              finally
-              {
-                  datos.cerrarConexion();
-              }
-
-
-          }
-
           public Pedidos ListarPedidoPorID(string ID)
           {
 
@@ -185,7 +207,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-    
+
 
         public int ObtenerUltimoPedidoPorUsuario(int usuarioID)
         {
@@ -226,10 +248,10 @@ namespace Negocio
         {
             AccesoDatos datos = new AccesoDatos();
             try
-            {                
+            {
                 string consulta = @"
                 INSERT INTO Pedidos (UsuarioID, DireccionID, FechaPedido, EstadoPedido, Total, MetodoDePago)
-                VALUES (@UsuarioID, @DireccionID, GETDATE(), 'NoData', 0.0, 'Efectivo');";  
+                VALUES (@UsuarioID, @DireccionID, GETDATE(), 'NoData', 0.0, 'Efectivo');";
 
                 datos.setearConsulta(consulta);
                 datos.setearParametro("UsuarioID", UsuarioID);
