@@ -15,47 +15,16 @@ namespace TP_Grupo10A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             MarcasNegocio negocio = new MarcasNegocio();
-           dgvMarcas.DataSource = negocio.ListarMarcas();
+            dgvMarcas.DataSource = negocio.ListarMarcas();
             dgvMarcas.DataBind();
 
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            MarcasNegocio negocio = new MarcasNegocio();
-
-
-            try
-            {
-                if (string.IsNullOrEmpty(txtNombre.Text))
-                {
-                    lblDato.Text = "Debe ingresar un nombre";
-                    lblDato.Visible = true;
-                    return;
-                }
-                if (negocio.BuscarMarca(txtNombre.Text))
-                {
-
-                    lblDato.Text = "Error, esa marca ya existe";
-                    lblDato.Visible = true;
-                    return;
-                }
-                else
-                {
-                    lblDato.Text = "¡Marca cargada con exito!";
-                    lblDato.Visible = true;
-                    negocio.AgregarMarca(txtNombre.Text);
-                    Page_Load(sender, e);
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+           
         }
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -67,11 +36,11 @@ namespace TP_Grupo10A
             MarcasNegocio neg = new MarcasNegocio();
             int index = dgvMarcas.SelectedIndex;
             int marcaID = Convert.ToInt32(dgvMarcas.DataKeys[index].Value);
-            Response.Redirect("ModificarMarca.aspx?ID=" + marcaID , false);
+            Response.Redirect("ModificarMarca.aspx?ID=" + marcaID, false);
 
 
         }
-           
+
 
         protected void dgvMarcas_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -81,25 +50,66 @@ namespace TP_Grupo10A
             int marcaID = Convert.ToInt32(dgvMarcas.DataKeys[index].Value);
 
 
-            if(!neg.BuscarProductoConMarca(marcaID.ToString()))
+            if (!neg.BuscarProductoConMarca(marcaID.ToString()))
             {
                 if (neg.EliminarMarca(marcaID))
                 {
-                    lblDato.Text = "¡Marca eliminada con exito!";
-                    lblDato.Visible = true;
+                    Mensaje("¡Marca eliminada con exito!");
+                    lblDato.ForeColor = System.Drawing.Color.Green;
                 }
                 else
                 {
-                    lblDato.Text = "Error, no se puede eliminar esta marca";
+                    Mensaje("Error, no se puede eliminar esta marca");
                 }
-                Page_Load(sender,e);
+                Page_Load(sender, e);
             }
             else
             {
-                lblDato.Text = "Error, esta marca pertenece a un producto";
+                Mensaje("Error, esta marca pertenece a un producto");
             }
-            
-            
+
+
+        }
+        private void Mensaje(string msj, bool visible = true)
+        {
+            lblDato.Text = msj;
+            lblDato.Visible = visible;
+            lblDato.ForeColor = System.Drawing.Color.Red;
+        }
+
+        protected void btnAgregar_Click1(object sender, EventArgs e)
+        {
+            MarcasNegocio negocio = new MarcasNegocio();
+
+
+            try
+            {
+                if (string.IsNullOrEmpty(txtNombre.Text))
+                {
+                    Mensaje("Debe ingresar un nombre");
+                    return;
+                }
+                if (negocio.BuscarMarca(txtNombre.Text))
+                {
+                    Mensaje("Error, esa marca ya existe");
+                    return;
+                }
+                else
+                {//Marcas Agregada Exitosamente
+                    Mensaje(txtNombre.Text + " cargada con exito!");
+                    lblDato.ForeColor = System.Drawing.Color.Green;
+
+
+                    negocio.AgregarMarca(txtNombre.Text);
+                    Page_Load(sender, e);
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
     }

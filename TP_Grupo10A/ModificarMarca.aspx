@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row justify-content-center" style="margin-top: 50px;">
             <div class="col-md-6 col-lg-4 text-center">
-                <asp:Label ID="lblTitulo" runat="server" Text="Modificar Marca" CssClass="h3"></asp:Label>
+                <asp:Label ID="lblTitulo" runat="server" text="MODIFICAR " CssClass="h3"></asp:Label>
                 <div>
                     <div class="row justify-content-center" style="margin-top: 25px;">
                         <asp:Label ID="lblMarca" runat="server" Text=" " CssClass="form-label text-primary"></asp:Label>
@@ -19,7 +19,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="form-group row mb-3">
                     <label for="lblNombre" class="col-sm-4 col-form-label">
-                        <asp:Label ID="lblNombre" runat="server" Text="Nombre: " CssClass="col-form-label"></asp:Label>
+                        <asp:Label ID="lblNombre" runat="server" Text="Nuevo Nombre:  " CssClass="form-label"></asp:Label>
                     </label>
                     <div class="col-sm-8">
                         <asp:TextBox ID="txtNombre" runat="server" Style="width: 850px;" CssClass="form-control" />

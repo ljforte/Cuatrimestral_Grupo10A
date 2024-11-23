@@ -4,9 +4,16 @@
     <h3>MARCAS</h3>
     <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px;">
         <div class="d-flex align-items-center">
-            <asp:TextBox ID="txtNombre" runat="server" Placeholder="Nombre" CssClass="form-control mr-2" Style="width: 300px; margin-right: 10px;"></asp:TextBox>
-            <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="Button1_Click" CssClass="btn btn-success" />
-            <div>
+            <div class="row">
+                <div class="col-8">
+                    <asp:TextBox ID="txtNombre" runat="server" Placeholder="Nombre" CssClass="form-control mr-2" Style="width: 300px; margin-right: 10px;"></asp:TextBox>
+                </div>
+                <div class="col-4">
+                    <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click1" CssClass="btn btn-success" />
+                </div>
+            </div>
+
+            <div class="pb-3">
                 <asp:Label ID="lblDato" runat="server" CssClass="mx-2" Text=""></asp:Label>
             </div>
         </div>
