@@ -16,7 +16,7 @@ namespace TP_Grupo10A
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             CategoriaNegocio negocio = new CategoriaNegocio();
             List<Categorias> categorias = new List<Categorias>();
             categorias = negocio.ListarCategorias();

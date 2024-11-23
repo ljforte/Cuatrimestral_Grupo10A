@@ -54,7 +54,7 @@
         </div>
 
         <div class="text-center mt-4">
-            <a href="Default.aspx" class="btn btn-primary">Volver al Inicio</a>
+            <a href="Default.aspx" class="btn btn-primary">Volver al inicio</a>
         </div>
     </div>
 </asp:Content>

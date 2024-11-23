@@ -17,21 +17,21 @@ namespace TP_Grupo10A
         public List<Pedidos> Pedidos = new List<Pedidos>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             if (!IsPostBack)
             {
-                ddlEstadosPedido.Items.Add(new ListItem("Estado (Sin especificar)", "0"));
+                /*ddlEstadosPedido.Items.Add(new ListItem("Estado (Sin especificar)", "0"));
 
                 List<Estado> estados = Negocio.ListarEstados();
                 for (int i = 0; i < estados.Count; i++)
                 {
                     ddlEstadosPedido.Items.Add(new ListItem(estados[i].Descripcion, estados[i].Id.ToString()));
                 }
+                */
+                dgvPedidos.DataSource = NegocioPedido.ListarPedidos();
+                dgvPedidos.DataBind();
             }
 
-            dgvPedidos.DataSource = NegocioPedido.ListarPedidos();
-            dgvPedidos.DataBind();
-            
         }
 
 

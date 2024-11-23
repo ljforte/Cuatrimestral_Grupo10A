@@ -11,25 +11,49 @@ namespace TP_Grupo10A
 {
     public partial class DetallePedido : System.Web.UI.Page
     {
-         public AccesoDatos datos = new AccesoDatos();
-       public DetallePedidoNegocio detallePedidoNegocio = new DetallePedidoNegocio();
-     //   public DetallePedido detallePedido = new DetallePedido();
-        public PedidoNegocio pedidoNegocio = new PedidoNegocio();
-        public Pedidos Pedido = new Pedidos();
+        private PedidoNegocio negocio = new PedidoNegocio();
+        private PedidoDetalleNegocio pedidoDetalleNegocio = new PedidoDetalleNegocio();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           /* string PedidoID = Request.QueryString["PedidoID"];
-            Pedido = pedidoNegocio.ListarPedidoPorID(PedidoID);
-            dgvProductos.DataSource = detallePedidoNegocio.ListarPedidoDetalle(PedidoID);
-
-            dgvProductos.DataBind();
-
-
-                lblEstadoPedido.Text = Pedido.Estado;
-            lblNombreClienteCampo.Text = Pedido.NombreCliente;
-            lblFechaCampo.Text = Pedido.FechaPedido.ToString();
-        */
+            if (!IsPostBack)
+            {
+                if (Request.QueryString["PedidoID"] != null)
+                {
+                    int pedidoID = Convert.ToInt32(Request.QueryString["PedidoID"]);
+                    CargarDatosPedido(pedidoID);
+                }
             }
+        }
+
+        private void CargarDatosPedido(int pedidoID)
+        {
+            try
+            {
+                Pedidos pedido = negocio.ObtenerPedidoPorID(pedidoID);
+
+                lblNombreUsuario.Text = $"{pedido.Usuario.Nombre} {pedido.Usuario.Apellido}";
+                lblDireccionCompleta.Text = $"{pedido.Direcciones.Calle}, {pedido.Direcciones.Ciudad}, {pedido.Direcciones.CodigoPostal} - {pedido.Direcciones.Pais}";
+                lblEstadoPedido.Text = pedido.Estado.ToString();
+                lblTotalPedido.Text = pedido.Total.ToString("F2");
+
+                List<PedidosDetalle> detalles = pedidoDetalleNegocio.ListarDetallePorPedidoID(pedidoID);
+
+                if (detalles != null && detalles.Count > 0)
+                {
+                    rptDetallesPedido.DataSource = detalles;
+                    rptDetallesPedido.DataBind();
+                }
+                else
+                {
+                    rptDetallesPedido.Visible = false;
+                    Response.Write("No hay detalles para este pedido.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Write($"Error al cargar los datos del pedido: {ex.Message}");
+            }
+        }
     }
 }

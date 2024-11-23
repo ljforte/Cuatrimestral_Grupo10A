@@ -23,66 +23,46 @@ namespace Negocio
 
         public List<Pedidos> ListarPedidos()
         {
+            List<Pedidos> lista = new List<Pedidos>();
 
             try
             {
-                datos.setearConsulta("SELECT P.PedidoID, p.FechaPedido, U.Nombre as NombreCliente, E.Descripcion as EstadoPedido, p.Total from Pedidos P\r\njoin Usuarios U on U.UsuarioID = P.UsuarioID\r\nJoin EstadoPedido E on E.EstadoID = P.EstadoPedido\r\njoin PedidosDetalle PD on PD.PedidoDetalleID = p.PedidoID");
+                datos.setearConsulta("SELECT PedidoID, FechaPedido, EstadoPedido, u.Nombre as NombreCliente, Total FROM Pedidos p" +
+                    " JOIN Usuarios u ON U.UsuarioID = p.UsuarioID    ");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
-                    Pedido = new Pedidos();
+                    Pedidos pedido = new Pedidos();
+
                     if (!(datos.Lector["PedidoID"] is DBNull))
-                        Pedido.PedidoID = (int)datos.Lector["PedidoID"];
+                        pedido.PedidoID = (int)datos.Lector["PedidoID"];
                     if (!(datos.Lector["FechaPedido"] is DBNull))
-                        Pedido.FechaPedido = (DateTime)datos.Lector["FechaPedido"];
-
+                        pedido.FechaPedido = (DateTime)datos.Lector["FechaPedido"];
                     if (!(datos.Lector["NombreCliente"] is DBNull))
-                        Pedido.Usuario.Nombre = datos.Lector["NombreCliente"].ToString();
-
+                       pedido.NombreCliente = (string)datos.Lector["NombreCliente"];
                     if (!(datos.Lector["EstadoPedido"] is DBNull))
-
-                        switch (datos.Lector["EstadoPedido"].ToString())
-                        {
-                            case "Envio":
-                                Pedido.Estado = EstadoPedido.Envio;
-                                break;
-
-                            case "Retiro":
-                                Pedido.Estado = EstadoPedido.Retiro;
-                                break;
-
-                            case "Entregado":
-                                Pedido.Estado = EstadoPedido.Entregado;
-                                break;
-
-                            case "NoData":
-                                Pedido.Estado = EstadoPedido.NoData;
-                                break;
-
-                            default:
-                                break;
-                        }
-
+                        pedido.Estado = Enum.TryParse(datos.Lector["EstadoPedido"].ToString(), out EstadoPedido estado)
+                            ? estado
+                            : EstadoPedido.NoData; // Valor predeterminado en caso de error
                     if (!(datos.Lector["Total"] is DBNull))
-                        Pedido.Total = Convert.ToSingle(datos.Lector["Total"]);
+                        pedido.Total = Convert.ToSingle(datos.Lector["Total"]);
 
-                    lista.Add(Pedido);
+                    lista.Add(pedido);
                 }
-                return lista;
 
+                return lista;
             }
             catch (Exception ex)
             {
-                throw;
+                throw new Exception("Error al listar pedidos: " + ex.Message, ex);
             }
             finally
             {
                 datos.cerrarConexion();
             }
-
-
         }
+
         /*
           public Pedidos ListarPedidoPorID(string ID)
           {

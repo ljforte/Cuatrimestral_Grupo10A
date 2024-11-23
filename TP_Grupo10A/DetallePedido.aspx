@@ -4,71 +4,47 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2 class="text-center">Detalle del pedido</h2>
+       <div class="card mb-4">
+           <div class="card-header bg-info text-white">
+               <h3>Resumen de tu Pedido</h3>
+           </div>
+           <div class="card-body">
+               <p><strong>Nombre:</strong> <asp:Label ID="lblNombreUsuario" runat="server" Text="Nombre del Usuario"></asp:Label></p>
+               <p><strong>Dirección:</strong> <asp:Label ID="lblDireccionCompleta" runat="server" Text="Dirección Completa"></asp:Label></p>
+               <p><strong>Estado del Pedido:</strong> <asp:Label ID="lblEstadoPedido" runat="server" Text="Estado Actual"></asp:Label></p>
+           </div>
+       </div>
 
-    <div class="container mt-3">
-        <div class="row justify-content-center">
-            <div class="col-md-3 text-right">
-                <asp:Label ID="lblNombreCliente" runat="server" Text="Cliente:"></asp:Label>
-            </div>
-            <div class="col-md-6">
-                <asp:Label ID="lblNombreClienteCampo" runat="server" Text=""></asp:Label>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-3 text-right">
-                <asp:Label ID="lblMetodoDePago" runat="server" Text="Metodo de pago:"></asp:Label>
-            </div>
-            <div class="col-md-6">
-                <asp:Label ID="lblMetodoDePagoCampo" runat="server" Text=""></asp:Label>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-3 text-right">
-                <asp:Label ID="lblEstadoPedido" runat="server" Text="Estado:"></asp:Label>
-            </div>
-            <div class="col-md-6">
-                <asp:Label ID="lblEstadoPedidoCampo" runat="server" Text=""></asp:Label>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-3 text-right">
-                <asp:Label ID="lblDireccion" runat="server" Text="Direccion:"></asp:Label>
-            </div>
-            <div class="col-md-6">
-                <asp:Label ID="lblDireccionCampo" runat="server" Text=""></asp:Label>
-            </div>
-        </div>
+       <h4>Productos Comprados</h4>
+       <asp:Repeater ID="rptDetallesPedido" runat="server">
+           <ItemTemplate>
+               <div class="row mb-3">
+                   <div class="col-md-3">
+                       <strong><%# Eval("producto.Nombre") %></strong>
+                   </div>
+                   <div class="col-md-3">
+                       <%# Eval("Cantidad") %>
+                   </div>
 
-         <div class="row justify-content-center">
-     <div class="col-md-3 text-right">
-         <asp:Label ID="lblFecha" runat="server" Text="Fecha de compra:"></asp:Label>
-     </div>
-     <div class="col-md-6">
-         <asp:Label ID="lblFechaCampo" runat="server" Text=""></asp:Label>
-     </div>
- </div>
+                   <div class="col-md-3">
+                       $<%# Eval("PrecioUnitario", "{0:F2}") %>
+                   </div>
 
-        
-        <div class="row justify-content-center mt-3">
-            <div class="col-md-9">
-                <asp:GridView ID="dgvProductos" CssClass="table" AutoGenerateColumns="false" runat="server">
-                    <Columns>
-                        <asp:BoundField HeaderText="ID" DataField="PedidoID" />
-                        <asp:BoundField HeaderText="Producto" DataField="ProductoNombre" />
-                        <asp:BoundField HeaderText="Precio" DataField= "PrecioUnitario" />
-                        <asp:CommandField HeaderText="Detalle" ShowSelectButton="true" SelectText="Ver" />
-                    </Columns>
-                </asp:GridView>
-            </div>
-        </div>
+                   <div class="col-md-3">
+                       $<%# 
+                   (Convert.ToInt32(Eval("Cantidad")) * Convert.ToSingle(Eval("PrecioUnitario"))).ToString("F2") 
+                       %>
+                   </div>
+               </div>
+           </ItemTemplate>
+         </asp:Repeater>
 
-        <div class="row justify-content-center">
-    <div class="col-md-3 text-right">
-        <asp:Label ID="lblTotal" runat="server" Text="Total"></asp:Label>
-    </div>
-    <div class="col-md-6">
-        <asp:Label ID="lblTotalCampo" runat="server" Text=""></asp:Label>
-    </div>
-</div>
-    </div>
+       <div class="text-end">
+           <h4><strong>Total:</strong> $<asp:Label ID="lblTotalPedido" runat="server" Text="0.00"></asp:Label></h4>
+       </div>
+
+       <div class="text-center mt-4">
+           <a href="GestionPedidos.aspx" class="btn btn-primary">Volver a Gestion</a>
+       </div>
+   </div>       
 </asp:Content>

@@ -25,15 +25,17 @@
 
         <div class="row w-100 justify-content-center">
             <div class="col-12">
-                <asp:GridView ID="dgvPedidos" CssClass="table table-striped mx-auto" DataKeyNames="PedidoID" AutoGenerateColumns="false" runat="server"
-                    OnSelectedIndexChanged="dgvPedidos_SelectedIndexChanged">
-                    <Columns>
-                        <asp:BoundField HeaderText="ID" DataField="PedidoID" />
-                        <asp:BoundField HeaderText="Nombre" DataField="NombreCliente" />
-                        <asp:BoundField HeaderText="Estado" DataField="Estado" />
-                        <asp:CommandField HeaderText="Detalle" ShowSelectButton="true" SelectText="Ver" />
-                    </Columns>
-                </asp:GridView>
+<asp:GridView ID="dgvPedidos" CssClass="table table-striped mx-auto" DataKeyNames="PedidoID" AutoGenerateColumns="false" runat="server"
+    OnSelectedIndexChanged="dgvPedidos_SelectedIndexChanged">
+    <Columns>
+        <asp:BoundField HeaderText="ID" DataField="PedidoID" />
+         <asp:BoundField HeaderText="Nombre" DataField="NombreCliente" />
+        <asp:BoundField HeaderText="Fecha" DataField="FechaPedido" DataFormatString="{0:dd/MM/yyyy}" />
+        <asp:BoundField HeaderText="Estado" DataField="EstadoPedido" />
+        <asp:BoundField HeaderText="Total" DataField="Total" DataFormatString="{0:C}" />
+        <asp:CommandField HeaderText="Detalle" ShowSelectButton="true" SelectText="Ver" />
+    </Columns>
+</asp:GridView>
 
             </div>
         </div>

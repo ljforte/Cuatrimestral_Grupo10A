@@ -14,8 +14,10 @@ namespace Dominio
         public Direcciones Direcciones { get; set; }
         public DateTime FechaPedido { get; set; }
         public EstadoPedido Estado { get; set; }
+        public string EstadoPedido { get; set; }
         public List<PedidosDetalle> Detalles { get; set; } = new List<PedidosDetalle>();
         public float Total { get; set; }
+        public string NombreCliente { get; set; }
         public Pago MetodoDePago { get; set; }
     }
 

@@ -51,15 +51,12 @@
                     </div>
                     <div class="row mb-3 text-center">
                         <div class="col-4 themed-grid-col">
-                            <asp:Label ID="lblCantidad" runat="server" Text="Cantidad: " CssClass="form-label font-weight-bold"></asp:Label>
-                            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" TextMode="Number" value="1" min="1" max="5" />
+                            <asp:Label ID="lblCantidad" runat="server" Visible="false" Text="Cantidad: " CssClass="form-label font-weight-bold"></asp:Label>
+                            <asp:TextBox ID="txtCantidad" runat="server" Visible="false" CssClass="form-control" TextMode="Number" value="1" min="1" max="5" />
                         </div>
 
                         <div class="col-4 themed-grid-col">
-                            <asp:Button ID="btnAgregarCarrito" runat="server" Text="Agregar Carrito" OnClick="btnAgregarCarrito_Click" CssClass="btn btn-outline-primary btn-sm" />
-                        </div>
-                        <div class="col-4 themed-grid-col">
-                            <asp:Button ID="btnComprar" runat="server" Text="Comprar Ahora" OnClick="btnComprar_Click" CssClass="btn btn-success btn-sm" />
+                            <asp:Button ID="btnAgregarCarrito" runat="server" Text="Volver" OnClick="btnAgregarCarrito_Click" CssClass="btn btn-outline-primary btn-sm" />
                         </div>
                     </div>
                 </div>

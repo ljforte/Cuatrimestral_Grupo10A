@@ -12,11 +12,11 @@ namespace TP_Grupo10A
 {
     public partial class DetalleProducto : System.Web.UI.Page
     {
+        private CarritoNegocio _carritoNegocio = new CarritoNegocio();
         private ProductoNegocio _productoNeg;
         private CarritoDetalleNegocio _detalleNeg;
         private List<ImagenProducto> ListIMG = new List<ImagenProducto>();
         private Carrito _carrito;
-        private CarritoDetalle _carritoDetalle;
         private Productos _producto;
         public DetalleProducto() {
             _productoNeg = new ProductoNegocio();
@@ -55,28 +55,7 @@ namespace TP_Grupo10A
 
         protected void btnAgregarCarrito_Click(object sender, EventArgs e)
         {
-            try
-            {
-
-                _carritoDetalle = new CarritoDetalle();
-
-                string productoID = Request.QueryString["productoID"];
-                _producto = _productoNeg.ListarArticulosPorID(productoID)[0];
-
-                _carritoDetalle.ProductoID = _producto.ProductoID;
-                _carritoDetalle.Cantidad = int.Parse(txtCantidad.Text);
-                _carritoDetalle.PrecioUnitario = _producto.Precio;
-
-                //_carrito = new Carrito();
-                //_carritoDetalle.CarritoID = _carrito.CarritoID;
-
-                _detalleNeg.AgregarDetalle(_carritoDetalle);
-                Console.Write(_carritoDetalle);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            Response.Redirect("Producto.aspx", false);          
         }
 
     }

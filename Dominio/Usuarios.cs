@@ -24,7 +24,7 @@ namespace Dominio
         public TipoUsuario Tipo { get; set; }
         public DateTime FechaRegistro { get; set; }
         public bool Estado {  get; set; }
-
+        public Usuarios() { }
         public Usuarios(int usuarioID, string nombre, string apellido, string email)
         {
             UsuarioID = usuarioID;
