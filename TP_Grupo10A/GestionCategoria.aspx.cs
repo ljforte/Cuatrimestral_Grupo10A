@@ -46,27 +46,24 @@ namespace TP_Grupo10A
             {
                 if (string.IsNullOrEmpty(txtNombre.Text))
                 {
-                    lblDato.Text = "Debe ingresar un nombre";
-                    lblDato.Visible = true;
+                    Mensaje("Debe ingresar un nombre");
                     return;
                 }
                 else if (string.IsNullOrEmpty(txtDescripcion.Text))
                 {
-                    lblDato.Text = "Debe ingresar una descripcion";
-                    lblDato.Visible = true;
+                    Mensaje("Debe ingresar una Descripcion");
                     return;
                 }
                 if (negocio.BuscarCat(txtNombre.Text))
                 {
-                    lblDato.Text = "Error, esa categoria ya existe";
-                    lblDato.Visible = true;
+                    Mensaje("Error, esa Categoria ya existe");
                     return;
                 }
                 else
-                {
+                { //Agregar marcas
                     negocio.AgregarCategoria(txtNombre.Text, txtDescripcion.Text);
-                    lblDato.Text = "¡Categoria cargada con exito!";
-                    lblDato.Visible = true;
+                    Mensaje(txtNombre.Text + " cargada con exito!");
+                    lblDato.ForeColor = System.Drawing.Color.Green;
                     Page_Load(sender, e);
                     return;
                 }
@@ -83,7 +80,7 @@ namespace TP_Grupo10A
             
           Id = int.Parse(dgvCategoria.SelectedDataKey.Value.ToString());
 
-            Response.Redirect("ModificarCategoria.aspx", false);
+            Response.Redirect("ModificarCategoria.aspx?ID="+Id, false);
 
         }
         protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
@@ -100,18 +97,22 @@ namespace TP_Grupo10A
 
             if (neg.EliminarCat(catID))
             {
-                lblDato.Text = "¡Categoria eliminada con exito!";
-                lblDato.Visible = true;
-            ConfirmarEliminacion = false;
-            btnConfirmarEliminacion.Visible = false;
-            Page_Load(sender, e);
-
+                Mensaje("¡Categoria eliminada con exito!");
+                lblDato.ForeColor = System.Drawing.Color.Green;
+                ConfirmarEliminacion = false;
+                btnConfirmarEliminacion.Visible = false;
+                Page_Load(sender, e);
             }
             else
             {
-                lblDato.Text = "No se pudo eliminar la categoria";
-                lblDato.Visible = true;
+                Mensaje("No se pudo eliminar la categoria");
             }
+        }
+        private void Mensaje(string msj, bool visible = true)
+        {
+            lblDato.Text = msj;
+            lblDato.Visible = visible;
+            lblDato.ForeColor = System.Drawing.Color.Red;
         }
     }
 }

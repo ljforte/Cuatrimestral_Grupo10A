@@ -229,12 +229,37 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
             finally
             {
                 datos.cerrarConexion();
             }
+        }
+
+        public bool ExisteMarca(string Nombre)
+        {
+            try
+            {
+                datos.setearConsulta("SELECT COUNT(*) FROM Marcas WHERE Nombre = @Nombre");
+                datos.setearParametro("@Nombre", Nombre);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read() && Convert.ToInt32(datos.Lector[0]) > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al verificar la existencia de la marca: " + ex.Message, ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
         }
     }
 }

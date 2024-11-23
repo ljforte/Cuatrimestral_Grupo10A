@@ -12,11 +12,11 @@ namespace TP_Grupo10A
 {
     public partial class ModificarMarca : System.Web.UI.Page
     {
-        public MarcasNegocio MarcaNeg;
-        public Marcas Marcas;
-        public string idMarca { get; set; }
-        string nombre;
-        string script;
+        private MarcasNegocio MarcaNeg;
+        private Marcas Marcas;
+        private string idMarca { get; set; }
+        private string nombre;
+        private string script;
         public ModificarMarca()
         {
             MarcaNeg = new MarcasNegocio();

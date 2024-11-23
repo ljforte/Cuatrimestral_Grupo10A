@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row justify-content-center" style="margin-top: 50px;">
             <div class="col-md-6 col-lg-4 text-center">
-                <asp:Label ID="lblTitulo" runat="server" Text="Modificar Categoria" CssClass="h3"></asp:Label>
+                <asp:Label ID="lblTitulo" runat="server" Text="Modificar Categoria " CssClass="h3"></asp:Label>
                 <div>
                     <div class="row justify-content-center" style="margin-top: 25px;">
                         <asp:Label ID="lblCategoria" runat="server" Text=" " CssClass="form-label text-primary"></asp:Label>
@@ -20,7 +20,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="form-group row mb-3">
                     <label for="lblNombre" class="col-sm-4 col-form-label">
-                        <asp:Label ID="lblNombre" runat="server" Text="Nombre: " CssClass="col-form-label"></asp:Label>
+                        <asp:Label ID="lblNombre" runat="server" Text="Nuevo Nombre: " CssClass="col-form-label"></asp:Label>
                     </label>
                     <div class="col-sm-8">
                         <asp:TextBox ID="txtNombre" runat="server" Style="width: 850px;" CssClass="form-control" />
@@ -28,11 +28,16 @@
                 </div>
                 <div class="form-group row mb-3">
                     <label for="lblDescripcion" class="col-sm-4 col-form-label">
-                        <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion: " CssClass="col-form-label"></asp:Label>
+                        <asp:Label ID="lblDescripcion" runat="server" Text="Nueva Descripcion: " CssClass="col-form-label"></asp:Label>
                     </label>
                     <div class="col-sm-8">
                         <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" TextMode="MultiLine" Style="width: 850px; height: 150px;" />
                     </div>
+                </div>
+                <div class="form-group row mb-3">
+                    <label for="lblDato" class="col-sm-4 col-form-label">
+                        <asp:Label ID="lblDato" runat="server" Text=" " CssClass="col-form-label"></asp:Label>
+                    </label>
                 </div>
                 <div class="row justify-content-center" style="margin-top: 25px;">
                     <asp:Button ID="btnModificar" runat="server" CssClass="btn btn-success" Text="Modificar" OnClick="btnModificar_Click" Style="margin-top: 25px;" />

@@ -73,12 +73,15 @@ namespace Negocio
 
         }
 
-        public bool EliminarCat(int catID)
+        public bool EliminarCat(int Id)
         {
             try
             {
+                // if (TieneProductoConStock(Id)) return false;
+
                 datos.setearConsulta("delete from Categorias where CategoriaID = @id");
-                datos.setearParametro("@id", catID);
+                datos.setearParametro("@id", Id);
+
                 datos.ejecutarAccion();
                 return true;
             }
@@ -91,8 +94,17 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
-        }
 
+
+        }
+        private bool TieneProductoConStock(int Id)
+        {
+            datos.setearConsulta("SELECT COUNT(*) FROM Productos WHERE CategoriaID = @id AND Stock > 0");
+            datos.setearParametro("@id", Id);
+            int count = datos.ejecutarAccionScalar();
+
+            return count > 0;
+        }
         public ImagenProducto ObtenerImagen()
         {
 
@@ -131,16 +143,16 @@ namespace Negocio
         {
             try
             {
-            datos.setearConsulta("select * from Categorias where Nombre = '" + cat + "'");
-            datos.ejecutarLectura();
-            if (datos.Lector.Read())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                datos.setearConsulta("select * from Categorias where Nombre = '" + cat + "'");
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
 
             }
             catch (Exception ex)
@@ -183,6 +195,86 @@ namespace Negocio
                 datos.cerrarConexion();
             }
 
+        }
+        public Categorias BuscarCategoria(String Id) {
+            try
+            {
+                datos.setearConsulta("select * from Categorias where CategoriaID = '" + Id + "'");
+                datos.ejecutarLectura();
+
+                Categorias categoria = new Categorias();
+                if (datos.Lector.Read())
+                {
+                    if (!(datos.Lector["CategoriaID"] is DBNull))
+                        categoria.CategoriaID = (int)datos.Lector["CategoriaID"];
+                    if (!(datos.Lector["Nombre"] is DBNull))
+                        categoria.Nombre = datos.Lector["Nombre"].ToString();
+                    return categoria;
+                }
+                else
+                {
+                    return categoria;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool modificar(string idCategoria, string Nombre, string Descripcion)
+        {
+            try
+            {
+                datos.setearConsulta("UPDATE Categorias SET Nombre=@Nombre, Descripcion=@Descripcion WHERE CategoriaID=@idCategoria");
+                datos.setearParametro("@Nombre", Nombre);
+                datos.setearParametro("@Descripcion", Descripcion);
+                datos.setearParametro("@idCategoria", idCategoria);
+                datos.ejecutarAccion();
+
+                //datos.setearConsulta("SELECT 1 FROM Marcas WHERE MarcaID = @MarcaID AND Nombre = @Nombre");
+                //datos.ejecutarLectura();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al Modificar las Categorias: " + ex.Message, ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return false;
+        }
+
+        public bool ExisteCategoria(string nombre)
+        {
+            try
+            {
+                datos.setearConsulta("SELECT COUNT(*) FROM Categorias WHERE Nombre = @Nombre");
+                datos.setearParametro("@Nombre", nombre);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read() && Convert.ToInt32(datos.Lector[0]) > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al verificar la existencia de la categoría: " + ex.Message, ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

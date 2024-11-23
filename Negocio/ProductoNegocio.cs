@@ -354,24 +354,28 @@ namespace Negocio
             }
         }
         //FILTRA POR DESCRIPCION O MARCA
-        public List<Productos> Filtrar(string nombre)
+        public List<Productos> Filtrar(string filtro)
         {
             list = new List<Productos>();
             try
             {
                 string consulta = @"
-            SELECT P.ProductoID, P.Nombre, M.Nombre AS Marca, P.Precio, P.Descripcion, 
-                   C.Nombre AS Categoria, P.MarcaID, C.CategoriaID
-            FROM Productos AS P
-            LEFT JOIN Marcas AS M ON M.MarcaID = P.MarcaID
-            LEFT JOIN Categorias AS C ON C.CategoriaID = P.CategoriaID
-            WHERE P.Estado = 1 AND P.Stock > 1
-            AND P.Descripcion LIKE @Nombre
-            OR M.Nombre LIKE @Nombre";
+                SELECT P.ProductoID, P.Nombre, M.Nombre AS Marca, P.Precio, P.Descripcion, 
+                C.Nombre AS Categoria, P.MarcaID, C.CategoriaID
+                FROM Productos AS P
+                LEFT JOIN Marcas AS M ON M.MarcaID = P.MarcaID
+                LEFT JOIN Categorias AS C ON C.CategoriaID = P.CategoriaID
+                WHERE P.Estado = 1 AND P.Stock > 1";
+                //Filtro
+                consulta += @"
+                AND P.Descripcion LIKE @filtro
+                OR P.Nombre LIKE @filtro
+                OR M.Nombre LIKE @filtro
+                OR C.Nombre LIKE @filtro";
                 //AND P.Descripcion LIKE '%emoria%'
 
                 datos.setearConsulta(consulta);
-                datos.setearParametro("@Nombre", "%" + nombre + "%");
+                datos.setearParametro("@filtro", "%" + filtro + "%");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
